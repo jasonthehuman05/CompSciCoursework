@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "productNumber": "000001",
+      "productName": "3mm Timber Nails: 20 Count",
+      "productTags": [
+        "Wood",
+        "structure",
+        "Construction",
+        "metal",
+        "Home",
+        "Fixing"
+      ],
+      "variations": [
+        {
+          "variationID": "1",
+          "varitionName": "140mm",
+          "variationCost": 3.80,
+          "stockLevel": 120
+        }
+      ]
+    }
+  ]
+}
