@@ -4,12 +4,12 @@
       "productNumber": "000001",
       "productName": "3mm Timber Nails: 20 Count",
       "productTags": [
-        "Wood",
+        "wood",
         "structure",
-        "Construction",
+        "construction",
         "metal",
-        "Home",
-        "Fixing"
+        "home",
+        "fixing"
       ],
       "variations": [
         {
@@ -17,6 +17,28 @@
           "varitionName": "140mm",
           "variationCost": 3.80,
           "stockLevel": 120
+        }
+      ]
+    },
+    {
+      "productNumber": "000002",
+      "productName": "3mm Masonry Nails: 20 Count",
+      "productTags": [
+        "brick",
+        "masonry",
+        "structure",
+        "construction",
+        "metal",
+        "home",
+        "fixing",
+        "outdoor"
+      ],
+      "variations": [
+        {
+          "variationID": "1",
+          "varitionName": "140mm",
+          "variationCost": 4.20,
+          "stockLevel": 84
         }
       ]
     }
