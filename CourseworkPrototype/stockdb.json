@@ -14,7 +14,7 @@
       "variations": [
         {
           "variationID": "1",
-          "varitionName": "140mm",
+          "variationName": "140mm",
           "variationCost": 3.80,
           "stockLevel": 120
         }
@@ -36,7 +36,7 @@
       "variations": [
         {
           "variationID": "1",
-          "varitionName": "140mm",
+          "variationName": "140mm",
           "variationCost": 4.20,
           "stockLevel": 84
         }

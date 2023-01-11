@@ -21,7 +21,7 @@ class StockDatabase():
             dbjson = file.read()
             #parse the file
             self.database = json.loads(dbjson)
-
+            
     def IndexDatabaseTags(self):
         #Ensure the tag index is empty
         self.tagIndex = dict()
@@ -35,7 +35,6 @@ class StockDatabase():
                     self.tagIndex[tag.lower()].append(index)
                 else:
                     self.tagIndex[tag.lower()] = [index]
-        print(self.tagIndex)
         
     def IndexDatabaseTitles(self):
         #Ensure the tag index is empty
@@ -50,7 +49,6 @@ class StockDatabase():
                     self.titleIndex[tag.lower()].append(index)
                 else:
                     self.titleIndex[tag.lower()] = [index]
-        print(self.titleIndex)
     
     def SearchForItem(self, query:str) -> list:
         #Separate query into its separate terms
@@ -62,8 +60,6 @@ class StockDatabase():
         for term in searchTerms:
             
             term = (''.join(c for c in term if c.isalnum())).lower()
-
-            print("finding", term)
             #Check title index
             if term in self.tagIndex:
                 #If it matches, get the indexes stored under the tag
@@ -94,7 +90,30 @@ class StockDatabase():
         print(uniqueResults)
         
         return uniqueResults
-        
-        
 
+    def GetItemByProductNumber(self, prodNum:str):
+        item = None
+
+        for i in range(len(self.database["items"])):
+            if self.database["items"][i]["productNumber"] == prodNum:
+                item = self.database["items"][i]
+        
+        return item
+
+    def GetVariation(self, itemNumber:str):
+        inumComponents = itemNumber.split(":")
+
+        prodNum = inumComponents[0]
+        varNum = inumComponents[1]
+
+        item = self.GetItemByProductNumber(prodNum)
+
+        variation = None
+
+        if item != None:
+            for var in item["variations"]:
+                if var["variationID"] == varNum:
+                    variation = var
             
+        return variation
+        

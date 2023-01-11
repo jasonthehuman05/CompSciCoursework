@@ -2,5 +2,8 @@
 import StockDatabase
 
 db = StockDatabase.StockDatabase()
-db.SearchForItem("20 masonry nails")
+item = db.GetItemByProductNumber("000001")
+print(item["productName"])
+variation = db.GetVariation("000001:1")
+print(variation["variationName"])
 #print(db.database["items"][0]["productName"])
