@@ -17,7 +17,7 @@ class StockDatabase():
         self.titleIndex = dict()
 
         #Load JSON File
-        with open("stockdb.json") as file:
+        with open("CourseworkPrototype/stockdb.json") as file:
             dbjson = file.read()
             #parse the file
             self.database = json.loads(dbjson)
@@ -32,9 +32,9 @@ class StockDatabase():
                 #TODO: CHECK TAGS, ADD INDEX
                 if tag in self.tagIndex:
                     #Tag is already stored, add the index to the dict
-                    self.tagIndex[tag].append(index)
+                    self.tagIndex[tag.lower()].append(index)
                 else:
-                    self.tagIndex[tag] = [index]
+                    self.tagIndex[tag.lower()] = [index]
         print(self.tagIndex)
         
     def IndexDatabaseTitles(self):
@@ -47,7 +47,54 @@ class StockDatabase():
                 tag = ''.join(c for c in tag if c.isalnum())
                 if tag in self.titleIndex:
                     #Tag is already stored, add the index to the dict
-                    self.titleIndex[tag].append(index)
+                    self.titleIndex[tag.lower()].append(index)
                 else:
-                    self.titleIndex[tag] = [index]
+                    self.titleIndex[tag.lower()] = [index]
         print(self.titleIndex)
+    
+    def SearchForItem(self, query:str) -> list:
+        #Separate query into its separate terms
+        searchTerms = query.split(" ")
+        
+        hits = []
+
+        #For each search term, find matches.
+        for term in searchTerms:
+            
+            term = (''.join(c for c in term if c.isalnum())).lower()
+
+            print("finding", term)
+            #Check title index
+            if term in self.tagIndex:
+                #If it matches, get the indexes stored under the tag
+                positions = self.tagIndex[term]
+                for position in positions:
+                    #Add as a hit
+                    hits.append(position)
+
+            #Check title index
+            if term in self.titleIndex:
+                #If it matches, get the indexes stored under the tag
+                positions = self.titleIndex[term]
+                for position in positions:
+                    #Add as a hit
+                    hits.append(position)
+
+        #Order the values in the hits list by their popularity.
+        #This takes the list, counts how many times the value appears, and reorders it using this count
+        #It's reversed so the most popular items are first, and then the popularity descends
+        prioritisedResults = sorted(hits, key=lambda x: hits.count(x), reverse=True)
+
+        #Get only the unique options.
+        uniqueResults = []
+        for index in prioritisedResults:
+            if uniqueResults.count(index) != 0: continue
+            else: uniqueResults.append(index)
+
+        print(uniqueResults)
+        
+        return uniqueResults
+        
+        
+
+            
