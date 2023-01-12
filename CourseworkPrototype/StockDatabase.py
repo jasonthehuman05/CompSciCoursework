@@ -4,6 +4,7 @@ class StockDatabase():
     database = dict()
     tagIndex = dict()
     titleIndex = dict()
+    dbFilePath = "CourseworkPrototype/stockdb.json"
 
     def __init__(self): #Runs when an object is made
         self.LoadFile()
@@ -17,11 +18,16 @@ class StockDatabase():
         self.titleIndex = dict()
 
         #Load JSON File
-        with open("CourseworkPrototype/stockdb.json") as file:
+        with open(self.dbFilePath) as file:
             dbjson = file.read()
             #parse the file
             self.database = json.loads(dbjson)
-            
+
+    def WriteDatabase(self):
+        jsonString = json.dumps(self.database)
+        with open(self.dbFilePath, "w") as file:
+            file.write(jsonString)
+
     def IndexDatabaseTags(self):
         #Ensure the tag index is empty
         self.tagIndex = dict()
