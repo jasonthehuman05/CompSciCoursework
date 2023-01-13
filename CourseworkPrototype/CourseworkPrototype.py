@@ -2,9 +2,17 @@
 import StockDatabase
 
 db = StockDatabase.StockDatabase()
-item = db.GetItemByProductNumber("000001")
-print(item["productName"])
-variation = db.GetVariation("000001:1")
-print(variation["variationName"])
-#print(db.database["items"][0]["productName"])
-#db.WriteDatabase()
+
+#Add Item Test
+variation1 = {
+	"variationID": "1",
+	"variationName": "Ocean Sky",
+	"variationCost": 16.30,
+	"stockLevel": 59
+}
+
+tags = ["paint", "indoor", "walls", "matt", "silk", "home"]
+
+db.CreateItem("5L Matte Paint", tags, [variation1])
+
+print(db.database)
