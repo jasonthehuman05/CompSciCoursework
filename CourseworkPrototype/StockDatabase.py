@@ -107,7 +107,7 @@ class StockDatabase():
 
     def GetItemByProductNumber(self, prodNum:str):
         item = None
-
+        #search db for prod number
         for i in range(len(self.database["items"])):
             if self.database["items"][i]["productNumber"] == prodNum:
                 item = self.database["items"][i]
@@ -115,15 +115,18 @@ class StockDatabase():
         return item
 
     def GetVariation(self, itemNumber:str):
+        #split product and variation numbers
         inumComponents = itemNumber.split(":")
 
         prodNum = inumComponents[0]
         varNum = inumComponents[1]
 
+        #Get item
         item = self.GetItemByProductNumber(prodNum)
 
         variation = None
 
+        #Find variation
         if item != None:
             for var in item["variations"]:
                 if var["variationID"] == varNum:
@@ -146,3 +149,22 @@ class StockDatabase():
         #Rebuild Index
         self.IndexDatabaseTags()
         self.IndexDatabaseTitles()
+
+    def UpdateItem(self, productNumber:str, editedItem:dict):
+        found = False
+
+        #Find the specified item
+        for i in range(len(self.database["items"])):
+            if self.database["items"][i]["productNumber"] == productNumber:
+                #switch item for new version
+                self.database["items"][i] = editedItem
+                found = True
+
+        #Throw error if item isn't found
+        if not found:
+            raise Exception(f"Unable to find product with ID {productNumber}")
+        else:
+            #Save and update tags
+            self.WriteDatabase()
+            self.IndexDatabaseTags()
+            self.IndexDatabaseTitles()

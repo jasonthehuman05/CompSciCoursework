@@ -3,16 +3,16 @@ import StockDatabase
 
 db = StockDatabase.StockDatabase()
 
-#Add Item Test
-variation1 = {
-	"variationID": "1",
-	"variationName": "Ocean Sky",
-	"variationCost": 16.30,
-	"stockLevel": 59
-}
+#Working test
+itemToChange = db.GetItemByProductNumber("000001")
+itemToChange["productName"] = "3mm Timber Nails: 25 Count"
 
-tags = ["paint", "indoor", "walls", "matt", "silk", "home"]
-
-db.CreateItem("5L Matte Paint", tags, [variation1])
+db.UpdateItem("000001", itemToChange)
 
 print(db.database)
+
+#Shouldn't work
+itemToChange = db.GetItemByProductNumber("000001")
+itemToChange["productName"] = "3mm Timber Nails: 25 Count"
+
+db.UpdateItem("123456", itemToChange)
