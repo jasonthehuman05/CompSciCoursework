@@ -1,16 +1,20 @@
 import json
 
 class StockDatabase():
+    #Declarations
     database = dict()
     tagIndex = dict()
     titleIndex = dict()
     dbFilePath = "stockdb.json"
-    nextProductNumber = 0
+    nextProductNumber = 1
 
     def __init__(self): #Runs when an object is made
         self.LoadFile()
         self.IndexDatabaseTags()
         self.IndexDatabaseTitles()
+    
+    #File IO
+    #region File IO
 
     def LoadFile(self):
         #Ensure all the lists are clear
@@ -34,6 +38,16 @@ class StockDatabase():
         jsonString = json.dumps(self.database)
         with open(self.dbFilePath, "w") as file:
             file.write(jsonString)
+
+    #endregion
+
+    def ReloadDatabase(self):
+        self.WriteDatabase()
+        self.IndexDatabaseTags()
+        self.IndexDatabaseTitles()
+
+    #Indexers
+    #region Indexers
 
     def IndexDatabaseTags(self):
         #Ensure the tag index is empty
@@ -64,6 +78,10 @@ class StockDatabase():
                 else:
                     self.titleIndex[tag.lower()] = [index]
     
+    #endregion#indexers
+
+    #Searcher And Finders
+    #region s and f
     def SearchForItem(self, query:str) -> list:
         #Separate query into its separate terms
         searchTerms = query.split(" ")
@@ -133,22 +151,22 @@ class StockDatabase():
                     variation = var
             
         return variation
-        
+       
+    #endregion
+
+    #Create, Update, Delete
+    #region CrUD
     def CreateItem(self, prodName:str, tags:list, variations:list):
         #Create Dict Entry
         newItem = {
-            "productNumber": str(self.nextProductNumber).zfill(6), #This creates a string using the next product number that's padded to length 6
+            "productNumber": str(self.nextProductNumber+1).zfill(6), #This creates a string using the next product number that's padded to length 6
             "productName": prodName,
             "productTags": tags,
             "variations": variations
         }
         self.database["items"].append(newItem) #Add new item to JSON
 
-        self.WriteDatabase() #Store database
-        
-        #Rebuild Index
-        self.IndexDatabaseTags()
-        self.IndexDatabaseTitles()
+        self.ReloadDatabase()
 
     def UpdateItem(self, productNumber:str, editedItem:dict):
         found = False
@@ -164,7 +182,15 @@ class StockDatabase():
         if not found:
             raise Exception(f"Unable to find product with ID {productNumber}")
         else:
-            #Save and update tags
-            self.WriteDatabase()
-            self.IndexDatabaseTags()
-            self.IndexDatabaseTitles()
+            self.ReloadDatabase()
+
+    def DeleteItem(self, productNumber:str):
+        #Find correct item
+        for i in range(len(self.database["items"])):
+            if self.database["items"][i]["productNumber"] == productNumber:
+                #Correct Item found
+                item = self.database["items"][i]
+                self.database["items"].remove(item)
+        
+        self.ReloadDatabase()
+    #endregion

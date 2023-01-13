@@ -1,1 +1,46 @@
-{"items": [{"productNumber": "000001", "productName": "3mm Timber Nails: 25 Count", "productTags": ["wood", "structure", "construction", "metal", "home", "fixing"], "variations": [{"variationID": "1", "variationName": "140mm", "variationCost": 3.8, "stockLevel": 120}]}, {"productNumber": "000002", "productName": "3mm Masonry Nails: 20 Count", "productTags": ["brick", "masonry", "structure", "construction", "metal", "home", "fixing", "outdoor"], "variations": [{"variationID": "1", "variationName": "140mm", "variationCost": 4.2, "stockLevel": 84}]}, {"productNumber": "000002", "productName": "5L Matte Paint", "productTags": ["paint", "indoor", "walls", "matt", "silk", "home"], "variations": [{"variationID": "1", "variationName": "Ocean Sky", "variationCost": 16.3, "stockLevel": 59}]}]}
+{
+  "items": [
+    {
+      "productNumber": "000001",
+      "productName": "3mm Timber Nails: 25 Count",
+      "productTags": [
+        "wood",
+        "structure",
+        "construction",
+        "metal",
+        "home",
+        "fixing"
+      ],
+      "variations": [
+        {
+          "variationID": "1",
+          "variationName": "140mm",
+          "variationCost": 3.8,
+          "stockLevel": 120
+        }
+      ]
+    },
+    {
+      "productNumber": "000002",
+      "productName": "3mm Masonry Nails: 20 Count",
+      "productTags": [
+        "brick",
+        "masonry",
+        "structure",
+        "construction",
+        "metal",
+        "home",
+        "fixing",
+        "outdoor"
+      ],
+      "variations": [
+        {
+          "variationID": "1",
+          "variationName": "140mm",
+          "variationCost": 4.2,
+          "stockLevel": 84
+        }
+      ]
+    }
+  ]
+}
