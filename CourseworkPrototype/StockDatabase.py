@@ -4,7 +4,7 @@ class StockDatabase():
     database = dict()
     tagIndex = dict()
     titleIndex = dict()
-    dbFilePath = "CourseworkPrototype/stockdb.json"
+    dbFilePath = "stockdb.json"
     nextProductNumber = 0
 
     def __init__(self): #Runs when an object is made
@@ -42,7 +42,7 @@ class StockDatabase():
         #Iterate through each item in stock
         for index in range(len(self.database["items"])):
             for tag in self.database["items"][index]["productTags"]:
-                #TODO: CHECK TAGS, ADD INDEX
+                tag = tag.lower()
                 if tag in self.tagIndex:
                     #Tag is already stored, add the index to the dict
                     self.tagIndex[tag.lower()].append(index)
@@ -57,6 +57,7 @@ class StockDatabase():
         for index in range(len(self.database["items"])):
             for tag in self.database["items"][index]["productName"].split(" "):
                 tag = ''.join(c for c in tag if c.isalnum())
+                tag = tag.lower()
                 if tag in self.titleIndex:
                     #Tag is already stored, add the index to the dict
                     self.titleIndex[tag.lower()].append(index)
@@ -133,8 +134,15 @@ class StockDatabase():
     def CreateItem(self, prodName:str, tags:list, variations:list):
         #Create Dict Entry
         newItem = {
-            "productNumber": str(self.nextProductNumber).zfill(6),
+            "productNumber": str(self.nextProductNumber).zfill(6), #This creates a string using the next product number that's padded to length 6
             "productName": prodName,
             "productTags": tags,
             "variations": variations
         }
+        self.database["items"].append(newItem) #Add new item to JSON
+
+        self.WriteDatabase() #Store database
+        
+        #Rebuild Index
+        self.IndexDatabaseTags()
+        self.IndexDatabaseTitles()

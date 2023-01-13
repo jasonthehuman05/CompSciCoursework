@@ -15,7 +15,7 @@
         {
           "variationID": "1",
           "variationName": "140mm",
-          "variationCost": 3.80,
+          "variationCost": 3.8,
           "stockLevel": 120
         }
       ]
@@ -37,8 +37,28 @@
         {
           "variationID": "1",
           "variationName": "140mm",
-          "variationCost": 4.20,
+          "variationCost": 4.2,
           "stockLevel": 84
+        }
+      ]
+    },
+    {
+      "productNumber": "000002",
+      "productName": "5L Matte Paint",
+      "productTags": [
+        "paint",
+        "indoor",
+        "walls",
+        "matt",
+        "silk",
+        "home"
+      ],
+      "variations": [
+        {
+          "variationID": "1",
+          "variationName": "Ocean Sky",
+          "variationCost": 16.3,
+          "stockLevel": 59
         }
       ]
     }
