@@ -5,6 +5,7 @@ class StockDatabase():
     tagIndex = dict()
     titleIndex = dict()
     dbFilePath = "CourseworkPrototype/stockdb.json"
+    nextProductNumber = 0
 
     def __init__(self): #Runs when an object is made
         self.LoadFile()
@@ -22,6 +23,12 @@ class StockDatabase():
             dbjson = file.read()
             #parse the file
             self.database = json.loads(dbjson)
+        
+        #Find the next product number
+        for item in self.database["items"]:
+            if int(item["productNumber"]) > self.nextProductNumber:
+                self.nextProductNumber = int(item["productNumber"])
+        
 
     def WriteDatabase(self):
         jsonString = json.dumps(self.database)
@@ -123,3 +130,11 @@ class StockDatabase():
             
         return variation
         
+    def CreateItem(self, prodName:str, tags:list, variations:list):
+        #Create Dict Entry
+        newItem = {
+            "productNumber": str(self.nextProductNumber).zfill(6),
+            "productName": prodName,
+            "productTags": tags,
+            "variations": variations
+        }
