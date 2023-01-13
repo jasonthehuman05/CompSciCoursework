@@ -17,6 +17,12 @@
           "variationName": "140mm",
           "variationCost": 3.8,
           "stockLevel": 120
+        },
+        {
+          "variationID": "2",
+          "variationName": "160mm",
+          "variationCost": 4.2,
+          "stockLevel": 120
         }
       ]
     },

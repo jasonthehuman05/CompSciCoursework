@@ -1,6 +1,7 @@
 #This is the startfile
 import StockDatabase
+import RootWindow
 
-db = StockDatabase.StockDatabase()
+#db = StockDatabase.StockDatabase()
 
-db.DeleteItem("000003")
+mainWin = RootWindow.RootWindow()
