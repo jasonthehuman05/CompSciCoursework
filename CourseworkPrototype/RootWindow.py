@@ -1,6 +1,7 @@
 import tkinter
 import StockDatabase
 import math
+import DetailsViewer
 
 class RootWindow:
     root = None
@@ -58,7 +59,7 @@ class RootWindow:
             rowYPosition = ((18+marginBetweenRows)*i)+2
 
             #generate buttons
-            self.itemOpenButton.append(tkinter.Button(self.inventoryFrame, text="View Details", command=lambda: print("Unassigned!")))
+            self.itemOpenButton.append(tkinter.Button(self.inventoryFrame, text="View Details", command=lambda: pass))
             self.itemOpenButton[i].place(x=8, y=rowYPosition, height=18, width=100)
 
             #generate prod num labels
@@ -75,7 +76,7 @@ class RootWindow:
 
     def EmptyItemInformation(self): #reset the information in the holders
         for i in range(0, 12):
-            self.itemOpenButton[i].config(text="View Details")
+            self.itemOpenButton[i].config(command=lambda: pass)
             self.itemNumberLabel[i].config(text="000000")
             self.itemNameLabel[i].config(text="NO ITEM")
 
@@ -101,7 +102,7 @@ class RootWindow:
         for i in range(startPoint, endPoint+1):
             item = self.db.database["items"][i]
 
-            self.itemOpenButton[elementNumber].config(text="View Details")
+            self.itemOpenButton[elementNumber].config(command=lambda: DetailsViewer.DetailsViewer(self.db, item["productNumber"]))
             self.itemNumberLabel[elementNumber].config(text=item["productNumber"])
             self.itemNameLabel[elementNumber].config(text=item["productName"])
 
