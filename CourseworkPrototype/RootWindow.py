@@ -28,20 +28,20 @@ class RootWindow:
         self.inventoryFrame = tkinter.Frame(self.root)
         self.inventoryFrame.configure(background='#aaaaaa')
         self.inventoryFrame.pack()
-        self.inventoryFrame.place(x=8, y=48, width = 584, height=306, anchor="nw")
+        self.inventoryFrame.place(x=8, y=48, width = 584, height=312, anchor="nw")
 
-        self.GenerateItemInformation()
+        self.GenerateItemInformationHolders()
 
         self.pageLabel = tkinter.Label(self.root, text=f"Page {self.pageNumber} of {self.pageCount}")
-        self.pageLabel.place(x=300, y=366, anchor="center")
+        self.pageLabel.place(x=300, y=372, anchor="center")
         
         self.prevPageButton = tkinter.Button(self.root, text="<=", command=lambda:self.ChangePage(-1))
-        self.prevPageButton.place(x=8, y=354)
+        self.prevPageButton.place(x=8, y=360)
 
         self.nextPageButton = tkinter.Button(self.root, text="=>", command=lambda:self.ChangePage(1))
-        self.nextPageButton.place(x=565, y=354)
+        self.nextPageButton.place(x=565, y=360)
 
-    def GenerateItemInformation(self):
+    def GenerateItemInformationHolders(self):
         #Generates the holders for the item information in the inventory frame
 
         #values to use for positioning
@@ -53,8 +53,16 @@ class RootWindow:
             rowYPosition = ((18+marginBetweenRows)*i)+2
 
             #generate buttons
-            self.itemNameLabel.append(tkinter.Button(self.inventoryFrame, text="View Details", command=lambda: print("Unassigned!")))
-            self.itemNameLabel[i].place(x=8, y=rowYPosition, height=18, width=100)
+            self.itemOpenButton.append(tkinter.Button(self.inventoryFrame, text="View Details", command=lambda: print("Unassigned!")))
+            self.itemOpenButton[i].place(x=8, y=rowYPosition, height=18, width=100)
+
+            #generate prod num labels
+            self.itemNumberLabel.append(tkinter.Label(self.inventoryFrame, text="000000"))
+            self.itemNumberLabel[i].place(x=116, y=rowYPosition, height=18, width=48)
+
+            #generate item informaiton labels
+            self.itemNameLabel.append(tkinter.Label(self.inventoryFrame, text="000000"))
+            self.itemNameLabel[i].place(x=172, y=rowYPosition, height=18, width=400)
         pass
 
     def ChangePage(self, direction:int):
