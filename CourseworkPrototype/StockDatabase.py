@@ -78,7 +78,7 @@ class StockDatabase():
                 else:
                     self.titleIndex[tag.lower()] = [index]
     
-    #endregion#indexers
+    #endregion
 
     #Searcher And Finders
     #region s and f
@@ -155,7 +155,6 @@ class StockDatabase():
     #endregion
 
     #Create, Update, Delete
-    #region CrUD
     def CreateItem(self, prodName:str, tags:list, variations:list):
         #Create Dict Entry
         newItem = {
@@ -193,4 +192,3 @@ class StockDatabase():
                 self.database["items"].remove(item)
         
         self.ReloadDatabase()
-    #endregion
