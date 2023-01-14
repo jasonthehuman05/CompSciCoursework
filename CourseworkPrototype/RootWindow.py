@@ -42,13 +42,19 @@ class RootWindow:
         self.nextPageButton.place(x=565, y=354)
 
     def GenerateItemInformation(self):
-        #Generates the holders for the item information
+        #Generates the holders for the item information in the inventory frame
+
+        #values to use for positioning
         marginBetweenRows = 8
         elementHeight = 8
+
         for i in range(0, 12):
+            #Generate Row Y position
+            rowYPosition = ((18+marginBetweenRows)*i)+2
+
             #generate buttons
             self.itemNameLabel.append(tkinter.Button(self.inventoryFrame, text="View Details", command=lambda: print("Unassigned!")))
-            self.itemNameLabel[i].place(x=8, y=((18+marginBetweenRows)*i)+2, height=18, width=100)
+            self.itemNameLabel[i].place(x=8, y=rowYPosition, height=18, width=100)
         pass
 
     def ChangePage(self, direction:int):
