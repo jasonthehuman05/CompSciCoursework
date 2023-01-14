@@ -1,15 +1,19 @@
 import tkinter
+import StockDatabase
+import math
 
 class RootWindow:
     root = None
     pageNumber = 1
     pageCount = 18
 
+    db = None
     itemNameLabel = []
     itemNumberLabel = []
     itemOpenButton = []
 
-    def __init__(self):
+    def __init__(self, db:StockDatabase.StockDatabase):
+        self.db = db
         self.root = tkinter.Tk()
         self.root.title("BuildrightDB Prototype: Inventory Manager")
         self.DrawWidgets()
@@ -31,6 +35,7 @@ class RootWindow:
         self.inventoryFrame.place(x=8, y=48, width = 584, height=312, anchor="nw")
 
         self.GenerateItemInformationHolders()
+        self.LoadPage()
 
         self.pageLabel = tkinter.Label(self.root, text=f"Page {self.pageNumber} of {self.pageCount}")
         self.pageLabel.place(x=300, y=372, anchor="center")
@@ -63,7 +68,16 @@ class RootWindow:
             #generate item informaiton labels
             self.itemNameLabel.append(tkinter.Label(self.inventoryFrame, text="000000"))
             self.itemNameLabel[i].place(x=172, y=rowYPosition, height=18, width=400)
-        pass
+        
+        #While its not part of the item information holder, calculate the number of pages
+        itemcount = len(self.db.database["items"])
+        self.pageCount = math.ceil(itemcount / 12)
+
+    def EmptyItemInformation(self): #reset the information in the holders
+        for i in range(0, 12):
+            self.itemOpenButton[i].config(text="View Details")
+            self.itemNumberLabel[i].config(text="000000")
+            self.itemNameLabel[i].config(text="NO ITEM")
 
     def ChangePage(self, direction:int):
         #Define new page number
@@ -74,9 +88,27 @@ class RootWindow:
             self.LoadPage()
 
     def LoadPage(self):
-        pass
+        #Empty the page
+        self.EmptyItemInformation()
+        #Get the start and end indexes
+        startPoint = (self.pageNumber-1)*12
+        endPoint = startPoint+1
+
+        if endPoint > len(self.db.database["items"]):
+            endPoint = len(self.db.database["items"])
+
+        elementNumber = 0
+        for i in range(startPoint, endPoint+1):
+            item = self.db.database["items"][i]
+
+            self.itemOpenButton[elementNumber].config(text="View Details")
+            self.itemNumberLabel[elementNumber].config(text=item["productNumber"])
+            self.itemNameLabel[elementNumber].config(text=item["productName"])
+
+            elementNumber += 1
+
 
     def AddInventory(self):
         pass
 
-n = RootWindow()
+n = RootWindow(StockDatabase.StockDatabase())

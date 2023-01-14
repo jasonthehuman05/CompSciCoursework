@@ -2,6 +2,6 @@
 import StockDatabase
 import RootWindow
 
-#db = StockDatabase.StockDatabase()
+db = StockDatabase.StockDatabase()
 
-mainWin = RootWindow.RootWindow()
+mainWin = RootWindow.RootWindow(db)
