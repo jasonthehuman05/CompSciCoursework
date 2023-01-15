@@ -6,7 +6,7 @@ import DetailsViewer
 class RootWindow:
     root = None
     pageNumber = 1
-    pageCount = 18
+    pageCount = 1
 
     db = None
     itemNameLabel = []
@@ -59,7 +59,7 @@ class RootWindow:
             rowYPosition = ((18+marginBetweenRows)*i)+2
 
             #generate buttons
-            self.itemOpenButton.append(tkinter.Button(self.inventoryFrame, text="View Details", command=lambda: pass))
+            self.itemOpenButton.append(tkinter.Button(self.inventoryFrame, text="View Details", command=self.Passer()))
             self.itemOpenButton[i].place(x=8, y=rowYPosition, height=18, width=100)
 
             #generate prod num labels
@@ -76,7 +76,7 @@ class RootWindow:
 
     def EmptyItemInformation(self): #reset the information in the holders
         for i in range(0, 12):
-            self.itemOpenButton[i].config(command=lambda: pass)
+            self.itemOpenButton[i].config(command=lambda: self.Passer())
             self.itemNumberLabel[i].config(text="000000")
             self.itemNameLabel[i].config(text="NO ITEM")
 
@@ -100,16 +100,16 @@ class RootWindow:
 
         elementNumber = 0
         for i in range(startPoint, endPoint+1):
-            item = self.db.database["items"][i]
+            itemMain = self.db.database["items"][i]
 
-            self.itemOpenButton[elementNumber].config(command=lambda: DetailsViewer.DetailsViewer(self.db, item["productNumber"]))
-            self.itemNumberLabel[elementNumber].config(text=item["productNumber"])
-            self.itemNameLabel[elementNumber].config(text=item["productName"])
+            self.itemOpenButton[elementNumber].config(command=lambda lambdaItem=itemMain: DetailsViewer.DetailsViewer(self.db, lambdaItem["productNumber"]))
+            self.itemNumberLabel[elementNumber].config(text=itemMain["productNumber"])
+            self.itemNameLabel[elementNumber].config(text=itemMain["productName"])
 
             elementNumber += 1
-
 
     def AddInventory(self):
         pass
 
-n = RootWindow(StockDatabase.StockDatabase())
+    def Passer(self):
+        pass
