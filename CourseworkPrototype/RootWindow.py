@@ -52,7 +52,6 @@ class RootWindow:
 
         #values to use for positioning
         marginBetweenRows = 8
-        elementHeight = 8
 
         for i in range(0, 12):
             #Generate Row Y position
