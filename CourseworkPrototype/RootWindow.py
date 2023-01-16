@@ -93,15 +93,14 @@ class RootWindow:
         self.EmptyItemInformation()
         #Get the start and end indexes
         startPoint = (self.pageNumber-1)*12
-        endPoint = startPoint+1
+        endPoint = startPoint+11
 
         if endPoint > len(self.db.database["items"]):
-            endPoint = len(self.db.database["items"])
+            endPoint = len(self.db.database["items"])-1
 
         elementNumber = 0
         for i in range(startPoint, endPoint+1):
             itemMain = self.db.database["items"][i]
-
             self.itemOpenButton[elementNumber].config(command=lambda lambdaItem=itemMain: DetailsViewer.DetailsViewer(self.db, lambdaItem["productNumber"]))
             self.itemNumberLabel[elementNumber].config(text=itemMain["productNumber"])
             self.itemNameLabel[elementNumber].config(text=itemMain["productName"])

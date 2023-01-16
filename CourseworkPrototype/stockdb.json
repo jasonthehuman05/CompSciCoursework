@@ -28,7 +28,7 @@
     },
     {
       "productNumber": "000002",
-      "productName": "3mm Masonry Nails: 20 Count",
+      "productName": "3mm Masonry Nails: 26 Count",
       "productTags": [
         "brick",
         "masonry",
@@ -45,6 +45,33 @@
           "variationName": "140mm",
           "variationCost": 4.2,
           "stockLevel": 84
+        }
+      ]
+    },
+    {
+      "productNumber": "000003",
+      "productName": "Hard-back Cushioned Office Chair with Adjustable Height",
+      "productTags": [
+        "chair",
+        "desk",
+        "soft",
+        "plastic",
+        "furniture",
+        "home",
+        "work"
+      ],
+      "variations": [
+        {
+          "variationID": "1",
+          "variationName": "Blue",
+          "variationCost": 25,
+          "stockLevel": 120
+        },
+        {
+          "variationID": "2",
+          "variationName": "Black",
+          "variationCost": 25.00,
+          "stockLevel": 120
         }
       ]
     }
