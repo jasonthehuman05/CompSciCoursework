@@ -5,7 +5,7 @@ class StockDatabase():
     database = dict()
     tagIndex = dict()
     titleIndex = dict()
-    dbFilePath = "CourseworkPrototype/stockdb.json"
+    dbFilePath = "stockdb.json"
     nextProductNumber = 1
 
     def __init__(self): #Runs when an object is made
