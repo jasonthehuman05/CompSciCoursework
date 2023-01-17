@@ -27,7 +27,7 @@ class VariationCreator:
         self.variationStockLabel = tkinter.Label(self.root, text="Stock")
         self.variationStockLabel.place(x=0, y=75)
 
-        self.variationIDEntry = tkinter.Entry(self.root, text="ID")
+        self.variationIDEntry = tkinter.Entry(self.root)
         self.variationIDEntry.place(x=0, y=0)
         self.variationNameEntry = tkinter.Entry(self.root, text="Name")
         self.variationNameEntry.place(x=0, y=25)
