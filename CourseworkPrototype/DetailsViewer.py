@@ -16,7 +16,6 @@ class DetailsViewer:
 
         #Calculate size to accomodate all variations
         winSize = 125 + len(self.item['variations'])*25
-        print(winSize)
         self.root.geometry(f"400x{winSize}")
 
         self.root.mainloop()
@@ -27,7 +26,7 @@ class DetailsViewer:
         saveButton.place(x=0,y=0,width=100,height=25)
 
         #NewVariation Butotn
-        nvButton = tkinter.Button(self.root, text="ADD VARIATION", command=lambda: self.Passer())
+        nvButton = tkinter.Button(self.root, text="ADD VARIATION", command=lambda: self.AddVariation())
         nvButton.place(x=100,y=0,width=100,height=25)
 
         #Item Name
@@ -126,4 +125,6 @@ class DetailsViewer:
         }
 
         self.db.UpdateItem(self.itemNumber, item)
-            
+     
+    def AddVariation(self):
+        vc = VariationCreator.VariationCreator(self.db, self.itemNumber)
