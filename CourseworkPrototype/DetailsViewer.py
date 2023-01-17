@@ -1,5 +1,6 @@
 import tkinter
 import StockDatabase
+import VariationCreator
 
 class DetailsViewer:
     item = dict()
@@ -24,6 +25,10 @@ class DetailsViewer:
         #Save Button
         saveButton = tkinter.Button(self.root, text="SAVE", command=lambda: self.SaveChanges())
         saveButton.place(x=0,y=0,width=100,height=25)
+
+        #NewVariation Butotn
+        nvButton = tkinter.Button(self.root, text="ADD VARIATION", command=lambda: self.Passer())
+        nvButton.place(x=100,y=0,width=100,height=25)
 
         #Item Name
         self.itemNameEntry = tkinter.Entry(self.root)
@@ -106,7 +111,7 @@ class DetailsViewer:
         variations = []
         for i in range(0, len(self.variationIDEntry)): #Go through each item and save the variation
             variation={
-                "variationsID": self.variationIDEntry[i].get(),
+                "variationID": self.variationIDEntry[i].get(),
                 "variationName":self.variationNameEntry[i].get(),
                 "variationCost": self.variationCostEntry[i].get(),
                 "stockLevel": self.variationStockEntry[i].get()

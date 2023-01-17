@@ -62,13 +62,13 @@
       ],
       "variations": [
         {
-          "variationsID": "1",
+          "variationID": "1",
           "variationName": "Blue",
           "variationCost": "25",
           "stockLevel": "120"
         },
         {
-          "variationsID": "2",
+          "variationID": "2",
           "variationName": "Black",
           "variationCost": "30",
           "stockLevel": "120"
