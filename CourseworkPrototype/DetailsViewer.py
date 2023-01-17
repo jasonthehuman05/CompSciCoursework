@@ -6,7 +6,8 @@ class DetailsViewer:
     
     def __init__(self, db:StockDatabase.StockDatabase, itemNumber:str):
         self.item = db.GetItemByProductNumber(itemNumber)
-        
+        self.db = db
+        self.itemNumber = itemNumber
         #Main Window
         self.root = tkinter.Tk()
         self.root.title(itemNumber)
@@ -96,5 +97,28 @@ class DetailsViewer:
         pass
 
     def SaveChanges(self):
-        for i in range(0, len(self.variationIDEntry)):
-            print(self.variationIDEntry[i].get())
+        #Parse Tags
+        tags = self.itemTagEntry.get().split(", ")
+        for i in range(0, len(tags)):
+            tags[i] = ''.join(c for c in tags[i] if c.isalnum())
+
+        #parse varitions
+        variations = []
+        for i in range(0, len(self.variationIDEntry)): #Go through each item and save the variation
+            variation={
+                "variationsID": self.variationIDEntry[i].get(),
+                "variationName":self.variationNameEntry[i].get(),
+                "variationCost": self.variationCostEntry[i].get(),
+                "stockLevel": self.variationStockEntry[i].get()
+            }
+            variations.append(variation)
+
+        item = {
+          "productNumber": str(self.item["productNumber"]),
+          "productName": self.itemNameEntry.get(),
+          "productTags": tags,
+          "variations": variations
+        }
+
+        self.db.UpdateItem(self.itemNumber, item)
+            

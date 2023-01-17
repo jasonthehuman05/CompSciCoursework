@@ -62,16 +62,16 @@
       ],
       "variations": [
         {
-          "variationID": "1",
+          "variationsID": "1",
           "variationName": "Blue",
-          "variationCost": 25,
-          "stockLevel": 120
+          "variationCost": "25",
+          "stockLevel": "120"
         },
         {
-          "variationID": "2",
+          "variationsID": "2",
           "variationName": "Black",
-          "variationCost": 25.00,
-          "stockLevel": 120
+          "variationCost": "30",
+          "stockLevel": "120"
         }
       ]
     }
