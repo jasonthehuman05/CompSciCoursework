@@ -25,6 +25,7 @@
     <Compile Include="DetailsViewer.py" />
     <Compile Include="RootWindow.py" />
     <Compile Include="StockDatabase.py" />
+    <Compile Include="VariationCreator.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="stockdb.json" />
