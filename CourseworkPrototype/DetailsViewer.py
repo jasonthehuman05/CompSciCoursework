@@ -13,7 +13,7 @@ class DetailsViewer:
         self.DrawWidgets()
 
         #Calculate size to accomodate all variations
-        winSize = 100 + len(self.item['variations'])*25
+        winSize = 125 + len(self.item['variations'])*25
         print(winSize)
         self.root.geometry(f"400x{winSize}")
 
