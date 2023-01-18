@@ -135,4 +135,4 @@ class DetailsViewer:
 
     def DeleteItem(self):
         self.db.DeleteItem(self.itemNumber)
-        self.root.destroy()
+        self.root.destroy() #Remove Window
