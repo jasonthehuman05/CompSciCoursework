@@ -20,6 +20,7 @@ class RootWindow:
         self.root.title("BuildrightDB Prototype: Inventory Manager")
         self.DrawWidgets()
         self.root.geometry("600x400")
+        self.root.resizable(False, False)
         self.root.mainloop()
         
     def DrawWidgets(self):

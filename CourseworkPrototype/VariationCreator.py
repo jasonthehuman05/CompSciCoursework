@@ -15,7 +15,7 @@ class VariationCreator:
         self.DrawWidgets()
         #Calculate size to accomodate all variations
         self.root.geometry(f"200x125")
-
+        self.root.resizable(False, False)
         self.root.mainloop()
         
     def DrawWidgets(self):

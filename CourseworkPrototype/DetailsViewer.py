@@ -12,6 +12,7 @@ class DetailsViewer:
         #Main Window
         self.root = tkinter.Tk()
         self.root.title(itemNumber)
+        self.root.resizable(False, False)
         self.DrawWidgets()
 
         #Calculate size to accomodate all variations
