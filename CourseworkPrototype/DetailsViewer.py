@@ -127,4 +127,4 @@ class DetailsViewer:
         self.db.UpdateItem(self.itemNumber, item)
      
     def AddVariation(self):
-        vc = VariationCreator.VariationCreator(self.db, self.itemNumber)
+        vc = VariationCreator.VariationCreator(self.db, self.itemNumber, self.root)
