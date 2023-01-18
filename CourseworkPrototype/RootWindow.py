@@ -2,6 +2,7 @@ import tkinter
 import StockDatabase
 import math
 import DetailsViewer
+import ItemCreator
 
 class RootWindow:
     root = None
@@ -107,7 +108,7 @@ class RootWindow:
             elementNumber += 1
 
     def AddInventory(self):
-        pass
+        ic = ItemCreator.ItemCreator(self.db)
 
     def Passer(self):
         pass

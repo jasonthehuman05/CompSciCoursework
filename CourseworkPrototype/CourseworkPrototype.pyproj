@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="CourseworkPrototype.py" />
     <Compile Include="DetailsViewer.py" />
+    <Compile Include="ItemCreator.py" />
     <Compile Include="RootWindow.py" />
     <Compile Include="StockDatabase.py" />
     <Compile Include="VariationCreator.py" />
