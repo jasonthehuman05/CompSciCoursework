@@ -23,11 +23,15 @@ class DetailsViewer:
     def DrawWidgets(self):
         #Save Button
         saveButton = tkinter.Button(self.root, text="SAVE", command=lambda: self.SaveChanges())
-        saveButton.place(x=0,y=0,width=100,height=25)
+        saveButton.place(x=0,y=0,width=150,height=25)
 
-        #NewVariation Butotn
+        #NewVariation Button
         nvButton = tkinter.Button(self.root, text="ADD VARIATION", command=lambda: self.AddVariation())
-        nvButton.place(x=100,y=0,width=100,height=25)
+        nvButton.place(x=150,y=0,width=150,height=25)
+
+        #Delete Button
+        nvButton = tkinter.Button(self.root, text="DELETE ITEM", command=lambda: self.DeleteItem(), bg="red")
+        nvButton.place(x=300,y=0,width=100,height=25)
 
         #Item Name
         self.itemNameEntry = tkinter.Entry(self.root)
@@ -128,3 +132,7 @@ class DetailsViewer:
      
     def AddVariation(self):
         vc = VariationCreator.VariationCreator(self.db, self.itemNumber, self.root)
+
+    def DeleteItem(self):
+        self.db.DeleteItem(self.itemNumber)
+        self.root.destroy()
