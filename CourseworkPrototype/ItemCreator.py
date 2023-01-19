@@ -1,12 +1,14 @@
 import tkinter
 import StockDatabase
 import VariationCreator
+import RootWindow
 
 class ItemCreator:
     item = dict()
     
-    def __init__(self, db:StockDatabase.StockDatabase):
+    def __init__(self, db:StockDatabase.StockDatabase, parent):
         self.db = db
+        self.parent = parent
         #Main Window
         self.root = tkinter.Tk()
         self.root.resizable(False, False)
@@ -52,8 +54,27 @@ class ItemCreator:
         self.variationStockEntry.place(x=100,y=150)
 
         #Save Button
-        self.addItemButton = tkinter.Button(self.root, text="ADD ITEM", bg="lime", command=lambda:self.Passer())
+        self.addItemButton = tkinter.Button(self.root, text="ADD ITEM", bg="lime", command=lambda:self.AddNewItem())
         self.addItemButton.place(x=0,y=175,width=300,height=50)
+
+    def AddNewItem(self):
+        #Turn tags string into individual tags
+        tags = self.tagsEntry.get().split(",")
+        for i in range(0, len(tags)):
+            tags[i] = (''.join(c for c in tags[i] if c.isalnum())).lower()
+
+        #Create variation dict
+        variation = [{
+            "variationID": "1",
+            "variationName": self.variationNameEntry.get(),
+            "variationCost": self.variationCostEntry.get(),
+            "stockLevel": self.variationCostEntry.get()
+        }]
+
+        self.db.CreateItem(self.nameEntry.get(), tags, variation)
+
+        self.root.destroy()
+        self.parent.Refresh()
 
     def Passer(self):
         pass

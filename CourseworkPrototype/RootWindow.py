@@ -49,6 +49,9 @@ class RootWindow:
         self.nextPageButton = tkinter.Button(self.root, text="=>", command=lambda:self.ChangePage(1))
         self.nextPageButton.place(x=565, y=360)
 
+    def Refresh(self):
+        self.ChangePage(0)
+
     def GenerateItemInformationHolders(self):
         #Generates the holders for the item information in the inventory frame
 
@@ -102,14 +105,14 @@ class RootWindow:
         elementNumber = 0
         for i in range(startPoint, endPoint+1):
             itemMain = self.db.database["items"][i]
-            self.itemOpenButton[elementNumber].config(command=lambda lambdaItem=itemMain: DetailsViewer.DetailsViewer(self.db, lambdaItem["productNumber"]))
+            self.itemOpenButton[elementNumber].config(command=lambda lambdaItem=itemMain: DetailsViewer.DetailsViewer(self.db, lambdaItem["productNumber"], self))
             self.itemNumberLabel[elementNumber].config(text=itemMain["productNumber"])
             self.itemNameLabel[elementNumber].config(text=itemMain["productName"])
 
             elementNumber += 1
 
     def AddInventory(self):
-        ic = ItemCreator.ItemCreator(self.db)
+        ic = ItemCreator.ItemCreator(self.db, self)
 
     def Passer(self):
         pass

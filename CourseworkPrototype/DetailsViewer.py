@@ -5,9 +5,10 @@ import VariationCreator
 class DetailsViewer:
     item = dict()
     
-    def __init__(self, db:StockDatabase.StockDatabase, itemNumber:str):
+    def __init__(self, db:StockDatabase.StockDatabase, itemNumber:str, parent):
         self.item = db.GetItemByProductNumber(itemNumber)
         self.db = db
+        self.parent = parent
         self.itemNumber = itemNumber
         #Main Window
         self.root = tkinter.Tk()
@@ -136,4 +137,5 @@ class DetailsViewer:
 
     def DeleteItem(self):
         self.db.DeleteItem(self.itemNumber)
+        self.parent.Refresh()
         self.root.destroy() #Remove Window
