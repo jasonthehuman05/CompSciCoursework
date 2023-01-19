@@ -164,7 +164,7 @@ class StockDatabase():
             "variations": variations
         }
         self.database["items"].append(newItem) #Add new item to JSON
-
+        self.nextProductNumber +=1
         self.ReloadDatabase()
 
     def UpdateItem(self, productNumber:str, editedItem:dict):
@@ -185,10 +185,12 @@ class StockDatabase():
 
     def DeleteItem(self, productNumber:str):
         #Find correct item
-        for i in range(len(self.database["items"])):
-            if self.database["items"][i]["productNumber"] == productNumber:
-                #Correct Item found
-                item = self.database["items"][i]
-                self.database["items"].remove(item)
-        
+        try:
+            for i in range(len(self.database["items"])):
+                if self.database["items"][i]["productNumber"] == productNumber:
+                    #Correct Item found
+                    item = self.database["items"][i]
+                    self.database["items"].remove(item)
+        except:
+            pass
         self.ReloadDatabase()

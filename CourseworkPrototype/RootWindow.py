@@ -104,11 +104,14 @@ class RootWindow:
 
         elementNumber = 0
         for i in range(startPoint, endPoint+1):
-            itemMain = self.db.database["items"][i]
-            self.itemOpenButton[elementNumber].config(command=lambda lambdaItem=itemMain: DetailsViewer.DetailsViewer(self.db, lambdaItem["productNumber"], self))
-            self.itemNumberLabel[elementNumber].config(text=itemMain["productNumber"])
-            self.itemNameLabel[elementNumber].config(text=itemMain["productName"])
-
+            try:
+                print(i)
+                itemMain = self.db.database["items"][i]
+                self.itemOpenButton[elementNumber].config(command=lambda lambdaItem=itemMain: DetailsViewer.DetailsViewer(self.db, lambdaItem["productNumber"], self))
+                self.itemNumberLabel[elementNumber].config(text=itemMain["productNumber"])
+                self.itemNameLabel[elementNumber].config(text=itemMain["productName"])
+            except:
+                pass
             elementNumber += 1
 
     def AddInventory(self):
