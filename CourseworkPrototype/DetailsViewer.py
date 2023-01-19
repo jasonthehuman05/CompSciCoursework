@@ -129,8 +129,9 @@ class DetailsViewer:
           "productTags": tags,
           "variations": variations
         }
-
+        
         self.db.UpdateItem(self.itemNumber, item)
+        self.parent.Refresh()
      
     def AddVariation(self):
         vc = VariationCreator.VariationCreator(self.db, self.itemNumber, self.root)
