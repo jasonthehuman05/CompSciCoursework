@@ -3,6 +3,7 @@ import StockDatabase
 import math
 import DetailsViewer
 import ItemCreator
+import SearchWindow
 
 class RootWindow:
     root = None
@@ -29,6 +30,11 @@ class RootWindow:
         self.createButton.pack()
         self.createButton.place(x=8, y=8, height=32, width=100, anchor="nw")
 
+        #SearchButton
+        self.searchButton = tkinter.Button(self.root, text="SEARCH", command= lambda:self.SearchForItem())
+        self.searchButton.pack()
+        self.searchButton.place(x=116, y=8, height=32, width=100, anchor="nw")
+
         #InventoryFrame
         #Since TKinter's scrollbar doesn't seem to work well, I am making a different
         #method of scrolling the page
@@ -51,6 +57,9 @@ class RootWindow:
 
     def Refresh(self):
         self.ChangePage(0)
+
+    def SearchForItem(self):
+        sw = SearchWindow.SearchWindow(self.db)
 
     def GenerateItemInformationHolders(self):
         #Generates the holders for the item information in the inventory frame

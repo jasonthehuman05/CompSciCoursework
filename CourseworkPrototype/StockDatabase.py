@@ -118,9 +118,7 @@ class StockDatabase():
         for index in prioritisedResults:
             if uniqueResults.count(index) != 0: continue
             else: uniqueResults.append(index)
-
-        print(uniqueResults)
-        
+            
         return uniqueResults
 
     def GetItemByProductNumber(self, prodNum:str):
