@@ -192,3 +192,19 @@ class StockDatabase():
         except:
             pass
         self.ReloadDatabase()
+
+    def DeleteVariation(self, productNumber:str, variationNumber:str):
+        #Find correct item
+        try:
+            for i in range(len(self.database["items"])):
+                if self.database["items"][i]["productNumber"] == productNumber:
+                    #Correct Item found
+                    item = self.database["items"][i]
+
+                    #Find Variation
+                    for i in range(0, len(item["variations"])):
+                        if item["variations"][i]["variationID"] == variationNumber:
+                            item["variations"].pop(i)
+        except:
+            pass
+        self.ReloadDatabase()
