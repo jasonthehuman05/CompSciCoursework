@@ -2,10 +2,11 @@
 import StockDatabase
 
 class MainMenu:
-	def __init__(self, userName = "Not Logged In"):
+	def __init__(self, db:StockDatabase.StockDatabase):
 		#Make vars accessible
-		self.userName = userName
-
+		self.userName = "Not Logged In"
+		self.db = db
+		self.itmDetailHolders = []
 		#Make Window
 		self.root = tkinter.Tk()
 		self.root.attributes('-fullscreen', True)
@@ -13,6 +14,9 @@ class MainMenu:
 		self.DrawWidgets()
 		self.root.mainloop()
 	
+	def ShowWindow(self):
+		self.root.deiconify()
+
 	def DrawWidgets(self):
 		#Main Header Frame
 		fbg="orange red"
@@ -28,7 +32,7 @@ class MainMenu:
 		#Searching
 		self.searchBar = tkinter.Entry(self.root, font = "default 28 normal")
 		self.searchBar.place(x=536,y=8,width=640,height=48)
-		self.searchButton = tkinter.Button(self.root, text="SEARCH", font = "default 16 normal")
+		self.searchButton = tkinter.Button(self.root, text="SEARCH", font = "default 16 normal", command=lambda:self.MakeSearch())
 		self.searchButton.place(x=1184,y=8,width=100,height=48)
 
 		#Body Frame
@@ -38,9 +42,34 @@ class MainMenu:
 		#Stock Frame
 		self.stockInfoFrame = tkinter.Frame(self.bodyFrame,bg="CadetBlue1")
 		self.stockInfoFrame.place(x=256,y=0,width=1664,height=1016)
+	
+	def MakeSearch(self):
+		self.DrawProducts([])
+
+	def DrawProducts(self, products:list):
+		products = [0,0,0,0,0,0]
+
+		#Get rid of any existing holders
+		for i in range(0, len(self.itemDetailHolders)):
+			self.itmDetailHolders[0].destroy()
 		
-	def ShowWindow(self):
-		self.root.deiconify()
+		
+		
+		#Variables for sizing
+		padding = 8
+		objHeight = 128
 
+		objIndex = 0
+		for index in products:
+			item = self.db.database["items"][index]
 
+			self.itmDetailHolders.append(tkinter.Frame(self.stockInfoFrame))
+			self.itmDetailHolders[objIndex].place(x=8,y=padding+((padding+objHeight)*objIndex),width=1648,height=objHeight)
+			
+			detailsButton = tkinter.Button(self.itmDetailHolders[objIndex], text="View Details", font = "default 24 normal")
+			detailsButton.place(x=1376, y=16, width=256, height=96)
+
+			objIndex += 1
+
+		
 

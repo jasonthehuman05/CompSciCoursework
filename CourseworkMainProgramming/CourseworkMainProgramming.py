@@ -8,4 +8,4 @@ import MainMenu
 
 db = StockDatabase.StockDatabase()
 
-mm = MainMenu.MainMenu()
+mm = MainMenu.MainMenu(db)
