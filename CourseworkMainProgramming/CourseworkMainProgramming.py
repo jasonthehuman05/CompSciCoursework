@@ -7,3 +7,5 @@ import MainMenu
 '''
 
 db = StockDatabase.StockDatabase()
+
+mm = MainMenu.MainMenu()
