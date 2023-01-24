@@ -51,7 +51,7 @@ class MainMenu:
 
 		#Get rid of any existing holders
 		for i in range(0, len(self.itemDetailHolders)):
-			self.itmDetailHolders[0].destroy()
+			self.itmDetailHolders[i].destroy()
 		
 		
 		
