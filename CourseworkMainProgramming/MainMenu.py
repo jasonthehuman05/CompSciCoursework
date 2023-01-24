@@ -32,8 +32,12 @@ class MainMenu:
 		self.searchButton.place(x=1184,y=8,width=100,height=48)
 
 		#Body Frame
-		self.bodyFrame = tkinter.Frame(self.root, bg="CadetBlue1")
+		self.bodyFrame = tkinter.Frame(self.root, bg="CadetBlue4")
 		self.bodyFrame.place(x=0,y=64,width=1920,height=1016)
+
+		#Stock Frame
+		self.stockInfoFrame = tkinter.Frame(self.bodyFrame,bg="CadetBlue1")
+		self.stockInfoFrame.place(x=256,y=0,width=1664,height=1016)
 		
 	def ShowWindow(self):
 		self.root.deiconify()
