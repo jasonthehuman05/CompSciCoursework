@@ -92,5 +92,10 @@ class MainMenu:
 		for i in range(0,7):
 			self.itemDetailHolders[i].place_forget()
 
+		endIndex = startingIndex+7
+		if len(self.activeItemIndexes-1) < endIndex:
+			endIndex = len(self.activeItemIndexes-1)
+
+
 		
 
