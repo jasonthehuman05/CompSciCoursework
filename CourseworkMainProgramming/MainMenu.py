@@ -6,7 +6,8 @@ class MainMenu:
 		#Make vars accessible
 		self.userName = "Not Logged In"
 		self.db = db
-		self.itmDetailHolders = []
+		self.itemDetailHolders = []
+		self.activeItemIndexes = []
 		#Make Window
 		self.root = tkinter.Tk()
 		self.root.attributes('-fullscreen', True)
@@ -42,34 +43,29 @@ class MainMenu:
 		#Stock Frame
 		self.stockInfoFrame = tkinter.Frame(self.bodyFrame,bg="CadetBlue1")
 		self.stockInfoFrame.place(x=256,y=0,width=1664,height=1016)
+		self.DrawItemHolders()
 	
-	def MakeSearch(self):
-		self.DrawProducts([])
-
-	def DrawProducts(self, products:list):
-		products = [0,0,0,0,0,0]
-
-		#Get rid of any existing holders
-		for i in range(0, len(self.itemDetailHolders)):
-			self.itmDetailHolders[i].destroy()
-		
-		
-		
+	def DrawItemHolders(self):		
 		#Variables for sizing
 		padding = 8
 		objHeight = 128
 
-		objIndex = 0
-		for index in products:
-			item = self.db.database["items"][index]
-
-			self.itmDetailHolders.append(tkinter.Frame(self.stockInfoFrame))
-			self.itmDetailHolders[objIndex].place(x=8,y=padding+((padding+objHeight)*objIndex),width=1648,height=objHeight)
+		#Generate item info
+		for i in range(0,7):
+			#Containing Frame
+			self.itemDetailHolders.append(tkinter.Frame(self.stockInfoFrame))
+			self.itemDetailHolders[i].place(x=8,y=padding+((padding+objHeight)*i),width=1648,height=objHeight)
 			
-			detailsButton = tkinter.Button(self.itmDetailHolders[objIndex], text="View Details", font = "default 24 normal")
+			#View Button
+			detailsButton = tkinter.Button(self.itemDetailHolders[i], text="View Details", font = "default 24 normal")
 			detailsButton.place(x=1376, y=16, width=256, height=96)
 
-			objIndex += 1
+	def MakeSearch(self):
+		self.activeItemIndexes = self.db.SearchForItem(self.searchBar.get())
+		self.DrawProducts()
+
+	def DrawProducts(self):
+		pass
 
 		
 
