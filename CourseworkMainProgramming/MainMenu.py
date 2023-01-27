@@ -51,13 +51,13 @@ class MainMenu:
 		self.pageNavFrame = tkinter.Frame(self.stockInfoFrame, bg="CadetBlue3")
 		self.pageNavFrame.place(x=0,y=956,width=1664,height=60)
 
-		self.prevPageButton = tkinter.Button(self.pageNavFrame, text="<-")
+		self.prevPageButton = tkinter.Button(self.pageNavFrame, text="⬅", font = "default 24 normal")
 		self.prevPageButton.place(x=8,y=8,width=200,height=44)
 
-		self.pageNumberLabel = tkinter.Label(self.pageNavFrame, text="Page 1 of 10")
+		self.pageNumberLabel = tkinter.Label(self.pageNavFrame, text="Page 1 of 1", font = "default 16 normal", bg="CadetBlue3")
 		self.pageNumberLabel.place(x=732,y=8,height=44,width=200)
 
-		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="->")
+		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="➡", font = "default 24 normal")
 		self.nextPageButton.place(x=1456,y=8,width=200,height=44)
 	
 	def GenerateItemHolders(self):		
@@ -68,7 +68,7 @@ class MainMenu:
 		#Generate item info
 		for i in range(0,7):
 			#Containing Frame
-			self.itemDetailHolders.append(tkinter.Frame(self.stockInfoFrame))
+			self.itemDetailHolders.append(tkinter.Frame(self.stockInfoFrame, bg="gray60"))
 			self.itemDetailHoldersPositions.append(padding+((padding+objHeight)*i)) #Calculate Y position
 
 			self.itemDetailHolders[i].place(x=8,y=self.itemDetailHoldersPositions[i],width=1648,height=objHeight)
