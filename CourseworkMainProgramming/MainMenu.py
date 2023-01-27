@@ -1,13 +1,16 @@
 ﻿import tkinter
+import math
 import StockDatabase
-
 class MainMenu:
 	def __init__(self, db:StockDatabase.StockDatabase):
 		#Make vars accessible
 		self.userName = "Not Logged In"
 		self.db = db
 		self.itemDetailHolders = []
+		self.itemDetailHoldersPositions = []
 		self.activeItemIndexes = []
+		self.pageCount = 0
+
 		#Make Window
 		self.root = tkinter.Tk()
 		self.root.attributes('-fullscreen', True)
@@ -43,9 +46,21 @@ class MainMenu:
 		#Stock Frame
 		self.stockInfoFrame = tkinter.Frame(self.bodyFrame,bg="CadetBlue1")
 		self.stockInfoFrame.place(x=256,y=0,width=1664,height=1016)
-		self.DrawItemHolders()
+		self.GenerateItemHolders()
+		#Page Navigation
+		self.pageNavFrame = tkinter.Frame(self.stockInfoFrame, bg="CadetBlue3")
+		self.pageNavFrame.place(x=0,y=956,width=1664,height=60)
+
+		self.prevPageButton = tkinter.Button(self.pageNavFrame, text="<-")
+		self.prevPageButton.place(x=8,y=8,width=200,height=44)
+
+		self.pageNumberLabel = tkinter.Label(self.pageNavFrame, text="Page 1 of 10")
+		self.pageNumberLabel.place(x=732,y=8,height=44,width=200)
+
+		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="->")
+		self.nextPageButton.place(x=1456,y=8,width=200,height=44)
 	
-	def DrawItemHolders(self):		
+	def GenerateItemHolders(self):		
 		#Variables for sizing
 		padding = 8
 		objHeight = 128
@@ -54,18 +69,28 @@ class MainMenu:
 		for i in range(0,7):
 			#Containing Frame
 			self.itemDetailHolders.append(tkinter.Frame(self.stockInfoFrame))
-			self.itemDetailHolders[i].place(x=8,y=padding+((padding+objHeight)*i),width=1648,height=objHeight)
+			self.itemDetailHoldersPositions.append(padding+((padding+objHeight)*i)) #Calculate Y position
+
+			self.itemDetailHolders[i].place(x=8,y=self.itemDetailHoldersPositions[i],width=1648,height=objHeight)
 			
 			#View Button
 			detailsButton = tkinter.Button(self.itemDetailHolders[i], text="View Details", font = "default 24 normal")
 			detailsButton.place(x=1376, y=16, width=256, height=96)
 
-	def MakeSearch(self):
-		self.activeItemIndexes = self.db.SearchForItem(self.searchBar.get())
-		self.DrawProducts()
 
-	def DrawProducts(self):
-		pass
+	def MakeSearch(self):
+		#Get Items
+		self.activeItemIndexes = self.db.SearchForItem(self.searchBar.get())
+
+		#Calculate number of pages
+		self.pageCount = math.ceil(len(self.activeItemIndexes) / 7)
+
+		self.DrawProducts(0)
+
+	def DrawProducts(self, startingIndex:int):
+		#Hide all containers
+		for i in range(0,7):
+			self.itemDetailHolders[i].place_forget()
 
 		
 
