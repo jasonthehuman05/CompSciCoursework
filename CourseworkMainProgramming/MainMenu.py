@@ -17,7 +17,7 @@ class MainMenu:
 
 		self.activeItemIndexes = []
 		self.pageCount = 0
-
+		self.currentPage = 1
 		#Make Window
 		self.root = tkinter.Tk()
 		self.root.attributes('-fullscreen', True) #Makes the window appear in fullscreen mode.
@@ -58,13 +58,13 @@ class MainMenu:
 		self.pageNavFrame = tkinter.Frame(self.stockInfoFrame, bg="CadetBlue3")
 		self.pageNavFrame.place(x=0,y=956,width=1664,height=60)
 
-		self.prevPageButton = tkinter.Button(self.pageNavFrame, text="⬅", font = "default 24 normal")
+		self.prevPageButton = tkinter.Button(self.pageNavFrame, text="⬅", font = "default 24 normal", command=lambda:self.ChangePage(-1))
 		self.prevPageButton.place(x=8,y=8,width=200,height=44)
 
 		self.pageNumberLabel = tkinter.Label(self.pageNavFrame, text="Page 1 of 1", font = "default 16 normal", bg="CadetBlue3")
 		self.pageNumberLabel.place(x=732,y=8,height=44,width=200)
 
-		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="➡", font = "default 24 normal")
+		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="➡", font = "default 24 normal", command=lambda:self.ChangePage(1))
 		self.nextPageButton.place(x=1456,y=8,width=200,height=44)
 	
 	def GenerateItemHolders(self):		
@@ -92,9 +92,9 @@ class MainMenu:
 			self.prodNameLabels.append(tkinter.Label(self.itemDetailHolders[i], text="SAMPLE TEXT", font = "default 32 normal", anchor="w", bg="gray60"))
 			self.prodNameLabels[i].place(x=8, y=8, width=1200, height = 82)
 
-			#Hide all containers. they aren't needed, so they should be removed to avoid confusion
-			for searchIndex in range(0,7):
-				self.itemDetailHolders[searchIndex].place_forget()
+		#Hide all containers. they aren't needed, so they should be removed to avoid confusion
+		for searchIndex in range(0,7):
+			self.itemDetailHolders[searchIndex].place_forget()
 
 
 
@@ -104,13 +104,25 @@ class MainMenu:
 
 		#Calculate number of pages
 		self.pageCount = math.ceil(len(self.activeItemIndexes) / 7)
+		self.pageNumberLabel.configure(text=f"Page {self.currentPage} of {self.pageCount}")
 
 		self.DrawProducts(0)
 
-	def ShowDetails(self, prodNum:str):
+	def ShowDetails(self, prodNum:str): #Show product details in a different screen
 		print(prodNum)
 
+	def ChangePage(self, delta:int):#Go delta pages in direction
+		nPageNum = self.currentPage + delta
+		if nPageNum > self.pageCount or nPageNum < 1: #Out of range, ignore command
+			return
+		else:
+			#Make the change
+			self.currentPage = nPageNum
+			self.DrawProducts((self.currentPage-1) * 7)
+
 	def DrawProducts(self, startingIndex:int):
+		#Set Page Indicator
+		self.pageNumberLabel.configure(text=f"Page {self.currentPage} of {self.pageCount}")
 		#Hide all containers
 		for searchIndex in range(0,7):
 			self.itemDetailHolders[searchIndex].place_forget()
@@ -120,7 +132,7 @@ class MainMenu:
 			endIndex = len(self.activeItemIndexes)-1
 
 		elementIndex = 0
-		for searchIndex in range(startingIndex, endIndex+1):
+		for searchIndex in range(startingIndex, endIndex):
 			item = self.db.database["items"][self.activeItemIndexes[searchIndex]] #Get the item to display
 			print(item["productNumber"])
 			#Draw the item container
