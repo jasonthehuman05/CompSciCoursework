@@ -7,6 +7,4 @@ import MainMenu
 '''
 
 db = StockDatabase.StockDatabase()
-print(db.tagIndex)
-print(db.titleIndex)
 mm = MainMenu.MainMenu(db)

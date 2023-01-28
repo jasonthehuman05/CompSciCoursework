@@ -134,7 +134,6 @@ class MainMenu:
 		elementIndex = 0
 		for searchIndex in range(startingIndex, endIndex):
 			item = self.db.database["items"][self.activeItemIndexes[searchIndex]] #Get the item to display
-			print(item["productNumber"])
 			#Draw the item container
 			self.itemDetailHolders[elementIndex].place(x=8,y=self.itemDetailHoldersPositions[elementIndex],width=1648,height=self.objHeight)
 			#Redo the button and labels
