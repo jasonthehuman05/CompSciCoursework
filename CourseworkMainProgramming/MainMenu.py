@@ -4,16 +4,23 @@ import StockDatabase
 class MainMenu:
 	def __init__(self, db:StockDatabase.StockDatabase):
 		#Make vars accessible
+		self.objHeight = 128
 		self.userName = "Not Logged In"
 		self.db = db
+
+		#Controls for item details
 		self.itemDetailHolders = []
 		self.itemDetailHoldersPositions = []
+		self.ViewButtons = []
+		self.prodNumLabels = []
+		self.prodNameLabels = []
+
 		self.activeItemIndexes = []
 		self.pageCount = 0
 
 		#Make Window
 		self.root = tkinter.Tk()
-		self.root.attributes('-fullscreen', True)
+		self.root.attributes('-fullscreen', True) #Makes the window appear in fullscreen mode.
 		self.root.title("BuildrightDB")
 		self.DrawWidgets()
 		self.root.mainloop()
@@ -63,19 +70,32 @@ class MainMenu:
 	def GenerateItemHolders(self):		
 		#Variables for sizing
 		padding = 8
-		objHeight = 128
+		self.objHeight = 128
 
 		#Generate item info
 		for i in range(0,7):
 			#Containing Frame
 			self.itemDetailHolders.append(tkinter.Frame(self.stockInfoFrame, bg="gray60"))
-			self.itemDetailHoldersPositions.append(padding+((padding+objHeight)*i)) #Calculate Y position
+			self.itemDetailHoldersPositions.append(padding+((padding+self.objHeight)*i)) #Calculate Y position
 
-			self.itemDetailHolders[i].place(x=8,y=self.itemDetailHoldersPositions[i],width=1648,height=objHeight)
+			self.itemDetailHolders[i].place(x=8,y=self.itemDetailHoldersPositions[i],width=1648,height=self.objHeight)
 			
 			#View Button
-			detailsButton = tkinter.Button(self.itemDetailHolders[i], text="View Details", font = "default 24 normal")
-			detailsButton.place(x=1376, y=16, width=256, height=96)
+			self.ViewButtons.append(tkinter.Button(self.itemDetailHolders[i], text="View Details", font = "default 24 normal"))
+			self.ViewButtons[i].place(x=1376, y=16, width=256, height=96)
+
+			#product number label
+			self.prodNumLabels.append(tkinter.Label(self.itemDetailHolders[i], text="000000", font = "default 16 normal", anchor="w", bg="gray60"))
+			self.prodNumLabels[i].place(x=8, y=94, width=1000)
+
+			#product name label
+			self.prodNameLabels.append(tkinter.Label(self.itemDetailHolders[i], text="SAMPLE TEXT", font = "default 32 normal", anchor="w", bg="gray60"))
+			self.prodNameLabels[i].place(x=8, y=8, width=1200, height = 82)
+
+			#Hide all containers. they aren't needed, so they should be removed to avoid confusion
+			for searchIndex in range(0,7):
+				self.itemDetailHolders[searchIndex].place_forget()
+
 
 
 	def MakeSearch(self):
@@ -87,15 +107,27 @@ class MainMenu:
 
 		self.DrawProducts(0)
 
+	def ShowDetails(self, prodNum:str):
+		print(prodNum)
+
 	def DrawProducts(self, startingIndex:int):
 		#Hide all containers
-		for i in range(0,7):
-			self.itemDetailHolders[i].place_forget()
+		for searchIndex in range(0,7):
+			self.itemDetailHolders[searchIndex].place_forget()
 
 		endIndex = startingIndex+7
-		if len(self.activeItemIndexes-1) < endIndex:
-			endIndex = len(self.activeItemIndexes-1)
+		if len(self.activeItemIndexes)-1 < endIndex:
+			endIndex = len(self.activeItemIndexes)-1
 
-
-		
-
+		elementIndex = 0
+		for searchIndex in range(startingIndex, endIndex+1):
+			item = self.db.database["items"][self.activeItemIndexes[searchIndex]] #Get the item to display
+			print(item["productNumber"])
+			#Draw the item container
+			self.itemDetailHolders[elementIndex].place(x=8,y=self.itemDetailHoldersPositions[elementIndex],width=1648,height=self.objHeight)
+			#Redo the button and labels
+			self.ViewButtons[elementIndex].configure(command=lambda x=item["productNumber"]: self.ShowDetails(x))
+			self.prodNameLabels[elementIndex].configure(text=item["productName"])
+			self.prodNumLabels[elementIndex].configure(text=f"Item Number: {item['productNumber']}")
+			#Increment Element
+			elementIndex+=1
