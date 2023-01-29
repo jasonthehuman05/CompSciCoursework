@@ -43,8 +43,8 @@ class MainMenu:
 		pos = 0
 		buttons = []
 		for tag in tags:
-			buttons.append(tkinter.Button(self.tagHolderFrame, text=tag, command=lambda t = tag: self.Filter(t)))
-			buttons[pos].place(x=8,y=52+(24*pos), width = 240, height = 24)
+			buttons.append(tkinter.Button(self.tagHolderFrame, text=pos, command=lambda t = tag: self.Filter(t)))
+			buttons[pos].place(x=8,y=52+(36*pos), width = 240, height = 36)
 			pos +=1
 
 	def Filter(self, tag:str):
