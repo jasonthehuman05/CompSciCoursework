@@ -1,5 +1,6 @@
 from __future__ import annotations #To fix circular import issue
 import tkinter
+import colorfile
 import StockDatabase
 import MainMenu
 
@@ -22,8 +23,26 @@ class ProductDetails:
         self.root.mainloop()
 
     def DrawWidgets(self):
-        self.productNumberLabel = tkinter.Label(self.root, text=self.item["productName"], font = "default 72 normal")
-        self.productNumberLabel.place(x=0,y=0,height=48)
+        #Top Bar Frame
+        self.topBarFrame = tkinter.Frame(self.root, bg=colorfile.topbarcolor)
+        self.topBarFrame.place(x=0,y=0,width=1920,height=64)
+        
+        #Main Body Frame
+        self.mainBodyFrame = tkinter.Frame(self.root, bg=colorfile.accent[0])
+        self.mainBodyFrame.place(x=0,y=64,width=1920,height=1016)
+        
+        #Product Details
+        self.productNameLabel = tkinter.Label(self.mainBodyFrame, text=self.item["productName"], font = "default 72 normal", bg=colorfile.accent[0])
+        self.productNameLabel.place(x=8,y=4,height=88)
+        self.productNumberLabel = tkinter.Label(self.mainBodyFrame, text=self.item["productNumber"], font = "default 26 normal", bg=colorfile.accent[0])
+        self.productNumberLabel.place(x=8,y=92,height=28)
+
+        #Variants Frame
+        self.variantFrame = tkinter.Frame(self.mainBodyFrame, bg=colorfile.accent[1])
+        self.variantFrame.place(x=8,y=134,width=1904,height=938)
+
+    def DrawVariants(self):
+        pass
 
 
 

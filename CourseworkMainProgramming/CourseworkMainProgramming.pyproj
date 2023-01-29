@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="colorfile.py" />
     <Compile Include="ProductDetails.py" />
     <Compile Include="CourseworkMainProgramming.py" />
     <Compile Include="MainMenu.py" />

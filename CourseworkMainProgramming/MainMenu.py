@@ -1,5 +1,6 @@
 ﻿import tkinter
 import math
+import colorfile
 import StockDatabase, ProductDetails
 
 class MainMenu:
@@ -31,7 +32,7 @@ class MainMenu:
 
 	def DrawWidgets(self):
 		#Main Header Frame
-		fbg="orange red"
+		fbg=colorfile.topbarcolor
 		self.headerFrame = tkinter.Frame(self.root, bg=fbg)
 		self.headerFrame .place(x=0,y=0,width=1920,height=64)
 
@@ -48,21 +49,21 @@ class MainMenu:
 		self.searchButton.place(x=1184,y=8,width=100,height=48)
 
 		#Body Frame
-		self.bodyFrame = tkinter.Frame(self.root, bg="CadetBlue4")
+		self.bodyFrame = tkinter.Frame(self.root, bg=colorfile.accent[3])
 		self.bodyFrame.place(x=0,y=64,width=1920,height=1016)
 
 		#Stock Frame
-		self.stockInfoFrame = tkinter.Frame(self.bodyFrame,bg="CadetBlue1")
+		self.stockInfoFrame = tkinter.Frame(self.bodyFrame,bg=colorfile.accent[0])
 		self.stockInfoFrame.place(x=256,y=0,width=1664,height=1016)
 		self.GenerateItemHolders()
 		#Page Navigation
-		self.pageNavFrame = tkinter.Frame(self.stockInfoFrame, bg="CadetBlue3")
+		self.pageNavFrame = tkinter.Frame(self.stockInfoFrame, bg=colorfile.accent[2])
 		self.pageNavFrame.place(x=0,y=956,width=1664,height=60)
 
 		self.prevPageButton = tkinter.Button(self.pageNavFrame, text="⬅", font = "default 24 normal", command=lambda:self.ChangePage(-1))
 		self.prevPageButton.place(x=8,y=8,width=200,height=44)
 
-		self.pageNumberLabel = tkinter.Label(self.pageNavFrame, text="Page 1 of 1", font = "default 16 normal", bg="CadetBlue3")
+		self.pageNumberLabel = tkinter.Label(self.pageNavFrame, text="Page 1 of 1", font = "default 16 normal", bg=colorfile.accent[2])
 		self.pageNumberLabel.place(x=732,y=8,height=44,width=200)
 
 		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="➡", font = "default 24 normal", command=lambda:self.ChangePage(1))
@@ -76,7 +77,7 @@ class MainMenu:
 		#Generate item info
 		for i in range(0,7):
 			#Containing Frame
-			self.itemDetailHolders.append(tkinter.Frame(self.stockInfoFrame, bg="gray60"))
+			self.itemDetailHolders.append(tkinter.Frame(self.stockInfoFrame, bg=colorfile.container))
 			self.itemDetailHoldersPositions.append(padding+((padding+self.objHeight)*i)) #Calculate Y position
 
 			self.itemDetailHolders[i].place(x=8,y=self.itemDetailHoldersPositions[i],width=1648,height=self.objHeight)
@@ -86,11 +87,11 @@ class MainMenu:
 			self.ViewButtons[i].place(x=1376, y=16, width=256, height=96)
 
 			#product number label
-			self.prodNumLabels.append(tkinter.Label(self.itemDetailHolders[i], text="000000", font = "default 16 normal", anchor="w", bg="gray60"))
+			self.prodNumLabels.append(tkinter.Label(self.itemDetailHolders[i], text="000000", font = "default 16 normal", anchor="w", bg=colorfile.container))
 			self.prodNumLabels[i].place(x=8, y=94, width=1000)
 
 			#product name label
-			self.prodNameLabels.append(tkinter.Label(self.itemDetailHolders[i], text="SAMPLE TEXT", font = "default 32 normal", anchor="w", bg="gray60"))
+			self.prodNameLabels.append(tkinter.Label(self.itemDetailHolders[i], text="SAMPLE TEXT", font = "default 32 normal", anchor="w", bg=colorfile.container))
 			self.prodNameLabels[i].place(x=8, y=8, width=1200, height = 82)
 
 		#Hide all containers. they aren't needed, so they should be removed to avoid confusion
