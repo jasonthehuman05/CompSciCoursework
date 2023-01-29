@@ -30,6 +30,26 @@ class MainMenu:
 	def ShowWindow(self):
 		self.root.deiconify()
 
+	def DrawTagHolders(self):
+		tags = []
+		#Get all tags
+		tIndex = self.db.tagIndex
+		for i in tIndex: tags.append(i)
+		nIndex = self.db.titleIndex
+		for i in nIndex: tags.append(i)
+		#Remove duplicate tags
+		tags = list(dict.fromkeys(tags))
+
+		pos = 0
+		buttons = []
+		for tag in tags:
+			buttons.append(tkinter.Button(self.tagHolderFrame, text=tag, command=lambda t = tag: self.Filter(t)))
+			buttons[pos].place(x=8,y=52+(24*pos), width = 240, height = 24)
+			pos +=1
+
+	def Filter(self, tag:str):
+		print(tag)
+
 	def DrawWidgets(self):
 		#Main Header Frame
 		fbg=colorfile.topbarcolor
@@ -51,11 +71,19 @@ class MainMenu:
 		#Body Frame
 		self.bodyFrame = tkinter.Frame(self.root, bg=colorfile.accent[3])
 		self.bodyFrame.place(x=0,y=64,width=1920,height=1016)
+		
+		#Tag Holder Frame
+		self.tagHolderFrame = tkinter.Frame(self.bodyFrame, bg=colorfile.accent[3])
+		self.tagHolderFrame.place(x=0,y=0,width=256,height=1016)
+		self.tagsHeaderLabel = tkinter.Label(self.tagHolderFrame, text="Tags", font="default 34 normal", bg=colorfile.accent[3])
+		self.tagsHeaderLabel.place(x=0,y=0,height=48)
+		self.DrawTagHolders()
 
 		#Stock Frame
 		self.stockInfoFrame = tkinter.Frame(self.bodyFrame,bg=colorfile.accent[0])
 		self.stockInfoFrame.place(x=256,y=0,width=1664,height=1016)
 		self.GenerateItemHolders()
+
 		#Page Navigation
 		self.pageNavFrame = tkinter.Frame(self.stockInfoFrame, bg=colorfile.accent[2])
 		self.pageNavFrame.place(x=0,y=956,width=1664,height=60)
