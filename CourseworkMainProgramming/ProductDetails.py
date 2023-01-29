@@ -1,4 +1,4 @@
-from __future__ import annotations #To fix circular import issue
+from __future__ import annotations#To fix circular import issue
 import tkinter
 import colorfile
 import StockDatabase
@@ -44,9 +44,30 @@ class ProductDetails:
         #Variants Frame
         self.variantFrame = tkinter.Frame(self.mainBodyFrame, bg=colorfile.accent[1])
         self.variantFrame.place(x=8,y=134,width=1904,height=938)
+        self.DrawVariants()
 
     def DrawVariants(self):
-        pass
+        variants = self.item["variations"]
+
+        font = "default 32 normal"
+        height = 64
+        padding = 8
+        startAt = 18
+        self.variantContainers = []
+        for i in range(0, len(variants)):
+            #get details -> calculate widget locations -> draw UI into arrays -> display
+            yPos = startAt + (padding+height)*i
+            self.variantContainers.append(tkinter.Frame(self.variantFrame))
+            self.variantContainers[i].place(x=8,y=yPos,width=1888,height=height)
+            variantNumber = tkinter.Label(self.variantContainers[i], text = f"Variation ID: {variants[i]['variationID']}",anchor="w").place(x=8,y=48, height = 16, width=1000)
+            variantName = tkinter.Label(self.variantContainers[i], text = variants[i]["variationName"],anchor="w",font=font).place(x=8,y=0, height = 48, width = 1000)
+            
+            #This all makes a string that holds the price. There were some character set issues between ISO 8859-1 and UTF-8. this is how i fixed it.
+            pound = bytes.fromhex('c2a3').decode('utf-8')
+            cost = ("{0:.2f}").format(variants[i]["variationCost"]) #formats price with the 2DP
+            finalString = pound+cost
+            variantCost = tkinter.Label(self.variantContainers[i], text = finalString).place(x=1208,y=8,width=200)
+            variantStock = tkinter.Label(self.variantContainers[i], text = variants[i]["stockLevel"]).place(x=1008,y=8, width=200)
 
 
 
