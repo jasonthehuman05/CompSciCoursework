@@ -39,14 +39,25 @@ class MainMenu:
 		for i in nIndex: tags.append(i)
 		#Remove duplicate tags
 		tags = list(dict.fromkeys(tags))
+		tags.sort()
 
-		self.tagsListbox = tkinter.Listbox(self.tagHolderFrame)
-		self.tagsListbox.place(x=8,y=52,width=240,height=1000)
-		for tag in tags:
-			self.tagsListbox.insert(tkinter.END, tag)
+		tagsButtons = []
+		remaining = len(tags)
+		cp = 0
+		for i in range(0, math.ceil(len(tags)/3)):
+			ub = 3
+			if remaining < 3:
+				ub = remaining
+			for j in range(0,ub):
+				tagsButtons.append(tkinter.Button(self.tagHolderFrame, text=tags[cp], command=lambda t=tags[cp]: self.Filter(t)))
+				tagsButtons[cp].place(x=8+(j*80),y=56+(i*24), height=24, width=80)
+				remaining -= 1
+				cp+=1
 
 	def Filter(self, tag:str):
-		print(tag)
+		self.searchBar.delete(0, 'end')
+		self.searchBar.insert(0, tag)
+		self.MakeSearch()
 
 	def DrawWidgets(self):
 		#Main Header Frame
