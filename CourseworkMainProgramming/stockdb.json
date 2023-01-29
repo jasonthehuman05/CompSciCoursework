@@ -46,8 +46,8 @@
         {
           "variationID": "2",
           "variationName": "10cm",
-          "variationCost": "7.5",
-          "stockLevel": "20"
+          "variationCost": 7.5,
+          "stockLevel": 2
         }
       ]
     },
@@ -59,8 +59,8 @@
         {
           "variationID": "1",
           "variationName": "280 Piece",
-          "variationCost": "10.60",
-          "stockLevel": "10.60"
+          "variationCost": 10.60,
+          "stockLevel": 60
         }
       ]
     },
@@ -72,8 +72,8 @@
         {
           "variationID": "1",
           "variationName": "Rose Pink",
-          "variationCost": "15.50",
-          "stockLevel": "15.50"
+          "variationCost": 15.50,
+          "stockLevel": 50
         }
       ]
     },
@@ -85,8 +85,8 @@
         {
           "variationID": "1",
           "variationName": "Ebony 5L",
-          "variationCost": "8.60",
-          "stockLevel": "8.60"
+          "variationCost": 8.60,
+          "stockLevel": 8
         }
       ]
     },
@@ -98,8 +98,8 @@
         {
           "variationID": "1",
           "variationName": "18x44x2400mm",
-          "variationCost": "5.80",
-          "stockLevel": "5.80"
+          "variationCost": 5.80,
+          "stockLevel": 54
         }
       ]
     },
@@ -111,8 +111,8 @@
         {
           "variationID": "1",
           "variationName": "Orange",
-          "variationCost": "120",
-          "stockLevel": "120"
+          "variationCost": 120,
+          "stockLevel": 3
         }
       ]
     },
@@ -124,8 +124,8 @@
         {
           "variationID": "1",
           "variationName": "5m",
-          "variationCost": "10",
-          "stockLevel": "10"
+          "variationCost": 10,
+          "stockLevel": 10
         }
       ]
     },
@@ -137,8 +137,8 @@
         {
           "variationID": "1",
           "variationName": "5m",
-          "variationCost": "7.50",
-          "stockLevel": "7.50"
+          "variationCost": 7.50,
+          "stockLevel": 4
         }
       ]
     }

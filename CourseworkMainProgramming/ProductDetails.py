@@ -66,8 +66,16 @@ class ProductDetails:
             pound = bytes.fromhex('c2a3').decode('utf-8')
             cost = ("{0:.2f}").format(variants[i]["variationCost"]) #formats price with the 2DP
             finalString = pound+cost
-            variantCost = tkinter.Label(self.variantContainers[i], text = finalString).place(x=1208,y=8,width=200)
-            variantStock = tkinter.Label(self.variantContainers[i], text = variants[i]["stockLevel"]).place(x=1008,y=8, width=200)
+
+            variantCost = tkinter.Label(self.variantContainers[i], text = finalString, font=font).place(x=1278,y=8,width=200)
+            variantStock = tkinter.Label(self.variantContainers[i], text = f'{variants[i]["stockLevel"]} in stock', font=font).place(x=1008,y=8, width=250)
+
+            pNumWithVariation = f"{self.productNumber}:{variants[i]['variationID']}"
+            addToBasketButton = tkinter.Button(self.variantContainers[i], text="ADD TO BASKET", bg=colorfile.accent[3], command= lambda x = pNumWithVariation: self.AddToBasket(pNumWithVariation))
+            addToBasketButton.place(x=1500,y=8,height=height-16,width=380)
+        
+    def AddToBasket(self, pNumWithVariation): #TODO: ADD
+        pass
 
 
 
