@@ -122,6 +122,8 @@ class MainMenu:
 			self.currentPage = nPageNum
 			self.DrawProducts((self.currentPage-1) * 7)
 
+	#All test items: nails mounting home wood outdoor pipe
+
 	def DrawProducts(self, startingIndex:int):
 		#Set Page Indicator
 		self.pageNumberLabel.configure(text=f"Page {self.currentPage} of {self.pageCount}")
@@ -131,7 +133,7 @@ class MainMenu:
 
 		endIndex = startingIndex+7
 		if len(self.activeItemIndexes)-1 < endIndex:
-			endIndex = len(self.activeItemIndexes)-1
+			endIndex = len(self.activeItemIndexes)
 
 		elementIndex = 0
 		for searchIndex in range(startingIndex, endIndex):
