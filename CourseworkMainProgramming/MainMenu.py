@@ -1,6 +1,7 @@
 ﻿import tkinter
 import math
-import StockDatabase
+import StockDatabase, ProductDetails
+
 class MainMenu:
 	def __init__(self, db:StockDatabase.StockDatabase):
 		#Make vars accessible
@@ -109,7 +110,7 @@ class MainMenu:
 		self.DrawProducts(0)
 
 	def ShowDetails(self, prodNum:str): #Show product details in a different screen
-		print(prodNum)
+		pd = ProductDetails.ProductDetails(self.db, self, prodNum)
 
 	def ChangePage(self, delta:int):#Go delta pages in direction
 		nPageNum = self.currentPage + delta
