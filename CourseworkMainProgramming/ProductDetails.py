@@ -27,6 +27,10 @@ class ProductDetails:
         self.topBarFrame = tkinter.Frame(self.root, bg=colorfile.topbarcolor)
         self.topBarFrame.place(x=0,y=0,width=1920,height=64)
         
+        #back button
+        self.returnButton = tkinter.Button(self.topBarFrame, text="BACK", command=lambda:self.root.destroy())
+        self.returnButton.place(x=8,y=8,width=128,height=48)
+
         #Main Body Frame
         self.mainBodyFrame = tkinter.Frame(self.root, bg=colorfile.accent[0])
         self.mainBodyFrame.place(x=0,y=64,width=1920,height=1016)
