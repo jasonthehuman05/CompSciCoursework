@@ -40,12 +40,10 @@ class MainMenu:
 		#Remove duplicate tags
 		tags = list(dict.fromkeys(tags))
 
-		pos = 0
-		buttons = []
+		self.tagsListbox = tkinter.Listbox(self.tagHolderFrame)
+		self.tagsListbox.place(x=8,y=52,width=240,height=1000)
 		for tag in tags:
-			buttons.append(tkinter.Button(self.tagHolderFrame, text=pos, command=lambda t = tag: self.Filter(t)))
-			buttons[pos].place(x=8,y=52+(36*pos), width = 240, height = 36)
-			pos +=1
+			self.tagsListbox.insert(tkinter.END, tag)
 
 	def Filter(self, tag:str):
 		print(tag)
