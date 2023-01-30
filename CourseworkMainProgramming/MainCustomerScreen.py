@@ -3,7 +3,7 @@ import math
 import colorfile
 import StockDatabase, ProductDetails
 
-class MainMenu:
+class MainCustomerScreen:
 	def __init__(self, db:StockDatabase.StockDatabase):
 		#Make vars accessible
 		self.objHeight = 128

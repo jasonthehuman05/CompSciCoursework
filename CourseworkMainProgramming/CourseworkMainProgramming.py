@@ -1,13 +1,14 @@
-﻿import StockDatabase, CustomerDatabase
-import MainMenu
+﻿import StockDatabase, CustomerDatabase, StaffDatabase
+import MainCustomerScreen
 '''
 ╔═══════════════════════╗
 ║Application Entry Point║
 ╚═══════════════════════╝
 '''
 
+#Create Database Instances
 db = StockDatabase.StockDatabase()
-
 customerdb = CustomerDatabase.CustomerDB()
-print(customerdb.LoginCustomer(""))
-#mm = MainMenu.MainMenu(db)
+staffdb = StaffDatabase.StaffDB()
+
+mm = MainCustomerScreen.MainCustomerScreen(db)

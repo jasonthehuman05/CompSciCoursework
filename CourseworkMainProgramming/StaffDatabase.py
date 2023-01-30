@@ -3,11 +3,11 @@ import json
 class StaffDB:
     def __init__(self):
         #Vars for operation
-        self.FILEPATH = "CourseworkMainProgramming/staff.json"
+        self.FILEPATH = "staff.json"
         self.database = []
         self.nextId = 0
 
-        self.LoadDatabase()
+        #self.LoadDatabase()
 
     def SaveDatabase(self):
         jsonString = json.dumps(self.database)

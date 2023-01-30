@@ -26,9 +26,12 @@
     <Compile Include="ProductDetails.py" />
     <Compile Include="CourseworkMainProgramming.py" />
     <Compile Include="MainMenu.py" />
+    <Compile Include="StaffDatabase.py" />
     <Compile Include="StockDatabase.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="customers.json" />
+    <Content Include="staff.json" />
     <Content Include="stockdb.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
