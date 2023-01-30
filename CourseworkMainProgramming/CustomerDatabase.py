@@ -3,7 +3,7 @@ import json
 class CustomerDB:
     def __init__(self):
         #Vars for operation
-        self.FILEPATH = "CourseworkMainProgramming/customers.json"
+        self.FILEPATH = "customers.json"
         self.database = []
         self.nextId = 0
 
