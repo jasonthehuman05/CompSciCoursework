@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="colorfile.py" />
     <Compile Include="CustomerDatabase.py" />
+    <Compile Include="CustomerLoginWindow.py" />
     <Compile Include="ProductDetails.py" />
     <Compile Include="CourseworkMainProgramming.py" />
     <Compile Include="MainCustomerScreen.py" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="customers.json" />
+    <Content Include="logo.png" />
     <Content Include="staff.json" />
     <Content Include="stockdb.json" />
   </ItemGroup>

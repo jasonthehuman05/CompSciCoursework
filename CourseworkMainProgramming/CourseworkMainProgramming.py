@@ -1,5 +1,5 @@
 ﻿import StockDatabase, CustomerDatabase, StaffDatabase
-import MainCustomerScreen
+import MainCustomerScreen, CustomerLoginWindow
 '''
 ╔═══════════════════════╗
 ║Application Entry Point║
@@ -11,4 +11,5 @@ db = StockDatabase.StockDatabase()
 customerdb = CustomerDatabase.CustomerDB()
 staffdb = StaffDatabase.StaffDB()
 
-mm = MainCustomerScreen.MainCustomerScreen(db)
+#mm = MainCustomerScreen.MainCustomerScreen(db)
+cl = CustomerLoginWindow.CustomerLoginWindow()
