@@ -50,13 +50,27 @@ class CustomerDB:
         return retval
 
     def SaveCustomer(self, customerID:str, data:dict):
-        pass
+        for i in range(0, len(self.database)):
+            if self.database[i]["CustomerID"] == customerID:
+                self.database[i] = data
+                break
 
     def DeleteCustomer(self, customerID:str):
-        pass
+        for i in range(0, len(self.database)):
+            if self.database[i]["CustomerID"] == customerID:
+                self.database.pop(i)
+                break
 
-    def LoginCustomer(self, userName:str, password:str):
-        pass
+    def LoginCustomer(self, userName:str, password:str) -> str:
+        customerID = "000000" #ID 000000 will represent a failed login
+        
+        #Go through each customer
+        for i in range(0, len(self.database)):
+            if self.database[i]["Email"] == userName: #Email match?
+                if self.database[i]["Password"] == password:#Password match?
+                    customerID = self.database[i]["CustomerID"]#Declare correct id to return
+        
+        return customerID
 
 
 
