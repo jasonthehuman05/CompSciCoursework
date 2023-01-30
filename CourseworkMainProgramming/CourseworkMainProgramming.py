@@ -1,4 +1,4 @@
-﻿import StockDatabase
+﻿import StockDatabase, CustomerDatabase
 import MainMenu
 '''
 ╔═══════════════════════╗
@@ -7,4 +7,8 @@ import MainMenu
 '''
 
 db = StockDatabase.StockDatabase()
-mm = MainMenu.MainMenu(db)
+
+customerdb = CustomerDatabase.CustomerDB()
+print(customerdb.database[0])
+
+#mm = MainMenu.MainMenu(db)
