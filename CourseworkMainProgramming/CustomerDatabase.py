@@ -41,8 +41,13 @@ class CustomerDB:
         self.SaveDatabase()
         self.nextId += 1
 
-    def GetCustomer(self, customerID:str):
-        pass
+    def GetCustomer(self, customerID:str) -> dict:
+        retval = None
+        for customer in self.database:
+            if customer["CustomerID"] == customerID:
+                retval = customer
+                break
+        return retval
 
     def SaveCustomer(self, customerID:str, data:dict):
         pass

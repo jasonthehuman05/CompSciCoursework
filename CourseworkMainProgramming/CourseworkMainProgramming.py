@@ -9,6 +9,5 @@ import MainMenu
 db = StockDatabase.StockDatabase()
 
 customerdb = CustomerDatabase.CustomerDB()
-print(customerdb.database[0])
-
+print(customerdb.GetCustomer("000001"))
 #mm = MainMenu.MainMenu(db)
