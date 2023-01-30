@@ -23,13 +23,15 @@ class CustomerLoginWindow:
         self.userEntry = tkinter.Entry(self.loginFrame)
         self.userLabel = tkinter.Label(self.loginFrame, text = "USERNAME")
         self.userLabel.place(x=0,y=100)
+        self.userEntry.place(x=100,y=100,width=275)
         #Password Stuff
         self.passEntry = tkinter.Entry(self.loginFrame)
         self.passLabel = tkinter.Label(self.loginFrame, text = "PASSWORD")
         self.passLabel.place(x=0,y=150)
+        self.passEntry.place(x=100,y=150,width=275)
         #Login Button
         self.loginButton = tkinter.Button(self.loginFrame, text="Log In")
-        self.loginButton.place(x=0,y=200)
+        self.loginButton.place(x=0,y=200,width=400,height=32)
 
 
 
