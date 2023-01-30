@@ -21,7 +21,7 @@ class MainCustomerScreen:
 		self.pageCount = 0
 		self.currentPage = 1
 		#Make Window
-		self.root = tkinter.Tk()
+		self.root = tkinter.Toplevel()
 		self.root.attributes('-fullscreen', True) #Makes the window appear in fullscreen mode.
 		self.root.title("BuildrightDB")
 		self.DrawWidgets()

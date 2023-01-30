@@ -25,7 +25,7 @@
     <Compile Include="CustomerDatabase.py" />
     <Compile Include="ProductDetails.py" />
     <Compile Include="CourseworkMainProgramming.py" />
-    <Compile Include="MainMenu.py" />
+    <Compile Include="MainCustomerScreen.py" />
     <Compile Include="StaffDatabase.py" />
     <Compile Include="StockDatabase.py" />
   </ItemGroup>

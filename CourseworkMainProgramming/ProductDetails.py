@@ -2,10 +2,10 @@ from __future__ import annotations#To fix circular import issue
 import tkinter
 import colorfile
 import StockDatabase
-import MainMenu
+import MainCustomerScreen
 
 class ProductDetails:
-    def __init__(self, db:StockDatabase.StockDatabase, mainScreen:MainMenu.MainMenu, productNumber:str):
+    def __init__(self, db:StockDatabase.StockDatabase, mainScreen:MainCustomerScreen.MainCustomerScreen, productNumber:str):
         #Public variables
         self.db = db
         self.mainScreen = mainScreen
