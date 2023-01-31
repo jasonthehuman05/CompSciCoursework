@@ -12,4 +12,4 @@ customerdb = CustomerDatabase.CustomerDB()
 staffdb = StaffDatabase.StaffDB()
 
 #mm = MainCustomerScreen.MainCustomerScreen(db)
-cl = CustomerLoginWindow.CustomerLoginWindow()
+cl = CustomerLoginWindow.CustomerLoginWindow(db,customerdb)
