@@ -1,4 +1,5 @@
 import tkinter
+import colorfile
 import StockDatabase, CustomerDatabase, StaffDatabase
 
 class CustomerLoginWindow:
@@ -14,24 +15,24 @@ class CustomerLoginWindow:
         self.root.mainloop()
 
     def DrawWidgets(self):
-        self.loginFrame = tkinter.Frame(self.root)
-        self.loginFrame.place(x=0,y=0,width=1920,height=1080)
+        self.loginFrame = tkinter.Frame(self.root, bg=colorfile.topbarcolor)
+        self.loginFrame.place(x=752,y=416,width=416,height=248)
         #Logo
-        self.imageContainer = tkinter.Label(self.loginFrame, image=self.logo)
-        self.imageContainer.place(x=0,y=0)
+        self.imageContainer = tkinter.Label(self.loginFrame, image=self.logo, bg=colorfile.topbarcolor)
+        self.imageContainer.place(x=8,y=8)
         #Username stuff
-        self.userEntry = tkinter.Entry(self.loginFrame)
-        self.userLabel = tkinter.Label(self.loginFrame, text = "USERNAME")
-        self.userLabel.place(x=0,y=100)
-        self.userEntry.place(x=100,y=100,width=275)
+        self.userEntry = tkinter.Entry(self.loginFrame, font="default 14 normal")
+        self.userLabel = tkinter.Label(self.loginFrame, text = "USERNAME", font="default 14 normal", bg=colorfile.topbarcolor)
+        self.userLabel.place(x=8,y=112)
+        self.userEntry.place(x=128,y=108,width=280,height=40)
         #Password Stuff
-        self.passEntry = tkinter.Entry(self.loginFrame)
-        self.passLabel = tkinter.Label(self.loginFrame, text = "PASSWORD")
-        self.passLabel.place(x=0,y=150)
-        self.passEntry.place(x=100,y=150,width=275)
+        self.passEntry = tkinter.Entry(self.loginFrame, font="default 14 normal")
+        self.passLabel = tkinter.Label(self.loginFrame, text = "PASSWORD", font="default 14 normal", bg=colorfile.topbarcolor)
+        self.passLabel.place(x=8,y=158)
+        self.passEntry.place(x=128,y=153,width=280,height=40)
         #Login Button
         self.loginButton = tkinter.Button(self.loginFrame, text="Log In")
-        self.loginButton.place(x=0,y=200,width=400,height=32)
+        self.loginButton.place(x=8,y=208,width=400,height=32)
 
 
 
