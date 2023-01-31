@@ -1,1 +1,1 @@
-[{"CustomerID": "000001", "Email": "brianbobson@mail.com", "Password": "brian2022", "addressLine1": "22 Rabbit Road", "AddressLine2": "", "City": "Chester", "Postcode": "CH1 6MS", "PhoneNumber": "07628471745"}]
+[{"CustomerID": "000001", "Name":  "Brian Bobson", "Email": "brian@mail.com", "Password": "brian", "addressLine1": "22 Rabbit Road", "AddressLine2": "", "City": "Chester", "Postcode": "CH1 6MS", "PhoneNumber": "07628471745"}]

@@ -1,13 +1,16 @@
 ﻿import tkinter
 import math
 import colorfile
-import StockDatabase, ProductDetails
+import StockDatabase, CustomerDatabase, ProductDetails
 
 class MainCustomerScreen:
-	def __init__(self, db:StockDatabase.StockDatabase):
+	def __init__(self, db:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, uid:str):
 		#Make vars accessible
 		self.objHeight = 128
-		self.userName = "Not Logged In"
+		self.customerdb = customerdb
+		self.userid = uid
+		self.customer = customerdb.GetCustomer(self.userid)
+		self.userName = self.customer["Name"]
 		self.db = db
 
 		#Controls for item details

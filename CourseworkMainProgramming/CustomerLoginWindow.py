@@ -47,7 +47,7 @@ class CustomerLoginWindow:
         else:
             #Login was valid, continue to the main application.
             self.root.withdraw()
-            self.MainWin = MainCustomerScreen.MainCustomerScreen(self.stockdb)
+            self.MainWin = MainCustomerScreen.MainCustomerScreen(self.stockdb, self.customerdb, uid)
             self.root.deiconify()
 
 
