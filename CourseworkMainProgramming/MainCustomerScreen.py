@@ -71,7 +71,7 @@ class MainCustomerScreen:
 		#Account Information
 		self.greetingLabel = tkinter.Label(self.headerFrame, text=f"Hello, {self.userName}", bg=fbg, fg="white")
 		self.greetingLabel.place(x=8,y=8,height=24)
-		self.logoutButton = tkinter.Button(self.headerFrame, text="Log Out")
+		self.logoutButton = tkinter.Button(self.headerFrame, text="Log Out", command=lambda:self.LogOutAndClose())
 		self.logoutButton.place(x=8,y=32,height=24,width=100, anchor="nw")
 
 		#Searching
@@ -109,6 +109,9 @@ class MainCustomerScreen:
 		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="➡", font = "default 24 normal", command=lambda:self.ChangePage(1))
 		self.nextPageButton.place(x=1456,y=8,width=200,height=44)
 	
+	def LogOutAndClose(self):
+		self.root.quit()
+
 	def GenerateItemHolders(self):		
 		#Variables for sizing
 		padding = 8

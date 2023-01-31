@@ -48,6 +48,8 @@ class CustomerLoginWindow:
             #Login was valid, continue to the main application.
             self.root.withdraw()
             self.MainWin = MainCustomerScreen.MainCustomerScreen(self.stockdb, self.customerdb, uid)
+            self.userEntry.delete(0, 'end')
+            self.passEntry.delete(0, 'end')
             self.root.deiconify()
 
 
