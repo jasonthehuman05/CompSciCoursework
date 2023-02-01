@@ -67,6 +67,11 @@ class BasketDatabase:
     def GetBasket(self, customerID:str) -> dict:
         return self.database[customerID]
 
-
-
-
+    def GetItemCount(self, customerID:str) -> int:
+        #Gets the number of items in the basket
+        cBasket = self.GetBasket(customerID)
+        totalItems = 0
+        #Iterate through each variation in the basket, and add the count to the total
+        for item in cBasket:
+            totalItems += item["Count"]
+        return totalItems
