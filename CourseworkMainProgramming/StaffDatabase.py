@@ -7,7 +7,7 @@ class StaffDB:
         self.database = []
         self.nextId = 0
 
-        #self.LoadDatabase()
+        self.LoadDatabase()
 
     def SaveDatabase(self):
         jsonString = json.dumps(self.database)

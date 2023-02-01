@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BasketDatabase.py" />
     <Compile Include="colorfile.py" />
     <Compile Include="CustomerDatabase.py" />
     <Compile Include="CustomerLoginWindow.py" />
