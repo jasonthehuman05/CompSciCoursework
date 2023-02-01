@@ -111,6 +111,7 @@ class MainCustomerScreen:
 	
 	def LogOutAndClose(self):
 		self.root.quit()
+		self.root.destroy()
 
 	def GenerateItemHolders(self):		
 		#Variables for sizing
