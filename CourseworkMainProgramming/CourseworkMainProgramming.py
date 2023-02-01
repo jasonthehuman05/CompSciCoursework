@@ -12,6 +12,6 @@ customerdb = CustomerDatabase.CustomerDB()
 staffdb = StaffDatabase.StaffDB()
 bdb = BasketDatabase.BasketDatabase()
 
-bdb.AddToBasket("000001", "000001:1")
-
+#bdb.AddToBasket("000001", "000001:1")
+bdb.RemoveFromBasket("000001", "000001:1")
 cl = CustomerLoginWindow.CustomerLoginWindow(db,customerdb)

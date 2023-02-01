@@ -23,7 +23,6 @@ class BasketDatabase:
         #Check if the basket exists
         keys = list(self.database.keys())
         #If it exists, add item
-        print(self.database.keys())
         if customerID in keys:
             #Check if this variation is already an item in the customers' basket
             done = False
@@ -47,11 +46,26 @@ class BasketDatabase:
         #Store database
         self.SaveDatabase()
 
+    def RemoveFromBasket(self, customerID:str, productIDWithVariation:str):
+        #Check if the basket exists
+        keys = list(self.database.keys())
+        #If it exists, continue to item modification
+        if customerID in keys:
+            #Check if this variation is already an item in the customers' basket. If it can't find it, it doesn't matter.
+            for i in range(0, len(self.database[customerID])):
+                if self.database[customerID][i]["ProductID"] == productIDWithVariation:
+                    self.database[customerID][i]["Count"] -= 1
+                    if self.database[customerID][i]["Count"] == 0: #Remove the item if there is 0 of it in the basket
+                        self.database[customerID].pop(i)
+                    break
+        #if it doesn't exist, there is nothing to do. Continue
+        else:
+            pass
+        #Store database
+        self.SaveDatabase()
+
     def GetBasket(self, customerID:str) -> dict:
         return self.database[customerID]
-
-    def RemoveFromBasket(self, BasketID:str):
-        pass
 
 
 
