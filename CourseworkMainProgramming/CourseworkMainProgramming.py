@@ -1,4 +1,4 @@
-﻿import StockDatabase, CustomerDatabase, StaffDatabase
+﻿import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase
 import MainCustomerScreen, CustomerLoginWindow
 '''
 ╔═══════════════════════╗
@@ -10,6 +10,8 @@ import MainCustomerScreen, CustomerLoginWindow
 db = StockDatabase.StockDatabase()
 customerdb = CustomerDatabase.CustomerDB()
 staffdb = StaffDatabase.StaffDB()
+bdb = BasketDatabase.BasketDatabase()
 
-#mm = MainCustomerScreen.MainCustomerScreen(db)
+bdb.AddToBasket("000001", "000001:1")
+
 cl = CustomerLoginWindow.CustomerLoginWindow(db,customerdb)

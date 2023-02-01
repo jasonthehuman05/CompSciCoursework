@@ -32,6 +32,7 @@
     <Compile Include="StockDatabase.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="basket.json" />
     <Content Include="customers.json" />
     <Content Include="logo.png" />
     <Content Include="staff.json" />
