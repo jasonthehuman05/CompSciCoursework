@@ -1,13 +1,14 @@
 ﻿import tkinter
 import math
 import colorfile
-import StockDatabase, CustomerDatabase, ProductDetails
+import StockDatabase, CustomerDatabase, BasketDatabase, ProductDetails
 
 class MainCustomerScreen:
-	def __init__(self, db:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, uid:str):
+	def __init__(self, db:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase, uid:str):
 		#Make vars accessible
 		self.objHeight = 128
 		self.customerdb = customerdb
+		self.basketdb = basketdb
 		self.userid = uid
 		self.customer = customerdb.GetCustomer(self.userid)
 		self.userName = self.customer["Name"]
@@ -62,11 +63,20 @@ class MainCustomerScreen:
 		self.searchBar.insert(0, tag)
 		self.MakeSearch()
 
+	def UpdateBasket(self):
+		self.basketButton.configure(text=f"Basket: {self.basketdb.GetItemCount(self.userid)} Items")
+		self.basketButton.after(1000, self.UpdateBasket)
+
 	def DrawWidgets(self):
 		#Main Header Frame
 		fbg=colorfile.topbarcolor
 		self.headerFrame = tkinter.Frame(self.root, bg=fbg)
 		self.headerFrame .place(x=0,y=0,width=1920,height=64)
+
+		#Basket
+		self.basketButton = tkinter.Button(self.headerFrame, text="", command=lambda:self.ShowBasket())
+		self.basketButton.place(x=1800,y=8,width=114,height=48)
+		self.UpdateBasket()
 
 		#Account Information
 		self.greetingLabel = tkinter.Label(self.headerFrame, text=f"Hello, {self.userName}", bg=fbg, fg="white")
@@ -109,6 +119,9 @@ class MainCustomerScreen:
 		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="➡", font = "default 24 normal", command=lambda:self.ChangePage(1))
 		self.nextPageButton.place(x=1456,y=8,width=200,height=44)
 	
+	def ShowBasket(self):
+		pass
+
 	def LogOutAndClose(self):
 		self.root.quit()
 		self.root.destroy()

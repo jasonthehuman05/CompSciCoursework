@@ -2,13 +2,14 @@ import tkinter
 from tkinter import messagebox
 import colorfile
 import MainCustomerScreen
-import StockDatabase, CustomerDatabase, StaffDatabase
+import StockDatabase, CustomerDatabase, BasketDatabase
 
 class CustomerLoginWindow:
-    def __init__(self, stockdb:StockDatabase.StockDatabase, staffdb:CustomerDatabase.CustomerDB):
+    def __init__(self, stockdb:StockDatabase.StockDatabase, staffdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase):
         #Public Variables
         self.stockdb = stockdb
         self.customerdb = staffdb
+        self.basketdb = basketdb
         #Make Window
         self.root = tkinter.Toplevel()
         self.root.geometry("1920x1080") #400x100
@@ -47,7 +48,7 @@ class CustomerLoginWindow:
         else:
             #Login was valid, continue to the main application.
             self.root.withdraw()
-            self.MainWin = MainCustomerScreen.MainCustomerScreen(self.stockdb, self.customerdb, uid)
+            self.MainWin = MainCustomerScreen.MainCustomerScreen(self.stockdb, self.customerdb, self.basketdb, uid)
             self.userEntry.delete(0, 'end')
             self.passEntry.delete(0, 'end')
             self.root.deiconify()
