@@ -1,12 +1,14 @@
 ﻿import tkinter
 import math
 import colorfile
+import CustomerLoginWindow
 import StockDatabase, CustomerDatabase, BasketDatabase, ProductDetails
 
 class MainCustomerScreen:
-	def __init__(self, db:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase, uid:str):
+	def __init__(self, rwin:CustomerLoginWindow.CustomerLoginWindow, db:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase, uid:str):
 		#Make vars accessible
 		self.objHeight = 128
+		self.rwin = rwin
 		self.customerdb = customerdb
 		self.basketdb = basketdb
 		self.userid = uid
@@ -123,6 +125,7 @@ class MainCustomerScreen:
 		pass
 
 	def LogOutAndClose(self):
+		self.rwin.Show()
 		self.root.quit()
 		self.root.destroy()
 

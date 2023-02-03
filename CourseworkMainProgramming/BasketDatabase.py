@@ -65,7 +65,12 @@ class BasketDatabase:
         self.SaveDatabase()
 
     def GetBasket(self, customerID:str) -> dict:
-        return self.database[customerID]
+        rv = dict()
+        try:
+            rv = self.database[customerID]
+        except:
+            pass
+        return rv
 
     def GetItemCount(self, customerID:str) -> int:
         #Gets the number of items in the basket

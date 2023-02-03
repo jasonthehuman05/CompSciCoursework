@@ -1,1 +1,24 @@
-[{"CustomerID": "000001", "Name":  "Brian Bobson", "Email": "brian@mail.com", "Password": "brian", "addressLine1": "22 Rabbit Road", "AddressLine2": "", "City": "Chester", "Postcode": "CH1 6MS", "PhoneNumber": "07628471745"}]
+[
+  {
+    "CustomerID": "000001",
+    "Name": "Brian Bobson",
+    "Email": "brian@mail.com",
+    "Password": "brian",
+    "addressLine1": "22 Rabbit Road",
+    "AddressLine2": "",
+    "City": "Chester",
+    "Postcode": "CH1 6MS",
+    "PhoneNumber": "07628471745"
+  },
+  {
+    "CustomerID": "000002",
+    "Name": "Ebeneezer Goode",
+    "Email": "eezer@mail.com",
+    "Password": "shamen",
+    "addressLine1": "22 Boss Road",
+    "AddressLine2": "",
+    "City": "Rhyl",
+    "Postcode": "LL18 3AS",
+    "PhoneNumber": "07628471745"
+  }
+]
