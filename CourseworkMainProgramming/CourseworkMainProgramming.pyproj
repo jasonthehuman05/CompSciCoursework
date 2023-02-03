@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BasketDatabase.py" />
+    <Compile Include="BasketViewer.py" />
     <Compile Include="colorfile.py" />
     <Compile Include="CustomerDatabase.py" />
     <Compile Include="CustomerLoginWindow.py" />

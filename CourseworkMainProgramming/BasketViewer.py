@@ -1,38 +1,26 @@
-﻿import tkinter
-import math
-import colorfile
-import CustomerLoginWindow, BasketViewer
-import StockDatabase, CustomerDatabase, BasketDatabase, ProductDetails
+﻿import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, colorfile
+import MainCustomerScreen
+import tkinter, math
 
-class MainCustomerScreen:
-	def __init__(self, rwin:CustomerLoginWindow.CustomerLoginWindow, db:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase, uid:str):
-		#Make vars accessible
-		self.objHeight = 128
-		self.rwin = rwin
-		self.customerdb = customerdb
-		self.basketdb = basketdb
-		self.userid = uid
-		self.customer = customerdb.GetCustomer(self.userid)
-		self.userName = self.customer["Name"]
+class BasketViewer:
+	def __init__(self, db:StockDatabase.StockDatabase, cdb:CustomerDatabase.CustomerDB, bdb:BasketDatabase.BasketDatabase, cid:str):
+		#Public Vars
 		self.db = db
-
-		#Controls for item details
+		self.customerdb = cdb
+		self.basketdb = bdb
+		self.userid = cid
 		self.itemDetailHolders = []
-		self.itemDetailHoldersPositions = []
 		self.ViewButtons = []
 		self.prodNumLabels = []
 		self.prodNameLabels = []
-
-		self.activeItemIndexes = []
-		self.pageCount = 0
-		self.currentPage = 1
-		#Make Window
+		#Window Creation
 		self.root = tkinter.Toplevel()
-		self.root.attributes('-fullscreen', True) #Makes the window appear in fullscreen mode.
-		self.root.title("BuildrightDB")
+		self.root.title("Basket View")
+		self.root.geometry("1920x1080")
+		self.root.attributes("-fullscreen", True)
 		self.DrawWidgets()
 		self.root.mainloop()
-	
+    
 	def ShowWindow(self):
 		self.root.deiconify()
 
@@ -81,7 +69,7 @@ class MainCustomerScreen:
 		self.UpdateBasket()
 
 		#Account Information
-		self.greetingLabel = tkinter.Label(self.headerFrame, text=f"Hello, {self.userName}", bg=fbg, fg="white")
+		self.greetingLabel = tkinter.Label(self.headerFrame, text=f"Hello", bg=fbg, fg="white")
 		self.greetingLabel.place(x=8,y=8,height=24)
 		self.logoutButton = tkinter.Button(self.headerFrame, text="Log Out", command=lambda:self.LogOutAndClose())
 		self.logoutButton.place(x=8,y=32,height=24,width=100, anchor="nw")
@@ -169,9 +157,10 @@ class MainCustomerScreen:
 		self.pageNumberLabel.configure(text=f"Page {self.currentPage} of {self.pageCount}")
 
 		self.DrawProducts(0)
-
+	
 	def ShowDetails(self, prodNum:str): #Show product details in a different screen
-		pd = ProductDetails.ProductDetails(self.db, self, self.basketdb, self.userid, prodNum)
+		#pd = ProductDetails.ProductDetails(self.db, self, self.basketdb, self.userid, prodNum)	
+		pass
 
 	def ChangePage(self, delta:int):#Go delta pages in direction
 		nPageNum = self.currentPage + delta
