@@ -10,9 +10,17 @@ class BasketViewer:
 		self.basketdb = bdb
 		self.userid = cid
 		self.itemDetailHolders = []
+		
+		#Controls for item details
+		self.itemDetailHolders = []
+		self.itemDetailHoldersPositions = []
 		self.ViewButtons = []
 		self.prodNumLabels = []
 		self.prodNameLabels = []
+
+		self.activeItemIndexes = []
+		self.pageCount = 0
+		self.currentPage = 1
 		#Window Creation
 		self.root = tkinter.Toplevel()
 		self.root.title("Basket View")
@@ -71,7 +79,7 @@ class BasketViewer:
 		#Account Information
 		self.greetingLabel = tkinter.Label(self.headerFrame, text=f"Hello", bg=fbg, fg="white")
 		self.greetingLabel.place(x=8,y=8,height=24)
-		self.logoutButton = tkinter.Button(self.headerFrame, text="Log Out", command=lambda:self.LogOutAndClose())
+		self.logoutButton = tkinter.Button(self.headerFrame, text="Log Out", command=lambda:self.Return())
 		self.logoutButton.place(x=8,y=32,height=24,width=100, anchor="nw")
 
 		#Searching
@@ -108,12 +116,8 @@ class BasketViewer:
 
 		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="➡", font = "default 24 normal", command=lambda:self.ChangePage(1))
 		self.nextPageButton.place(x=1456,y=8,width=200,height=44)
-	
-	def ShowBasket(self):
-		bv = BasketViewer.BasketViewer(self.db, self.customerdb, self.basketdb, self.userid)
 
-	def LogOutAndClose(self):
-		self.rwin.Show()
+	def Return(self):
 		self.root.quit()
 		self.root.destroy()
 
