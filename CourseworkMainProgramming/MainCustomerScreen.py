@@ -168,7 +168,7 @@ class MainCustomerScreen:
 		self.DrawProducts(0)
 
 	def ShowDetails(self, prodNum:str): #Show product details in a different screen
-		pd = ProductDetails.ProductDetails(self.db, self, prodNum)
+		pd = ProductDetails.ProductDetails(self.db, self, self.basketdb, self.userid, prodNum)
 
 	def ChangePage(self, delta:int):#Go delta pages in direction
 		nPageNum = self.currentPage + delta

@@ -52,7 +52,3 @@ class CustomerLoginWindow:
             self.userEntry.delete(0, 'end')
             self.passEntry.delete(0, 'end')
             self.root.deiconify()
-
-
-
-

@@ -1,16 +1,17 @@
 from __future__ import annotations#To fix circular import issue
 import tkinter
 import colorfile
-import StockDatabase
+import StockDatabase, BasketDatabase
 import MainCustomerScreen
 
 class ProductDetails:
-    def __init__(self, db:StockDatabase.StockDatabase, mainScreen:MainCustomerScreen.MainCustomerScreen, productNumber:str):
+    def __init__(self, db:StockDatabase.StockDatabase, mainScreen:MainCustomerScreen.MainCustomerScreen, basketdb:BasketDatabase.BasketDatabase, uid:str, productNumber:str):
         #Public variables
         self.db = db
+        self.basketdb = basketdb
         self.mainScreen = mainScreen
         self.productNumber = productNumber
-
+        self.uid = uid
         #Find item
         self.item = self.db.GetItemByProductNumber(self.productNumber)
 
@@ -75,7 +76,7 @@ class ProductDetails:
             addToBasketButton.place(x=1500,y=8,height=height-16,width=380)
         
     def AddToBasket(self, pNumWithVariation): #TODO: ADD
-        pass
+        self.basketdb.AddToBasket(self.uid, pNumWithVariation)
 
 
 
