@@ -37,6 +37,7 @@
     <Content Include="basket.json" />
     <Content Include="customers.json" />
     <Content Include="logo.png" />
+    <Content Include="orders.json" />
     <Content Include="staff.json" />
     <Content Include="stockdb.json" />
   </ItemGroup>

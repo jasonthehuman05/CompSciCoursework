@@ -46,6 +46,9 @@ class BasketDatabase:
         #Store database
         self.SaveDatabase()
 
+    def ClearBasket(self, CustomerID:str):
+        self.database.pop(CustomerID)
+
     def RemoveFromBasket(self, customerID:str, productIDWithVariation:str):
         #Check if the basket exists
         keys = list(self.database.keys())

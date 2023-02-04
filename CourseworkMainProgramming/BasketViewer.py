@@ -1,5 +1,5 @@
 ﻿from tkinter import messagebox
-import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, colorfile
+import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, colorfile, OrderDatabase
 import MainCustomerScreen
 import tkinter, math
 
@@ -11,7 +11,7 @@ class BasketViewer:
 		self.basketdb = bdb
 		self.userid = cid
 		self.itemDetailHolders = []
-		
+		self.orderdb = OrderDatabase.OrderDatabase()
 		#Controls for item details
 		self.itemDetailHolders = []
 		self.itemDetailHoldersPositions = []
@@ -84,7 +84,15 @@ class BasketViewer:
 		self.nextPageButton.place(x=1712,y=8,width=200,height=44)
 
 	def PlaceOrder(self):
-		pass
+		answer = messagebox.askyesno("Place Order", "Are you sure you wish to place an order?")
+
+		if answer:
+			basket = self.basketdb.GetBasket(self.userid)
+			self.orderdb.AddOrder(self.userid, basket)
+			self.basketdb.ClearBasket(self.userid)
+			messagebox.showinfo("Order placed!", "Order has been placed. Please speak to a member of staff for further details")
+			self.root.quit()
+			self.root.destroy()
 
 	def Return(self):
 		self.root.quit()
