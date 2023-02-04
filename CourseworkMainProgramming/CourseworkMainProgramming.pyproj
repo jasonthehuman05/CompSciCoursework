@@ -21,25 +21,28 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BasketDatabase.py" />
+    <Compile Include="databases\BasketDatabase.py" />
     <Compile Include="BasketViewer.py" />
     <Compile Include="colorfile.py" />
-    <Compile Include="CustomerDatabase.py" />
+    <Compile Include="databases\CustomerDatabase.py" />
     <Compile Include="CustomerLoginWindow.py" />
     <Compile Include="ProductDetails.py" />
     <Compile Include="CourseworkMainProgramming.py" />
     <Compile Include="MainCustomerScreen.py" />
-    <Compile Include="OrderDatabase.py" />
-    <Compile Include="StaffDatabase.py" />
-    <Compile Include="StockDatabase.py" />
+    <Compile Include="databases\OrderDatabase.py" />
+    <Compile Include="databases\StaffDatabase.py" />
+    <Compile Include="databases\StockDatabase.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="basket.json" />
-    <Content Include="customers.json" />
+    <Content Include="databases\basket.json" />
+    <Content Include="databases\customers.json" />
     <Content Include="logo.png" />
-    <Content Include="orders.json" />
-    <Content Include="staff.json" />
-    <Content Include="stockdb.json" />
+    <Content Include="databases\orders.json" />
+    <Content Include="databases\staff.json" />
+    <Content Include="databases\stockdb.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="databases\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

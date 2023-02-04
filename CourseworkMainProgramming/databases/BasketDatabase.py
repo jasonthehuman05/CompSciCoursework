@@ -3,7 +3,7 @@ import json
 class BasketDatabase:
     def __init__(self):
         #Vars for operation
-        self.FILEPATH = "basket.json"
+        self.FILEPATH = "databases/basket.json"
         self.database = dict()
         self.nextId = 0
 
@@ -48,6 +48,7 @@ class BasketDatabase:
 
     def ClearBasket(self, CustomerID:str):
         self.database.pop(CustomerID)
+        self.SaveDatabase()
 
     def RemoveFromBasket(self, customerID:str, productIDWithVariation:str):
         #Check if the basket exists

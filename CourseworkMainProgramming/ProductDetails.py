@@ -2,7 +2,7 @@ from __future__ import annotations#To fix circular import issue
 import tkinter
 from tkinter import messagebox
 import colorfile
-import StockDatabase, BasketDatabase
+from databases import StockDatabase, BasketDatabase
 import MainCustomerScreen
 
 class ProductDetails:

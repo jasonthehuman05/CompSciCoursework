@@ -1,8 +1,8 @@
 ﻿import tkinter
 import math
 import colorfile
-import CustomerLoginWindow, BasketViewer
-import StockDatabase, CustomerDatabase, BasketDatabase, ProductDetails
+import CustomerLoginWindow, ProductDetails, BasketViewer
+from databases import StockDatabase, CustomerDatabase, BasketDatabase
 
 class MainCustomerScreen:
 	def __init__(self, rwin:CustomerLoginWindow.CustomerLoginWindow, db:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase, uid:str):

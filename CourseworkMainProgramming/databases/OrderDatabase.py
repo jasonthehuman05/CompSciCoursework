@@ -3,11 +3,11 @@ import json
 class OrderDatabase:
     def __init__(self):
         #Vars for operation
-        self.FILEPATH = "orders.json"
+        self.FILEPATH = "databases/orders.json"
         self.database = []
         self.nextId = 0
 
-        #self.LoadDatabase()
+        self.LoadDatabase()
 
     def SaveDatabase(self):
         jsonString = json.dumps(self.database)
@@ -20,8 +20,8 @@ class OrderDatabase:
             self.database = json.loads(file.read())
         
         #Find the next staff id
-        for staff in self.database:
-            val = int(staff["StaffID"])
+        for order in self.database:
+            val = int(order["OrderID"])
             if val >= self.nextId: self.nextId = val + 1
 
     def AddOrder(self, customerID:str, basket:list):
@@ -49,12 +49,14 @@ class OrderDatabase:
             if self.database[i]["OrderID"] == OrderID:
                 self.database[i] = data
                 break
+        self.SaveDatabase()
 
     def DeleteOrder(self, OrderID:str):
         for i in range(0, len(self.database)):
             if self.database[i]["OrderID"] == OrderID:
                 self.database.pop(i)
                 break
+        self.SaveDatabase()
 
 
 

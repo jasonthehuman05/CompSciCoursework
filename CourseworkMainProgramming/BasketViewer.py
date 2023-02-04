@@ -1,6 +1,7 @@
 ﻿from tkinter import messagebox
-import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, colorfile, OrderDatabase
+from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, OrderDatabase
 import MainCustomerScreen
+import colorfile
 import tkinter, math
 
 class BasketViewer:

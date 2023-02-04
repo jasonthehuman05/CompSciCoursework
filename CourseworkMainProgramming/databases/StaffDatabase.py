@@ -3,7 +3,7 @@ import json
 class StaffDB:
     def __init__(self):
         #Vars for operation
-        self.FILEPATH = "staff.json"
+        self.FILEPATH = "databases/staff.json"
         self.database = []
         self.nextId = 0
 

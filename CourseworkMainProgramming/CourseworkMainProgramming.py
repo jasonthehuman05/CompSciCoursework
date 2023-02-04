@@ -1,4 +1,4 @@
-﻿import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase
+﻿from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase
 import MainCustomerScreen, CustomerLoginWindow
 '''
 ╔═══════════════════════╗

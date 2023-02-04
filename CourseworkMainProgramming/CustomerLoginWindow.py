@@ -2,7 +2,7 @@ import tkinter
 from tkinter import messagebox
 import colorfile
 import MainCustomerScreen
-import StockDatabase, CustomerDatabase, BasketDatabase
+from databases import StockDatabase, CustomerDatabase, BasketDatabase
 
 class CustomerLoginWindow:
     def __init__(self, stockdb:StockDatabase.StockDatabase, staffdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase):
