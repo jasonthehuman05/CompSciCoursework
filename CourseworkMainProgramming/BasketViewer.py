@@ -14,11 +14,15 @@ class BasketViewer:
 		#Controls for item details
 		self.itemDetailHolders = []
 		self.itemDetailHoldersPositions = []
-		self.ViewButtons = []
 		self.prodNumLabels = []
+		self.varNameLabels = []
 		self.prodNameLabels = []
+		self.subtractItemButton = []
+		self.addItemButton = []
+		self.itemCountLabel = []
 
-		self.activeItemIndexes = []
+
+		self.basket = []
 		self.pageCount = 0
 		self.currentPage = 1
 		#Window Creation
@@ -27,43 +31,16 @@ class BasketViewer:
 		self.root.geometry("1920x1080")
 		self.root.attributes("-fullscreen", True)
 		self.DrawWidgets()
+		self.root.after(500, self.LoadItems)
 		self.root.mainloop()
     
 	def ShowWindow(self):
 		self.root.deiconify()
 
-	def DrawTagHolders(self):
-		tags = []
-		#Get all tags
-		tIndex = self.db.tagIndex
-		for i in tIndex: tags.append(i)
-		nIndex = self.db.titleIndex
-		for i in nIndex: tags.append(i)
-		#Remove duplicate tags
-		tags = list(dict.fromkeys(tags))
-		tags.sort()
-
-		tagsButtons = []
-		remaining = len(tags)
-		cp = 0
-		for i in range(0, math.ceil(len(tags)/3)):
-			ub = 3
-			if remaining < 3:
-				ub = remaining
-			for j in range(0,ub):
-				tagsButtons.append(tkinter.Button(self.tagHolderFrame, text=tags[cp], command=lambda t=tags[cp]: self.Filter(t)))
-				tagsButtons[cp].place(x=8+(j*80),y=56+(i*24), height=24, width=80)
-				remaining -= 1
-				cp+=1
-
 	def Filter(self, tag:str):
 		self.searchBar.delete(0, 'end')
 		self.searchBar.insert(0, tag)
-		self.MakeSearch()
-
-	def UpdateBasket(self):
-		self.basketButton.configure(text=f"Basket: {self.basketdb.GetItemCount(self.userid)} Items")
-		self.basketButton.after(1000, self.UpdateBasket)
+		self.LoadItems()
 
 	def DrawWidgets(self):
 		#Main Header Frame
@@ -72,50 +49,41 @@ class BasketViewer:
 		self.headerFrame .place(x=0,y=0,width=1920,height=64)
 
 		#Basket
-		self.basketButton = tkinter.Button(self.headerFrame, text="", command=lambda:self.ShowBasket())
+		self.basketButton = tkinter.Button(self.headerFrame, text="PLACE ORDER", command=lambda:self.PlaceOrder())
 		self.basketButton.place(x=1800,y=8,width=114,height=48)
-		self.UpdateBasket()
 
-		#Account Information
-		self.greetingLabel = tkinter.Label(self.headerFrame, text=f"Hello", bg=fbg, fg="white")
-		self.greetingLabel.place(x=8,y=8,height=24)
-		self.logoutButton = tkinter.Button(self.headerFrame, text="Log Out", command=lambda:self.Return())
-		self.logoutButton.place(x=8,y=32,height=24,width=100, anchor="nw")
+		#Back Button
+		self.logoutButton = tkinter.Button(self.headerFrame, text="Return", command=lambda:self.Return())
+		self.logoutButton.place(x=8,y=8,height=48,width=100, anchor="nw")
 
-		#Searching
-		self.searchBar = tkinter.Entry(self.root, font = "default 28 normal")
-		self.searchBar.place(x=536,y=8,width=640,height=48)
-		self.searchButton = tkinter.Button(self.root, text="SEARCH", font = "default 16 normal", command=lambda:self.MakeSearch())
-		self.searchButton.place(x=1184,y=8,width=100,height=48)
+		#Header Label
+		self.searchBar = tkinter.Label(self.root, text="BASKET", font = "default 28 normal", bg=colorfile.topbarcolor)
+		self.searchBar.place(x=636,y=8,width=640,height=48)
 
 		#Body Frame
 		self.bodyFrame = tkinter.Frame(self.root, bg=colorfile.accent[3])
 		self.bodyFrame.place(x=0,y=64,width=1920,height=1016)
-		
-		#Tag Holder Frame
-		self.tagHolderFrame = tkinter.Frame(self.bodyFrame, bg=colorfile.accent[3])
-		self.tagHolderFrame.place(x=0,y=0,width=256,height=1016)
-		self.tagsHeaderLabel = tkinter.Label(self.tagHolderFrame, text="Tags", font="default 34 normal", bg=colorfile.accent[3])
-		self.tagsHeaderLabel.place(x=0,y=0,height=48)
-		self.DrawTagHolders()
 
 		#Stock Frame
 		self.stockInfoFrame = tkinter.Frame(self.bodyFrame,bg=colorfile.accent[0])
-		self.stockInfoFrame.place(x=256,y=0,width=1664,height=1016)
+		self.stockInfoFrame.place(x=0,y=0,width=1920,height=1016)
 		self.GenerateItemHolders()
 
 		#Page Navigation
 		self.pageNavFrame = tkinter.Frame(self.stockInfoFrame, bg=colorfile.accent[2])
-		self.pageNavFrame.place(x=0,y=956,width=1664,height=60)
+		self.pageNavFrame.place(x=0,y=956,width=1920,height=60)
 
 		self.prevPageButton = tkinter.Button(self.pageNavFrame, text="⬅", font = "default 24 normal", command=lambda:self.ChangePage(-1))
 		self.prevPageButton.place(x=8,y=8,width=200,height=44)
 
 		self.pageNumberLabel = tkinter.Label(self.pageNavFrame, text="Page 1 of 1", font = "default 16 normal", bg=colorfile.accent[2])
-		self.pageNumberLabel.place(x=732,y=8,height=44,width=200)
+		self.pageNumberLabel.place(x=218,y=8,height=44,width=1505)
 
 		self.nextPageButton = tkinter.Button(self.pageNavFrame, text="➡", font = "default 24 normal", command=lambda:self.ChangePage(1))
-		self.nextPageButton.place(x=1456,y=8,width=200,height=44)
+		self.nextPageButton.place(x=1712,y=8,width=200,height=44)
+
+	def PlaceOrder(self):
+		pass
 
 	def Return(self):
 		self.root.quit()
@@ -132,19 +100,27 @@ class BasketViewer:
 			self.itemDetailHolders.append(tkinter.Frame(self.stockInfoFrame, bg=colorfile.container))
 			self.itemDetailHoldersPositions.append(padding+((padding+self.objHeight)*i)) #Calculate Y position
 
-			self.itemDetailHolders[i].place(x=8,y=self.itemDetailHoldersPositions[i],width=1648,height=self.objHeight)
+			self.itemDetailHolders[i].place(x=8,y=self.itemDetailHoldersPositions[i],width=1904,height=self.objHeight)
 			
-			#View Button
-			self.ViewButtons.append(tkinter.Button(self.itemDetailHolders[i], text="View Details", font = "default 24 normal"))
-			self.ViewButtons[i].place(x=1376, y=16, width=256, height=96)
-
-			#product number label
-			self.prodNumLabels.append(tkinter.Label(self.itemDetailHolders[i], text="000000", font = "default 16 normal", anchor="w", bg=colorfile.container))
-			self.prodNumLabels[i].place(x=8, y=94, width=1000)
-
 			#product name label
 			self.prodNameLabels.append(tkinter.Label(self.itemDetailHolders[i], text="SAMPLE TEXT", font = "default 32 normal", anchor="w", bg=colorfile.container))
-			self.prodNameLabels[i].place(x=8, y=8, width=1200, height = 82)
+			self.prodNameLabels[i].place(x=8, y=8, width=1200, height = 66)
+			#variation name label
+			self.varNameLabels.append(tkinter.Label(self.itemDetailHolders[i], text="Variation Goes Here", font = "default 20 normal", anchor="w", bg=colorfile.container))
+			self.varNameLabels[i].place(x=8, y=60, width=1000)
+			#product number label
+			self.prodNumLabels.append(tkinter.Label(self.itemDetailHolders[i], text="000000", font = "default 14 normal", anchor="w", bg=colorfile.container))
+			self.prodNumLabels[i].place(x=8, y=96, width=1000)
+
+			#Item count and add/rem buttons
+			self.subtractItemButton.append(tkinter.Button(self.itemDetailHolders[i], text="-", font="default 36 normal"))
+			self.addItemButton.append(tkinter.Button(self.itemDetailHolders[i], text="+", font="default 36 normal"))
+			self.itemCountLabel.append(tkinter.Label(self.itemDetailHolders[i], text="88", font="default 24 normal"))
+
+			self.addItemButton[i].place(x=1784, y=8, width=112)
+			self.subtractItemButton[i].place(x=1512, y=8, width=112)
+			self.itemCountLabel[i].place(x=1648, y=8, width=112)
+
 
 		#Hide all containers. they aren't needed, so they should be removed to avoid confusion
 		for searchIndex in range(0,7):
@@ -152,19 +128,16 @@ class BasketViewer:
 
 
 
-	def MakeSearch(self):
-		#Get Items
-		self.activeItemIndexes = self.db.SearchForItem(self.searchBar.get())
+	def LoadItems(self):
+		#Get Basket
+		self.basket = self.basketdb.GetBasket(self.userid)
 
 		#Calculate number of pages
-		self.pageCount = math.ceil(len(self.activeItemIndexes) / 7)
+		self.pageCount = math.ceil(len(self.basket) / 7)
 		self.pageNumberLabel.configure(text=f"Page {self.currentPage} of {self.pageCount}")
 
-		self.DrawProducts(0)
-	
-	def ShowDetails(self, prodNum:str): #Show product details in a different screen
-		#pd = ProductDetails.ProductDetails(self.db, self, self.basketdb, self.userid, prodNum)	
-		pass
+		#Displays items from the basket
+		self.DisplayItems(0)
 
 	def ChangePage(self, delta:int):#Go delta pages in direction
 		nPageNum = self.currentPage + delta
@@ -173,29 +146,50 @@ class BasketViewer:
 		else:
 			#Make the change
 			self.currentPage = nPageNum
-			self.DrawProducts((self.currentPage-1) * 7)
+			self.DisplayItems((self.currentPage-1) * 7) #Display items starting at the correct index in the basket
 
 	#All test items: nails mounting home wood outdoor pipe
 
-	def DrawProducts(self, startingIndex:int):
+	def DisplayItems(self, startingIndex:int):
 		#Set Page Indicator
 		self.pageNumberLabel.configure(text=f"Page {self.currentPage} of {self.pageCount}")
+		
 		#Hide all containers
 		for searchIndex in range(0,7):
 			self.itemDetailHolders[searchIndex].place_forget()
 
 		endIndex = startingIndex+7
-		if len(self.activeItemIndexes)-1 < endIndex:
-			endIndex = len(self.activeItemIndexes)
+		if len(self.basket)-1 < endIndex:
+			endIndex = len(self.basket)
 
 		elementIndex = 0
 		for searchIndex in range(startingIndex, endIndex):
-			item = self.db.database["items"][self.activeItemIndexes[searchIndex]] #Get the item to display
+			item = self.db.GetItemByProductNumber(self.basket[searchIndex]["ProductID"].split(":")[0]) #Get the actual item
+			variation = self.db.GetVariation(self.basket[searchIndex]["ProductID"])
+
 			#Draw the item container
-			self.itemDetailHolders[elementIndex].place(x=8,y=self.itemDetailHoldersPositions[elementIndex],width=1648,height=self.objHeight)
+			self.itemDetailHolders[elementIndex].place(x=8,y=self.itemDetailHoldersPositions[elementIndex],width=1904,height=self.objHeight)
 			#Redo the button and labels
-			self.ViewButtons[elementIndex].configure(command=lambda x=item["productNumber"]: self.ShowDetails(x))
 			self.prodNameLabels[elementIndex].configure(text=item["productName"])
-			self.prodNumLabels[elementIndex].configure(text=f"Item Number: {item['productNumber']}")
+			self.varNameLabels[elementIndex].configure(text=variation["variationName"])
+			self.prodNumLabels[elementIndex].configure(text=f"Item Variation: {self.basket[searchIndex]['ProductID']}")
+
+			self.addItemButton[elementIndex].configure(command=lambda ind = elementIndex: self.ChangeItemCount(ind, 1))
+			self.subtractItemButton[elementIndex].configure(command=lambda ind = elementIndex: self.ChangeItemCount(ind, -1))
+			self.itemCountLabel[elementIndex].configure(text=self.basket[searchIndex]["Count"])
+
 			#Increment Element
 			elementIndex+=1
+
+	def ChangeItemCount(self, itemIndex:str, delta:int):
+		newCount = self.basket[itemIndex]["Count"] + delta #Calculate count after change
+		
+		#If new count will be zero, delete the item
+		if newCount == 0:
+			self.basket.pop(itemIndex)
+		#Otherwise, apply the change
+		else:
+			self.basket[itemIndex]["Count"] += delta
+
+		#Refresh display
+		self.DisplayItems((self.currentPage-1) * 7)
