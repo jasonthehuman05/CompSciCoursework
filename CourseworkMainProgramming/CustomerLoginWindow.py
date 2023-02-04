@@ -40,8 +40,7 @@ class CustomerLoginWindow:
 
     def LogIn(self):
         #Find login
-        #uid = self.customerdb.LoginCustomer(self.userEntry.get(), self.passEntry.get())
-        uid = self.customerdb.LoginCustomer("eezer@mail.com", "shamen")
+        uid = self.customerdb.LoginCustomer(self.userEntry.get(), self.passEntry.get())
         #If the provided login was incorrect, alert the user
         if uid == "000000":
             messagebox.showwarning("Invalid Account!", "The username or password provided was incorrect\nPlease try again.")
