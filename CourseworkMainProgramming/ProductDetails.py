@@ -1,5 +1,6 @@
 from __future__ import annotations#To fix circular import issue
 import tkinter
+from tkinter import messagebox
 import colorfile
 import StockDatabase, BasketDatabase
 import MainCustomerScreen
@@ -12,6 +13,7 @@ class ProductDetails:
         self.mainScreen = mainScreen
         self.productNumber = productNumber
         self.uid = uid
+        self.variantContainers = []
         #Find item
         self.item = self.db.GetItemByProductNumber(self.productNumber)
 
@@ -48,7 +50,14 @@ class ProductDetails:
         self.DrawVariants()
 
     def DrawVariants(self):
+        self.item = self.db.GetItemByProductNumber(self.productNumber)
         variants = self.item["variations"]
+
+        #If the variants are already filled, clear them
+        if len(self.variantContainers) > 0:
+            for i in range(0, len(self.variantContainers)):
+                self.variantContainers[i].place_forget()
+
 
         font = "default 32 normal"
         height = 64
@@ -72,11 +81,25 @@ class ProductDetails:
             variantStock = tkinter.Label(self.variantContainers[i], text = f'{variants[i]["stockLevel"]} in stock', font=font).place(x=1008,y=8, width=250)
 
             pNumWithVariation = f"{self.productNumber}:{variants[i]['variationID']}"
-            addToBasketButton = tkinter.Button(self.variantContainers[i], text="ADD TO BASKET", bg=colorfile.accent[3], command= lambda x = pNumWithVariation: self.AddToBasket(pNumWithVariation))
+            if variants[i]["stockLevel"] == 0:
+                addToBasketButton = tkinter.Button(self.variantContainers[i], text="ADD TO BASKET", bg=colorfile.accent[3], command= lambda: messagebox.showwarning("Not In Stock", "This item is out of stock! Sorry for any inconvenience"))
+            else:
+                addToBasketButton = tkinter.Button(self.variantContainers[i], text="ADD TO BASKET", bg=colorfile.accent[3], command= lambda x = pNumWithVariation: self.AddToBasket(pNumWithVariation))
             addToBasketButton.place(x=1500,y=8,height=height-16,width=380)
         
     def AddToBasket(self, pNumWithVariation): #TODO: ADD
         self.basketdb.AddToBasket(self.uid, pNumWithVariation)
+        self.ChangeStockLevel(pNumWithVariation)
+        self.DrawVariants()
+
+    def ChangeStockLevel(self, pNumWithVari):
+        #Change stock level
+        prodnum = pNumWithVari.split(":")[0]
+        vari = self.db.GetVariation(pNumWithVari)
+        item = self.db.GetItemByProductNumber(prodnum)
+        vi = item["variations"].index(vari)
+        item["variations"][vi]["stockLevel"] -= 1
+        self.db.UpdateItem(prodnum, item)
 
 
 

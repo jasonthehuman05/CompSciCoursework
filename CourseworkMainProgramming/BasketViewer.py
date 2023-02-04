@@ -193,3 +193,16 @@ class BasketViewer:
 
 		#Refresh display
 		self.DisplayItems((self.currentPage-1) * 7)
+
+		self.ChangeStockLevel(itemIndex, delta)
+
+
+	def ChangeStockLevel(self, itemIndex, delta):
+		#Change stock level
+		prodnum = self.basket[itemIndex]["ProductID"].split(":")[0]
+		vari = self.db.GetVariation(self.basket[itemIndex]["ProductID"])
+		item = self.db.GetItemByProductNumber(prodnum)
+		vi = item["variations"].index(vari)
+		item["variations"][vi]["stockLevel"] -= delta
+		self.db.UpdateItem(prodnum, item)
+		
