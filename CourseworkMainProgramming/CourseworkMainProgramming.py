@@ -1,5 +1,5 @@
 ﻿from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase
-import MainCustomerScreen, CustomerLoginWindow
+import MainMenu
 '''
 ╔═══════════════════════╗
 ║Application Entry Point║
@@ -12,4 +12,4 @@ customerdb = CustomerDatabase.CustomerDB()
 staffdb = StaffDatabase.StaffDB()
 bdb = BasketDatabase.BasketDatabase()
 
-cl = CustomerLoginWindow.CustomerLoginWindow(db,customerdb, bdb)
+cl = MainMenu.MainMenu(db,customerdb,staffdb,bdb)
