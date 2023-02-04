@@ -115,11 +115,11 @@ class BasketViewer:
 			#Item count and add/rem buttons
 			self.subtractItemButton.append(tkinter.Button(self.itemDetailHolders[i], text="-", font="default 36 normal"))
 			self.addItemButton.append(tkinter.Button(self.itemDetailHolders[i], text="+", font="default 36 normal"))
-			self.itemCountLabel.append(tkinter.Label(self.itemDetailHolders[i], text="88", font="default 24 normal"))
+			self.itemCountLabel.append(tkinter.Label(self.itemDetailHolders[i], text="88", font="default 24 normal",bg=colorfile.container))
 
 			self.addItemButton[i].place(x=1784, y=8, width=112)
 			self.subtractItemButton[i].place(x=1512, y=8, width=112)
-			self.itemCountLabel[i].place(x=1648, y=8, width=112)
+			self.itemCountLabel[i].place(x=1648, y=8, width=112,height=112)
 
 
 		#Hide all containers. they aren't needed, so they should be removed to avoid confusion
