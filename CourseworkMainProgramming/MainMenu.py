@@ -11,6 +11,9 @@ class MainMenu:
         self.basketdb = bdb
         #Create Window
         self.root = tkinter.Tk()
+
+        self.logo = tkinter.PhotoImage(file="logo-small.png")
+
         self.root.title("BuildrightDB")
         self.root.geometry("900x450")
         self.DrawWidgets()
@@ -18,7 +21,12 @@ class MainMenu:
         self.root.mainloop()
 
     def DrawWidgets(self):
-        pass
+        #Header Frame
+        self.headerFrame = tkinter.Frame(self.root, bg=colorfile.container)
+        self.headerFrame.place(x=0,y=0,width=900,height=64)
+        #Logo Label
+        self.imageContainer = tkinter.Label(self.headerFrame, image=self.logo, bg=colorfile.container)
+        self.imageContainer.place(x=8,y=4)
 
     def OpenCustomerView(self):
         cv = CustomerLoginWindow.CustomerLoginWindow(self.db,self.customerdb,self.staffdb,self.bdb)

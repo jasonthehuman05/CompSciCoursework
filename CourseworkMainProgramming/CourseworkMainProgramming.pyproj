@@ -37,6 +37,7 @@
   <ItemGroup>
     <Content Include="databases\basket.json" />
     <Content Include="databases\customers.json" />
+    <Content Include="logo-small.png" />
     <Content Include="logo.png" />
     <Content Include="databases\orders.json" />
     <Content Include="databases\staff.json" />

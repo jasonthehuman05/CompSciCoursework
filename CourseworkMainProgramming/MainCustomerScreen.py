@@ -1,4 +1,5 @@
-﻿import tkinter
+﻿from __future__ import annotations#To fix circular import issue
+import tkinter
 import math
 import colorfile
 import CustomerLoginWindow, ProductDetails, BasketViewer
