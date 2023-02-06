@@ -27,6 +27,7 @@
     <Compile Include="databases\CustomerDatabase.py" />
     <Compile Include="CustomerLoginWindow.py" />
     <Compile Include="MainMenu.py" />
+    <Compile Include="StaffPortal.py" />
     <Compile Include="ProductDetails.py" />
     <Compile Include="CourseworkMainProgramming.py" />
     <Compile Include="MainCustomerScreen.py" />

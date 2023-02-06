@@ -197,14 +197,15 @@ class BasketViewer:
 		#If new count will be zero, delete the item
 		if newCount == 0:
 			self.basket.pop(itemIndex)
-		#Otherwise, apply the change
-		stockCount = self.db.GetVariation(self.basket[itemIndex]["ProductID"])["stockLevel"]
-		#Check the change won't make a negative stock
-		if stockCount - delta < 0:
-			messagebox.showwarning("Not Enough Stock", "Sorry, there is not enough stock to fulfil this request.")
 		else:
-			self.basket[itemIndex]["Count"] += delta
-			self.ChangeStockLevel(itemIndex, delta)
+			#Otherwise, apply the change
+			stockCount = self.db.GetVariation(self.basket[itemIndex]["ProductID"])["stockLevel"]
+			#Check the change won't make a negative stock
+			if stockCount - delta < 0:
+				messagebox.showwarning("Not Enough Stock", "Sorry, there is not enough stock to fulfil this request.")
+			else:
+				self.basket[itemIndex]["Count"] += delta
+				self.ChangeStockLevel(itemIndex, delta)
 
 		#Refresh display
 		self.DisplayItems((self.currentPage-1) * 7)

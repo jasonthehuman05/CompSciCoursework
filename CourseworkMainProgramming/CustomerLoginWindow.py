@@ -5,10 +5,10 @@ import MainCustomerScreen
 from databases import StockDatabase, CustomerDatabase, BasketDatabase
 
 class CustomerLoginWindow:
-    def __init__(self, stockdb:StockDatabase.StockDatabase, staffdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase):
+    def __init__(self, stockdb:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase):
         #Public Variables
         self.stockdb = stockdb
-        self.customerdb = staffdb
+        self.customerdb = customerdb
         self.basketdb = basketdb
         #Make Window
         self.root = tkinter.Toplevel()

@@ -1,7 +1,8 @@
 import tkinter
-import CustomerLoginWindow
+import CustomerLoginWindow, StaffPortal
 import colorfile
 from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase
+
 class MainMenu:
     def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase):
         #Public vars
@@ -14,7 +15,8 @@ class MainMenu:
 
         self.logo = tkinter.PhotoImage(file="logo-small.png")
 
-        self.root.title("BuildrightDB")
+        self.root.title("BuildrightDB - Select An Option")
+        self.root.configure(bg=colorfile.accent[0])
         self.root.geometry("900x450")
         self.DrawWidgets()
 
@@ -28,8 +30,29 @@ class MainMenu:
         self.imageContainer = tkinter.Label(self.headerFrame, image=self.logo, bg=colorfile.container)
         self.imageContainer.place(x=8,y=4)
 
+        #Option Buttons
+        buttonHeight = 64
+        self.openCustomerButton = tkinter.Button(self.root, text="Customer Portal", font ="default 36 normal", command = lambda:self.OpenCustomerView())
+        self.openCustomerButton.place(x=150,y=193, width=600,height=buttonHeight)
+        self.openStaffButton = tkinter.Button(self.root, text="Staff Portal", font ="default 36 normal", command= lambda:self.OpenStaffPortal())
+        self.openStaffButton.place(x=150,y=265, width=600,height=buttonHeight)
+
+    def HideWindow(self):
+        self.root.iconify()
+
+    def ShowWindow(self):
+        self.root.deiconify()
+
     def OpenCustomerView(self):
-        cv = CustomerLoginWindow.CustomerLoginWindow(self.db,self.customerdb,self.staffdb,self.bdb)
+        self.HideWindow()
+        cv = CustomerLoginWindow.CustomerLoginWindow(self.db,self.customerdb,self.basketdb)
+        self.ShowWindow()
+
+
+    def OpenStaffPortal(self):
+        self.HideWindow()
+        sp = StaffPortal.StaffPortal()
+        self.ShowWindow()
 
 
 

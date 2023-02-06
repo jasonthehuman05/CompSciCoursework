@@ -84,7 +84,7 @@ class ProductDetails:
             if variants[i]["stockLevel"] == 0:
                 addToBasketButton = tkinter.Button(self.variantContainers[i], text="ADD TO BASKET", bg=colorfile.accent[3], command= lambda: messagebox.showwarning("Not In Stock", "This item is out of stock! Sorry for any inconvenience"))
             else:
-                addToBasketButton = tkinter.Button(self.variantContainers[i], text="ADD TO BASKET", bg=colorfile.accent[3], command= lambda x = pNumWithVariation: self.AddToBasket(pNumWithVariation))
+                addToBasketButton = tkinter.Button(self.variantContainers[i], text="ADD TO BASKET", bg=colorfile.accent[3], command= lambda x = pNumWithVariation: self.AddToBasket(x))
             addToBasketButton.place(x=1500,y=8,height=height-16,width=380)
         
     def AddToBasket(self, pNumWithVariation): #TODO: ADD
