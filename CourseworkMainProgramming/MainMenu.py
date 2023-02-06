@@ -1,12 +1,13 @@
 import tkinter
 import CustomerLoginWindow, StaffPortal
 import colorfile
-from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase
+from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, OrderDatabase
 
 class MainMenu:
-    def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase):
+    def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase):
         #Public vars
         self.db = db
+        self.orderdb = odb
         self.customerdb = customerdb
         self.staffdb = staffdb
         self.basketdb = bdb
@@ -49,10 +50,11 @@ class MainMenu:
         self.ShowWindow()
 
 
-    def OpenStaffPortal(self):
-        self.HideWindow()
-        sp = StaffPortal.StaffPortal()
-        self.ShowWindow()
+    def OpenStaffPortal(self): #This needs to go to staff login page!!!!!
+        #self.HideWindow()
+        #sp = StaffPortal.StaffPortal(self.db, self.customerdb, self.staffdb, self.basketdb, self.orderdb)
+        #self.ShowWindow()
+        pass
 
 
 
