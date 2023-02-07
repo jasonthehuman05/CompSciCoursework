@@ -1,1 +1,1 @@
-[{"OrderID": "000001", "CustomerID": "000002", "Items": [{"ProductID": "000005:1", "Count": 1}, {"ProductID": "000007:1", "Count": 1}], "Cost": "21.30"}]
+[{"OrderID": "000001", "CustomerID": "000002", "Items": [{"ProductID": "000007:1", "Count": 2}], "Cost": "11.60", "Completed": false}]

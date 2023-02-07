@@ -30,7 +30,8 @@ class OrderDatabase:
             "OrderID": str(self.nextId).zfill(6),
             "CustomerID": customerID,
             "Items": basket,
-            "Cost": cost
+            "Cost": cost,
+            "Completed": False
         }
         #Add to json
         self.database.append(order)
