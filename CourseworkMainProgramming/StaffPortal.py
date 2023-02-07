@@ -12,8 +12,8 @@ class StaffPortal:
         self.basketdb = bdb
 
         #Window Builder
-        self.root = tkinter.TopLevel()
-
+        self.root = tkinter.Toplevel()
+        self.root.protocol("WM_DELETE_WINDOW", self.HandleClose) #Captures the close event to close it properly
         self.root.title("BuildrightDB")
         self.root.geometry("900x450")
         self.DrawWidgets()
@@ -25,3 +25,7 @@ class StaffPortal:
         self.headerFrame = tkinter.Frame(self.root, bg=colorfile.container)
         self.headerFrame.place(x=0,y=0,width=900,height=64)
         self.titleLabel = tkinter.Label(self.headerFrame, text="Staff Portal")
+
+    def HandleClose(self):
+        self.root.quit()
+        self.root.destroy()
