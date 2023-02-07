@@ -24,12 +24,13 @@ class OrderDatabase:
             val = int(order["OrderID"])
             if val >= self.nextId: self.nextId = val + 1
 
-    def AddOrder(self, customerID:str, basket:list):
+    def AddOrder(self, customerID:str, basket:list, cost:float):
         #Create order dictionary
         order = {
             "OrderID": str(self.nextId).zfill(6),
             "CustomerID": customerID,
-            "Items": basket
+            "Items": basket,
+            "Cost": cost
         }
         #Add to json
         self.database.append(order)

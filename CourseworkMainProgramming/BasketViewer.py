@@ -13,6 +13,7 @@ class BasketViewer:
 		self.userid = cid
 		self.itemDetailHolders = []
 		self.orderdb = OrderDatabase.OrderDatabase()
+		self.cost = 0
 		#Controls for item details
 		self.itemDetailHolders = []
 		self.itemDetailHoldersPositions = []
@@ -50,7 +51,7 @@ class BasketViewer:
 		self.headerFrame = tkinter.Frame(self.root, bg=fbg)
 		self.headerFrame .place(x=0,y=0,width=1920,height=64)
 
-		#Basket
+		#Place Order Button
 		self.basketButton = tkinter.Button(self.headerFrame, text="PLACE ORDER", command=lambda:self.PlaceOrder())
 		self.basketButton.place(x=1800,y=8,width=114,height=48)
 
@@ -89,7 +90,7 @@ class BasketViewer:
 
 		if answer:
 			basket = self.basketdb.GetBasket(self.userid)
-			self.orderdb.AddOrder(self.userid, basket)
+			self.orderdb.AddOrder(self.userid, basket, self.cost)
 			self.basketdb.ClearBasket(self.userid)
 			messagebox.showinfo("Order placed!", "Order has been placed. Please speak to a member of staff for further details")
 			self.root.quit()
@@ -159,10 +160,23 @@ class BasketViewer:
 			self.DisplayItems((self.currentPage-1) * 7) #Display items starting at the correct index in the basket
 
 	#All test items: nails mounting home wood outdoor pipe
+	
+	def SetBasketCost(self):
+		self.cost = 0
+		for bItem in self.basket:
+			item = self.db.GetVariation(bItem["ProductID"])
+			itemCost = item["variationCost"] * bItem["Count"]
+			self.cost += itemCost
+
+		self.cost = ("{0:.2f}").format(self.cost)
+		self.searchBar.configure(text=f"BASKET: £{self.cost}")
 
 	def DisplayItems(self, startingIndex:int):
 		#Set Page Indicator
 		self.pageNumberLabel.configure(text=f"Page {self.currentPage} of {self.pageCount}")
+		
+		#Calculate		
+		self.SetBasketCost()
 		
 		#Hide all containers
 		for searchIndex in range(0,7):
