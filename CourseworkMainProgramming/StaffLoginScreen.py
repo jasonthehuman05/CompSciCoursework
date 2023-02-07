@@ -1,27 +1,26 @@
 import tkinter
-import CustomerLoginWindow
 import colorfile
 from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, OrderDatabase
 
-class StaffPortal:
+class StaffLoginScreen:
     def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase):
         #Public vars
         self.db = db
+        self.orderdb = odb
         self.customerdb = customerdb
         self.staffdb = staffdb
         self.basketdb = bdb
 
         #Window Builder
-        self.root = tkinter.TopLevel()
-
-        self.root.title("BuildrightDB")
-        self.root.geometry("900x450")
+        self.root = tkinter.Toplevel()
+        self.root.title("BuildrightDB Staff Login")
+        self.root.geometry("400x200")
         self.DrawWidgets()
-
         self.root.mainloop()
 
     def DrawWidgets(self):
-        #Header Frame
-        self.headerFrame = tkinter.Frame(self.root, bg=colorfile.container)
-        self.headerFrame.place(x=0,y=0,width=900,height=64)
-        self.titleLabel = tkinter.Label(self.headerFrame, text="Staff Portal")
+        pass
+
+
+
+

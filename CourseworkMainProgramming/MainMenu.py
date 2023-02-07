@@ -1,5 +1,5 @@
 import tkinter
-import CustomerLoginWindow, StaffPortal
+import CustomerLoginWindow, StaffPortal, StaffLoginScreen
 import colorfile
 from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, OrderDatabase
 
@@ -51,10 +51,6 @@ class MainMenu:
 
 
     def OpenStaffPortal(self): #This needs to go to staff login page!!!!!
-        #self.HideWindow()
-        #sp = StaffPortal.StaffPortal(self.db, self.customerdb, self.staffdb, self.basketdb, self.orderdb)
-        #self.ShowWindow()
-        pass
-
-
-
+        self.HideWindow()
+        StaffLoginScreen.StaffLoginScreen(self.db, self.customerdb, self.staffdb, self.basketdb, self.orderdb)
+        self.ShowWindow()
