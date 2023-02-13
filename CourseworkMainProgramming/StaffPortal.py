@@ -3,6 +3,7 @@ import CustomerLoginWindow
 import colorfile
 from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, OrderDatabase
 from staffViews.stockManager import StockManager
+from staffViews.staffManager import StaffManager
 
 class StaffPortal:
     def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase):
@@ -28,12 +29,34 @@ class StaffPortal:
         self.titleLabel = tkinter.Label(self.headerFrame, text="Staff Portal", font="default 32 normal", anchor="w", bg=colorfile.topbarcolor)
         self.titleLabel.place(x=8,y=8,width=400,height=48)
 
+        #Stock Management
         self.stockViewButton = tkinter.Button(self.root, text="Stock Management", command=lambda:self.ViewStock())
         self.stockViewButton.place(x=8,y=100,width=438,height=125)
+
+        #Staff Management
+        self.staffViewButton = tkinter.Button(self.root, text="Staff Management", command=lambda:self.ViewStaff())
+        self.staffViewButton.place(x=454,y=100,width=438,height=125)
+
+        #Customer Management
+        self.customerViewButton = tkinter.Button(self.root, text="Customer Management", command=lambda:self.ViewCustomer())
+        self.customerViewButton.place(x=8,y=233,width=438,height=125)
+
+        #Order Management
+        self.orderViewButton = tkinter.Button(self.root, text="Order Management", command=lambda:self.ViewOrder())
+        self.orderViewButton.place(x=454,y=233,width=438,height=125)
 
     def HandleClose(self):
         self.root.quit()
         self.root.destroy()
 
     def ViewStock(self):
-        sm = StockManager.StockManager(self.db)
+        stockmm = StockManager.StockManager(self.db)
+
+    def ViewStaff(self):
+        staffm = StaffManager.StaffManager(self.staffdb)
+    
+    def ViewCustomer(self):
+        pass
+
+    def ViewOrder(self):
+        pass
