@@ -59,7 +59,7 @@ class StaffPortal:
         staffm = StaffManager.StaffManager(self.staffdb)
     
     def ViewCustomer(self):
-        pass
+        cman = CustomerManager.CustomerManager(self.customerdb)
 
     def ViewOrder(self):
         pass
