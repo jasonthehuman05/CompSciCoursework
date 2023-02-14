@@ -10,6 +10,7 @@ class StaffEditor:
         self.root = tkinter.Toplevel()
         self.root.title("BuildrightDB Staff Editor")
         self.root.geometry("180x100")
+        self.root.protocol("WM_DELETE_WINDOW", self.HandleClose) #Captures the close event to close it properly
         self.DrawWidgets()
         self.DisplayData()
         self.root.mainloop()
@@ -51,3 +52,8 @@ class StaffEditor:
             "Password": self.passwordEntry.get()
         }
         self.staffdb.SaveStaff(self.id, data)
+
+    def HandleClose(self):
+        #print("Closing!")
+        self.root.quit()
+        self.root.destroy()

@@ -10,6 +10,7 @@ class StaffCreator:
         self.root = tkinter.Toplevel()
         self.root.title("BuildrightDB Staff Creator")
         self.root.geometry("180x100")
+        self.root.protocol("WM_DELETE_WINDOW", self.HandleClose) #Captures the close event to close it properly
         self.DrawWidgets()
         self.root.mainloop()
 
@@ -38,5 +39,10 @@ class StaffCreator:
 
     def AddStaff(self):
         self.staffdb.AddStaff(self.loginEntry.get(),self.passwordEntry.get())
+        self.root.quit()
+        self.root.destroy()
+
+    def HandleClose(self):
+        #print("Closing!")
         self.root.quit()
         self.root.destroy()

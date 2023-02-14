@@ -52,9 +52,12 @@ class StaffLoginScreen:
         #BYPASS: UNCOMMENT ABOVE AND REMOVE BELOW TO UNBYPASS
         self.Login()
     
+    def Reopen(self):
+        self.root.deiconify()
+
     def Login(self):
         self.root.withdraw()
-        win = StaffPortal.StaffPortal(self.db, self.customerdb, self.staffdb, self.basketdb, self.orderdb)
+        win = StaffPortal.StaffPortal(self.db, self.customerdb, self.staffdb, self.basketdb, self.orderdb, self.Reopen)
         self.root.deiconify()
 
 

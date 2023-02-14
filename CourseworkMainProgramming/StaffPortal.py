@@ -6,13 +6,13 @@ from staffViews.stockManager import StockManager
 from staffViews.staffManager import StaffManager
 
 class StaffPortal:
-    def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase):
+    def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase, closeFn):
         #Public vars
         self.db = db
         self.customerdb = customerdb
         self.staffdb = staffdb
         self.basketdb = bdb
-
+        self.closeFn = closeFn
         #Window Builder
         self.root = tkinter.Toplevel()
         self.root.protocol("WM_DELETE_WINDOW", self.HandleClose) #Captures the close event to close it properly
@@ -46,8 +46,10 @@ class StaffPortal:
         self.orderViewButton.place(x=454,y=233,width=438,height=125)
 
     def HandleClose(self):
+        #print("Closing!")
         self.root.quit()
         self.root.destroy()
+        self.closeFn()
 
     def ViewStock(self):
         stockmm = StockManager.StockManager(self.db)

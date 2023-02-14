@@ -10,6 +10,7 @@ class StaffManager:
         self.root = tkinter.Toplevel()
         self.root.title("BuildrightDB Staff Manager")
         self.root.geometry("350x800")
+        self.root.protocol("WM_DELETE_WINDOW", self.HandleClose) #Captures the close event to close it properly
         self.DrawWidgets()
         self.root.mainloop()
 
@@ -49,6 +50,11 @@ class StaffManager:
             editButton.place(x=150,y=pos,width=100,height=32)
 
             pos += 40
+
+    def HandleClose(self):
+        #print("Closing!")
+        self.root.quit()
+        self.root.destroy()
 
 
 
