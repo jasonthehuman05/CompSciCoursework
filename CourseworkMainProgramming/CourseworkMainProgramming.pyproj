@@ -35,6 +35,7 @@
     <Compile Include="databases\OrderDatabase.py" />
     <Compile Include="databases\StaffDatabase.py" />
     <Compile Include="databases\StockDatabase.py" />
+    <Compile Include="staffViews\staffManager\StaffCreator.py" />
     <Compile Include="staffViews\staffManager\StaffEditor.py" />
     <Compile Include="staffViews\staffManager\StaffManager.py" />
     <Compile Include="staffViews\stockManager\StockManager.py" />

@@ -1,5 +1,5 @@
 import tkinter
-from staffViews.staffManager import StaffEditor
+from staffViews.staffManager import StaffEditor, StaffCreator
 
 class StaffManager:
     def __init__(self, staffdb):
@@ -20,6 +20,7 @@ class StaffManager:
 
     def AddStaff(self):
         #Open staff creator
+        sc = StaffCreator.StaffCreator(self.staffdb)
         pass
 
     def DeleteStaff(self, id:str):
