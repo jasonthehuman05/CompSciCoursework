@@ -49,12 +49,14 @@ class StaffDB:
             if self.database[i]["StaffID"] == StaffID:
                 self.database[i] = data
                 break
+        self.SaveDatabase()
 
     def DeleteStaff(self, StaffID:str):
         for i in range(0, len(self.database)):
             if self.database[i]["StaffID"] == StaffID:
                 self.database.pop(i)
                 break
+        self.SaveDatabase()
 
     def LoginStaff(self, userName:str, password:str) -> str:
         StaffID = "000000" #ID 000000 will represent a failed login
