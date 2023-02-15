@@ -30,7 +30,7 @@ class CustomerDB:
             "CustomerID": str(self.nextId).zfill(6),
             "Email": email,
             "Password": password,
-            "addressLine1": addrl1,
+            "AddressLine1": addrl1,
             "AddressLine2": addrl2,
             "City": city,
             "Postcode": postcode,

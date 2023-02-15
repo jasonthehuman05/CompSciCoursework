@@ -10,6 +10,8 @@ class CustomerManager:
         self.root = tkinter.Toplevel()
         self.root.title("BuildrightDB Customer Manager")
         self.DrawWidgets()
+        self.LoadCustomers()
+        self.root.mainloop()
 
     def DrawWidgets(self):
         #Add Customer Button
@@ -37,7 +39,10 @@ class CustomerManager:
         self.DrawDetailsHolder()
        
     def LoadCustomers(self):
-        pass
+        #For each customer, add their information
+        for customer in self.customerdb.database:
+            txt = f"{customer['CustomerID']} {customer['Name']}"
+            self.listBox.insert(tkinter.END, txt)
 
     def AddCustomer(self):
         pass
@@ -94,16 +99,17 @@ class CustomerManager:
         self.phoneNumberBox.delete(0,tkinter.END)
 
     def DisplayDetails(self):
-        cid = self.listBox.curselection()[0] #Get the selected item
+        self.ClearDetails()
+        cid = self.listBox.get(self.listBox.curselection()[0]).split(" ")[0] #Get ID from the selected item
 
         cd = self.customerdb.GetCustomer(cid) #Get the customer's details from database
 
         self.idLabel.config(text=f"ID: {cd['CustomerID']}")
 
-        self.nameBox.insert(0,cd["name"])
+        self.nameBox.insert(0,cd["Name"])
         self.emailBox.insert(0, cd["Email"])
-        self.addrLine1Box.insert(0, cd["addressLine1"])
-        self.addrLine2Box.insert(0, cd["addressLine2"])
+        self.addrLine1Box.insert(0, cd["AddressLine1"])
+        self.addrLine2Box.insert(0, cd["AddressLine2"])
         self.cityBox.insert(0, cd["City"])
         self.postcodeBox.insert(0, cd["Postcode"])
         self.phoneNumberBox.insert(0, cd["Postcode"])
