@@ -4,7 +4,7 @@ import colorfile
 from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketDatabase, OrderDatabase
 from staffViews.stockManager import StockManager
 from staffViews.staffManager import StaffManager
-from staffViews.customerManager import CustomerManager
+from staffViews.custManager import CustomerManager
 
 class StaffPortal:
     def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase, closeFn):
