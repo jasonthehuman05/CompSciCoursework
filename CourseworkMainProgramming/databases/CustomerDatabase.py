@@ -24,10 +24,11 @@ class CustomerDB:
             val = int(customer["CustomerID"])
             if val >= self.nextId: self.nextId = val + 1
 
-    def AddCustomer(self, email:str, password:str, addrl1:str, addrl2:str, city:str, postcode:str, phoneNumber:str):
+    def AddCustomer(self, name:str, email:str, password:str, addrl1:str, addrl2:str, city:str, postcode:str, phoneNumber:str):
         #Create customer dictionary
         customer = {
             "CustomerID": str(self.nextId).zfill(6),
+            "Name": name,
             "Email": email,
             "Password": password,
             "AddressLine1": addrl1,
@@ -54,6 +55,7 @@ class CustomerDB:
             if self.database[i]["CustomerID"] == customerID:
                 self.database[i] = data
                 break
+        self.SaveDatabase()
 
     def DeleteCustomer(self, customerID:str):
         for i in range(0, len(self.database)):
