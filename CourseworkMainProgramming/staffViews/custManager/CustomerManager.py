@@ -57,7 +57,7 @@ class CustomerManager:
         self.ClearDetails()
         self.idLabel.config(text="New Customer")
         #Update save button
-        self.saveButton.config(command=self.AddNewCustomerToDatabase(), text="Add Customer")
+        self.saveButton.config(command=lambda:self.AddNewCustomerToDatabase(), text="Add Customer")
 
     def AddNewCustomerToDatabase(self):
         #Check Data is valid

@@ -20,5 +20,16 @@
     "City": "Rhyl",
     "Postcode": "LL18 3AS",
     "PhoneNumber": "07628471745"
+  },
+  {
+    "CustomerID": "000003",
+    "Name": "Oliver Ford",
+    "Email": "oliolioli@mail.com",
+    "Password": "cheesus",
+    "AddressLine1": "42 Widnes Lane",
+    "AddressLine2": "",
+    "City": "Wrexham",
+    "Postcode": "LL1 8XD",
+    "PhoneNumber": "07361526734"
   }
 ]
