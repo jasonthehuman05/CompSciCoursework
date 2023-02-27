@@ -113,7 +113,6 @@ class RootWindow:
         elementNumber = 0
         for i in range(startPoint, endPoint+1):
             try:
-                print(i)
                 itemMain = self.db.database["items"][i]
                 self.itemOpenButton[elementNumber].config(command=lambda lambdaItem=itemMain: DetailsViewer.DetailsViewer(self.db, lambdaItem["productNumber"], self))
                 self.itemNumberLabel[elementNumber].config(text=itemMain["productNumber"])

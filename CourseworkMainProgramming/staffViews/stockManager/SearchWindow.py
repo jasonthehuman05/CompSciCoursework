@@ -25,7 +25,6 @@ class SearchWindow:
     def RunSearch(self):
         #Get search results from db
         results = self.db.SearchForItem(self.searchBox.get())
-        print(results)
 
         for i in results:
             #i is an index in the database
