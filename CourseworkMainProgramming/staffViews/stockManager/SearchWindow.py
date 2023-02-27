@@ -4,23 +4,34 @@ class SearchWindow:
     def __init__(self, db):
         self.db = db
         self.root = tkinter.Tk()
-        self.root.geometry("200x200")
+        #self.root.geometry("200x215")
         self.DrawWidgets()
 
         self.root.mainloop()
 
-    def DrawWidgets(self):
-        #Make searchbox
-        self.searchBox = tkinter.Entry(self.root)
-        self.searchBox.place(x=0,y=0,width=150,height=25)
+    def DrawWidgets(self):        
+        #Search Bar
+        self.searchEntry = tkinter.Entry(self.root)
+        self.searchEntry.grid(row=0,column=0,sticky="nesw")
 
-        #Search button
-        self.searchButton = tkinter.Button(self.root, text="Search", command=lambda:self.RunSearch())
-        self.searchButton.place(x=150,y=0,width=50,height=25)
+        #Search Button
+        self.searchButton = tkinter.Button(self.root, text="Search")
+        self.searchButton.grid(row=0,column=1,sticky="nesw")
 
-        #ListBox of items from search
-        self.listbox = tkinter.Listbox(self.root)
-        self.listbox.place(x=0,y=32,width=200,height=175)
+        #Customer List Box Container
+        self.listBoxContainer = tkinter.Frame(self.root)
+        self.listBoxContainer.grid(row=1,column=0,columnspan=2)
+
+        #Listbox and scrollbar
+        self.listBox = tkinter.Listbox(self.listBoxContainer, width=50, height=18)
+        self.listBox.pack(side="left", fill="y")
+        self.lbScrollbar = tkinter.Scrollbar(self.listBoxContainer, orient="vertical")
+        self.listBox.config(yscrollcommand=self.lbScrollbar.set)
+        self.lbScrollbar.pack(side="right", fill="y")
+
+        #Open Button
+        self.openDetailsButton = tkinter.Button(self.root, text="Open Details", command=lambda:self.Passer(),bg="#aaaaaa")
+        self.openDetailsButton.grid(column=0,row=2,columnspan=2,sticky="nesw",)
 
     def RunSearch(self):
         #Get search results from db
@@ -32,7 +43,8 @@ class SearchWindow:
             item = f'{itemObj["productNumber"]} :: {itemObj["productName"]}'
             self.listbox.insert("end", item)
 
-
+    def Passer(self):
+        pass
 
 
 

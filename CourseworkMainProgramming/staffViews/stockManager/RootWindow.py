@@ -17,7 +17,7 @@ class RootWindow:
     def __init__(self, db):
         self.db = db
         self.root = tkinter.Tk()
-        self.root.title("BuildrightDB Prototype: Inventory Manager")
+        self.root.title("BuildrightDB: Inventory Manager")
         self.DrawWidgets()
         self.root.geometry("600x400")
         self.root.resizable(False, False)
