@@ -15,7 +15,7 @@ class SearchWindow:
         self.searchEntry.grid(row=0,column=0,sticky="nesw")
 
         #Search Button
-        self.searchButton = tkinter.Button(self.root, text="Search")
+        self.searchButton = tkinter.Button(self.root, text="Search", command=lambda:self.RunSearch())
         self.searchButton.grid(row=0,column=1,sticky="nesw")
 
         #Customer List Box Container
@@ -35,13 +35,13 @@ class SearchWindow:
 
     def RunSearch(self):
         #Get search results from db
-        results = self.db.SearchForItem(self.searchBox.get())
+        results = self.db.SearchForItem(self.searchEntry.get())
 
         for i in results:
             #i is an index in the database
             itemObj = self.db.database["items"][i]
             item = f'{itemObj["productNumber"]} :: {itemObj["productName"]}'
-            self.listbox.insert("end", item)
+            self.listBox.insert("end", item)
 
     def Passer(self):
         pass
