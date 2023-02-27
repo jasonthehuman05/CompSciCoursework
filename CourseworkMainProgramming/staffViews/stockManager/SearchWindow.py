@@ -1,4 +1,5 @@
 import tkinter
+from staffViews.stockManager import DetailsViewer
 
 class SearchWindow:
     def __init__(self, db):
@@ -30,21 +31,26 @@ class SearchWindow:
         self.lbScrollbar.pack(side="right", fill="y")
 
         #Open Button
-        self.openDetailsButton = tkinter.Button(self.root, text="Open Details", command=lambda:self.Passer(),bg="#aaaaaa")
+        self.openDetailsButton = tkinter.Button(self.root, text="Open Details", command=lambda:self.OpenItem(),bg="#aaaaaa")
         self.openDetailsButton.grid(column=0,row=2,columnspan=2,sticky="nesw",)
 
     def RunSearch(self):
         #Get search results from db
         results = self.db.SearchForItem(self.searchEntry.get())
 
+        #Clear box
+        self.listBox.delete(0,tkinter.END)
+
+        #Add each item to the dropdown
         for i in results:
             #i is an index in the database
             itemObj = self.db.database["items"][i]
             item = f'{itemObj["productNumber"]} :: {itemObj["productName"]}'
             self.listBox.insert("end", item)
 
-    def Passer(self):
-        pass
+    def OpenItem(self):
+        itemNumber = self.listBox.get(self.listBox.curselection()[0]).split(" :: ")[0] #Get ID from the selected item
+        dv = DetailsViewer.DetailsViewer(self.db, itemNumber, self.root)
 
 
 

@@ -130,7 +130,10 @@ class DetailsViewer:
         }
         
         self.db.UpdateItem(self.itemNumber, item)
-        self.parent.Refresh()
+        
+        
+        try: self.parent.Refresh()
+        except: pass
      
     def AddVariation(self):
         vc = VariationCreator.VariationCreator(self.db, self.itemNumber, self.root)
