@@ -36,6 +36,7 @@
     <Compile Include="databases\StaffDatabase.py" />
     <Compile Include="databases\StockDatabase.py" />
     <Compile Include="staffViews\custManager\CustomerManager.py" />
+    <Compile Include="staffViews\orderManager\OrderManager.py" />
     <Compile Include="staffViews\staffManager\StaffCreator.py" />
     <Compile Include="staffViews\staffManager\StaffEditor.py" />
     <Compile Include="staffViews\staffManager\StaffManager.py" />
@@ -59,6 +60,7 @@
     <Folder Include="databases\" />
     <Folder Include="staffViews\" />
     <Folder Include="staffViews\custManager\" />
+    <Folder Include="staffViews\orderManager\" />
     <Folder Include="staffViews\staffManager\" />
     <Folder Include="staffViews\stockManager\" />
   </ItemGroup>
