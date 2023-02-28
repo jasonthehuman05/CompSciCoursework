@@ -64,4 +64,4 @@ class StaffPortal:
         cman = CustomerManager.CustomerManager(self.customerdb)
 
     def ViewOrder(self):
-        oman = OrderManager.OrderManager(self.orderdb, self.customerdb)
+        oman = OrderManager.OrderManager(self.orderdb, self.customerdb, self.db)

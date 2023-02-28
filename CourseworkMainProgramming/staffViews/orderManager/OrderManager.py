@@ -1,12 +1,13 @@
 import tkinter
 from turtle import width
-from databases import OrderDatabase, CustomerDatabase
+from databases import OrderDatabase, CustomerDatabase, StockDatabase
 
 class OrderManager:
-    def __init__(self, odb:OrderDatabase.OrderDatabase, cdb:CustomerDatabase.CustomerDB):
+    def __init__(self, odb:OrderDatabase.OrderDatabase, cdb:CustomerDatabase.CustomerDB, sdb:StockDatabase.StockDatabase):
         #Public Vars
         self.orderdb = odb
         self.customerdb = cdb
+        self.stockdb = sdb
 
         #Make Window
         self.root = tkinter.Toplevel()
@@ -67,7 +68,21 @@ class OrderManager:
 
 
     def OpenOrder(self):
-        pass
+        #Get order number
+        orderNumber = self.orderListBox.get(self.orderListBox.curselection()[0]).split(" :: ")[0] #Get ID from the selected item
+        
+        #Get order details
+        order = self.orderdb.GetOrder(orderNumber)
+        products = order["Items"]
+
+        #For each product, get its details and add it to the listbox
+        for item in products:
+            pnum = item["ProductID"].split(":")[0]
+            sitem = self.stockdb.GetItemByProductNumber(pnum)
+            variation = self.stockdb.GetVariation(item["ProductID"])
+            boxString = f"{item['Count']}x {sitem} :: {variation}"
+
+            self.detailsListBox.insert("end", boxString)
 
     def OpenCustomerDetails(self):
         pass
