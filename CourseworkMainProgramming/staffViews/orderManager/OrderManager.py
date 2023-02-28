@@ -1,11 +1,12 @@
 import tkinter
 from turtle import width
-from databases import OrderDatabase
+from databases import OrderDatabase, CustomerDatabase
 
 class OrderManager:
-    def __init__(self, odb:OrderDatabase.OrderDatabase):
+    def __init__(self, odb:OrderDatabase.OrderDatabase, cdb:CustomerDatabase.CustomerDB):
         #Public Vars
         self.orderdb = odb
+        self.customerdb = cdb
 
         #Make Window
         self.root = tkinter.Toplevel()
@@ -13,6 +14,7 @@ class OrderManager:
         self.root.geometry("500x285")
         
         self.DrawWidgets()
+        self.DisplayOrders()
         self.root.mainloop()
 
             
@@ -50,6 +52,19 @@ class OrderManager:
         #Close Order Button
         self.closeOrderButton = tkinter.Button(self.root, text="Close Order", command=lambda:self.CompleteOrder())
         self.closeOrderButton.grid(row=1,column=2, sticky="nesw")
+
+    def DisplayOrders(self):
+        #Get all orders
+        orders = self.orderdb.database
+        
+        #For each order, add it to the list box
+        for order in orders:
+            #get customer details
+            customer = self.customerdb.GetCustomer(order["CustomerID"])
+            #Build string to display
+            lboxString = f"{order['OrderID']} :: {customer['Name']}"
+            self.orderListBox.insert("end", lboxString)
+
 
     def OpenOrder(self):
         pass
