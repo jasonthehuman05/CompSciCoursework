@@ -49,8 +49,7 @@ class MainMenu:
         cv = CustomerLoginWindow.CustomerLoginWindow(self.db,self.customerdb,self.basketdb)
         self.ShowWindow()
 
-
     def OpenStaffPortal(self): #This needs to go to staff login page!!!!!
         self.HideWindow()
-        StaffLoginScreen.StaffLoginScreen(self.db, self.customerdb, self.staffdb, self.basketdb, self.orderdb)
+        StaffLoginScreen.StaffLoginScreen(self.db, self.customerdb, self.staffdb, self.basketdb, self.orderdb, lambda:self.root.deiconify())
         self.ShowWindow()

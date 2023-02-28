@@ -5,14 +5,14 @@ from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketData
 import StaffPortal
 
 class StaffLoginScreen:
-    def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase):
+    def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase, openParent):
         #Public vars
         self.db = db
         self.orderdb = odb
         self.customerdb = customerdb
         self.staffdb = staffdb
         self.basketdb = bdb
-
+        self.openParent = openParent
         #Window Builder
         self.root = tkinter.Toplevel()
         self.root.title("BuildrightDB Staff Login")
@@ -24,6 +24,7 @@ class StaffLoginScreen:
     def HandleClose(self):
         self.root.quit()
         self.root.destroy()
+        self.openParent()
 
     def DrawWidgets(self):
         #username
@@ -56,9 +57,9 @@ class StaffLoginScreen:
         self.root.deiconify()
 
     def Login(self):
-        self.root.withdraw()
+        self.root.iconify()
         win = StaffPortal.StaffPortal(self.db, self.customerdb, self.staffdb, self.basketdb, self.orderdb, self.Reopen)
-        self.root.deiconify()
+        #self.root.deiconify()
 
 
 
