@@ -5,6 +5,7 @@ from databases import StockDatabase, CustomerDatabase, StaffDatabase, BasketData
 from staffViews.stockManager import StockManager
 from staffViews.staffManager import StaffManager
 from staffViews.custManager import CustomerManager
+from staffViews.orderManager import OrderManager
 
 class StaffPortal:
     def __init__(self, db:StockDatabase.StockDatabase,customerdb:CustomerDatabase.CustomerDB,staffdb:StaffDatabase.StaffDB, bdb:BasketDatabase.BasketDatabase, odb:OrderDatabase.OrderDatabase, closeFn):
@@ -13,6 +14,7 @@ class StaffPortal:
         self.customerdb = customerdb
         self.staffdb = staffdb
         self.basketdb = bdb
+        self.orderdb = odb
         self.closeFn = closeFn
         #Window Builder
         self.root = tkinter.Toplevel()
@@ -62,4 +64,4 @@ class StaffPortal:
         cman = CustomerManager.CustomerManager(self.customerdb)
 
     def ViewOrder(self):
-        pass
+        oman = OrderManager.OrderManager(self.orderdb)
