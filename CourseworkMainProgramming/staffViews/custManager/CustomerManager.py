@@ -78,8 +78,10 @@ class CustomerManager:
             postcode = self.postcodeBox.get()
             phoneNumber = self.phoneNumberBox.get()
             self.customerdb.AddCustomer(name, email, password, addrl1, addrl2, city, postcode, phoneNumber)
-        #update details
-        self.saveButton.config(command=lambda:self.DoNothing(), text="")
+            #update details
+            self.saveButton.config(command=lambda:self.DoNothing(), text="")
+            self.ClearDetails()
+            self.LoadCustomers()
 
     def SaveChanges(self):
         #Check Data is valid
