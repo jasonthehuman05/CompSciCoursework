@@ -9,7 +9,7 @@ class ItemCreator:
         self.db = db
         self.parent = parent
         #Main Window
-        self.root = tkinter.Tk()
+        self.root = tkinter.Toplevel()
         self.root.resizable(False, False)
         self.root.title("New Item")
         self.DrawWidgets()

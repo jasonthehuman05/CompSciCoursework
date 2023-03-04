@@ -10,7 +10,7 @@ class DetailsViewer:
         self.parent = parent
         self.itemNumber = itemNumber
         #Main Window
-        self.root = tkinter.Tk()
+        self.root = tkinter.TopLevel()
         self.root.title(itemNumber)
         self.root.resizable(False, False)
         self.DrawWidgets()
