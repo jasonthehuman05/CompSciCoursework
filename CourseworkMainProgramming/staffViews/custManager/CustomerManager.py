@@ -2,7 +2,7 @@ import tkinter
 from tkinter import messagebox
 
 class CustomerManager:
-    def __init__(self, customerdb):
+    def __init__(self, customerdb, *args):
         #Public Vars
         self.customerdb = customerdb
         self.currentCustomer = ""
@@ -11,6 +11,11 @@ class CustomerManager:
         self.root.title("BuildrightDB Customer Manager")
         self.DrawWidgets()
         self.LoadCustomers()
+
+        #Check if a customer ID was provided
+        if len(args) > 0:
+            self.DisplayFromCustomerID(args[0])
+
         self.root.mainloop()
 
     def DrawWidgets(self):
@@ -212,6 +217,25 @@ class CustomerManager:
         self.ClearDetails()
         self.saveButton.config(command=lambda:self.SaveChanges())
         cid = self.listBox.get(self.listBox.curselection()[0]).split(" ")[0] #Get ID from the selected item
+
+        cd = self.customerdb.GetCustomer(cid) #Get the customer's details from database
+
+        self.idLabel.config(text=f"ID: {cd['CustomerID']}")
+
+        self.nameBox.insert(0,cd["Name"])
+        self.emailBox.insert(0, cd["Email"])
+        self.addrLine1Box.insert(0, cd["AddressLine1"])
+        self.addrLine2Box.insert(0, cd["AddressLine2"])
+        self.cityBox.insert(0, cd["City"])
+        self.postcodeBox.insert(0, cd["Postcode"])
+        self.phoneNumberBox.insert(0, cd["PhoneNumber"])
+
+        self.currentCustomer = cd["CustomerID"]
+        self.saveButton.config(text="Save Changes")
+
+    def DisplayFromCustomerID(self, cid:str):
+        self.ClearDetails()
+        self.saveButton.config(command=lambda:self.SaveChanges())
 
         cd = self.customerdb.GetCustomer(cid) #Get the customer's details from database
 

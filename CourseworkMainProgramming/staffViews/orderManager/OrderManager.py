@@ -1,6 +1,6 @@
 import tkinter
-from turtle import width
 from databases import OrderDatabase, CustomerDatabase, StockDatabase
+from staffViews.custManager import CustomerManager
 
 class OrderManager:
     def __init__(self, odb:OrderDatabase.OrderDatabase, cdb:CustomerDatabase.CustomerDB, sdb:StockDatabase.StockDatabase):
@@ -8,11 +8,12 @@ class OrderManager:
         self.orderdb = odb
         self.customerdb = cdb
         self.stockdb = sdb
+        self.orderNumber = ""
 
         #Make Window
         self.root = tkinter.Toplevel()
         self.root.title("BuildrightDB Orders")
-        self.root.geometry("500x285")
+        self.root.geometry("650x285")
         
         self.DrawWidgets()
         self.DisplayOrders()
@@ -35,7 +36,7 @@ class OrderManager:
         self.orderScrollbar.pack(side="right", fill="y")
 
         #Order details list box
-        self.detailsListBox = tkinter.Listbox(self.detailsContainer, width=37,height=16)
+        self.detailsListBox = tkinter.Listbox(self.detailsContainer, width=64,height=16)
         self.detailsScrollbar = tkinter.Scrollbar(self.detailsContainer, orient="vertical")
 
         self.detailsListBox.pack(side="left", fill="y")
@@ -68,11 +69,13 @@ class OrderManager:
 
 
     def OpenOrder(self):
+        self.ClearOrderDetails()
+
         #Get order number
-        orderNumber = self.orderListBox.get(self.orderListBox.curselection()[0]).split(" :: ")[0] #Get ID from the selected item
+        self.orderNumber = self.orderListBox.get(self.orderListBox.curselection()[0]).split(" :: ")[0] #Get ID from the selected item
         
         #Get order details
-        order = self.orderdb.GetOrder(orderNumber)
+        order = self.orderdb.GetOrder(self.orderNumber)
         products = order["Items"]
 
         #For each product, get its details and add it to the listbox
@@ -80,12 +83,29 @@ class OrderManager:
             pnum = item["ProductID"].split(":")[0]
             sitem = self.stockdb.GetItemByProductNumber(pnum)
             variation = self.stockdb.GetVariation(item["ProductID"])
-            boxString = f"{item['Count']}x {sitem} :: {variation}"
+            boxString = f"{item['Count']}x {sitem['productName']} :: {variation['variationName']}"
 
             self.detailsListBox.insert("end", boxString)
 
+    def ClearOrderDetails(self):
+        self.detailsListBox.delete(0, "end")
+        
+    def ClearOrderList(self):
+        self.orderListBox.delete(0, "end")
+
     def OpenCustomerDetails(self):
-        pass
+        #Find customer number
+        order = self.orderdb.GetOrder(self.orderNumber)
+        customerID = order["CustomerID"]
+        #Open details
+        cman = CustomerManager.CustomerManager(self.customerdb, customerID)
+        cman.DisplayFromCustomerID(customerID)
 
     def CompleteOrder(self):
-        pass
+        #delete from orders list
+        self.orderdb.DeleteOrder(self.orderNumber)
+
+        #refresh display
+        self.ClearOrderDetails()
+        self.ClearOrderList()
+        self.orderNumber = ""
