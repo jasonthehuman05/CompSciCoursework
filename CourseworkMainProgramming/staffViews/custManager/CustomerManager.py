@@ -112,10 +112,10 @@ class CustomerManager:
 
             self.customerdb.SaveCustomer(self.currentCustomer, data)
             messagebox.showinfo("Updated", "Updated customer details!")
-        #update details
-        self.saveButton.config(command=lambda:self.DoNothing(), text="")
-        self.ClearDetails()
-        self.LoadCustomers()
+            #update details
+            self.saveButton.config(command=lambda:self.DoNothing(), text="")
+            self.ClearDetails()
+            self.LoadCustomers()
 
     def IsDataValid(self) -> bool:
         valid = True
