@@ -226,6 +226,7 @@ class CustomerManager:
 
         self.nameBox.insert(0,cd["Name"])
         self.emailBox.insert(0, cd["Email"])
+        self.passwordBox.insert(0, cd["Password"])
         self.addrLine1Box.insert(0, cd["AddressLine1"])
         self.addrLine2Box.insert(0, cd["AddressLine2"])
         self.cityBox.insert(0, cd["City"])
@@ -245,6 +246,7 @@ class CustomerManager:
 
         self.nameBox.insert(0,cd["Name"])
         self.emailBox.insert(0, cd["Email"])
+        self.passwordBox.insert(0, cd["Password"])
         self.addrLine1Box.insert(0, cd["AddressLine1"])
         self.addrLine2Box.insert(0, cd["AddressLine2"])
         self.cityBox.insert(0, cd["City"])
