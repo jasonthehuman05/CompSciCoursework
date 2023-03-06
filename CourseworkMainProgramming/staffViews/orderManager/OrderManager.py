@@ -1,4 +1,5 @@
 import tkinter
+from tkinter import messagebox
 from databases import OrderDatabase, CustomerDatabase, StockDatabase
 from staffViews.custManager import CustomerManager
 
@@ -71,21 +72,24 @@ class OrderManager:
     def OpenOrder(self):
         self.ClearOrderDetails()
 
-        #Get order number
-        self.orderNumber = self.orderListBox.get(self.orderListBox.curselection()[0]).split(" :: ")[0] #Get ID from the selected item
+        try:
+            #Get order number
+            self.orderNumber = self.orderListBox.get(self.orderListBox.curselection()[0]).split(" :: ")[0] #Get ID from the selected item
         
-        #Get order details
-        order = self.orderdb.GetOrder(self.orderNumber)
-        products = order["Items"]
+            #Get order details
+            order = self.orderdb.GetOrder(self.orderNumber)
+            products = order["Items"]
 
-        #For each product, get its details and add it to the listbox
-        for item in products:
-            pnum = item["ProductID"].split(":")[0]
-            sitem = self.stockdb.GetItemByProductNumber(pnum)
-            variation = self.stockdb.GetVariation(item["ProductID"])
-            boxString = f"{item['Count']}x {sitem['productName']} :: {variation['variationName']}"
+            #For each product, get its details and add it to the listbox
+            for item in products:
+                pnum = item["ProductID"].split(":")[0]
+                sitem = self.stockdb.GetItemByProductNumber(pnum)
+                variation = self.stockdb.GetVariation(item["ProductID"])
+                boxString = f"{item['Count']}x {sitem['productName']} :: {variation['variationName']}"
 
-            self.detailsListBox.insert("end", boxString)
+                self.detailsListBox.insert("end", boxString)
+
+        except: return
 
     def ClearOrderDetails(self):
         self.detailsListBox.delete(0, "end")
@@ -94,18 +98,26 @@ class OrderManager:
         self.orderListBox.delete(0, "end")
 
     def OpenCustomerDetails(self):
-        #Find customer number
-        order = self.orderdb.GetOrder(self.orderNumber)
-        customerID = order["CustomerID"]
-        #Open details
-        cman = CustomerManager.CustomerManager(self.customerdb, customerID)
-        cman.DisplayFromCustomerID(customerID)
+        try:
+            #Find customer number
+            order = self.orderdb.GetOrder(self.orderNumber)
+            customerID = order["CustomerID"]
+            #Open details
+            cman = CustomerManager.CustomerManager(self.customerdb, customerID)
+            cman.DisplayFromCustomerID(customerID)
+        except :
+            return
 
     def CompleteOrder(self):
-        #delete from orders list
-        self.orderdb.DeleteOrder(self.orderNumber)
-
-        #refresh display
-        self.ClearOrderDetails()
-        self.ClearOrderList()
-        self.orderNumber = ""
+        try:
+            completeOrder = messagebox.askyesno("Complete Order", "Would you like to close this order? This cannot be reversed.")
+            
+            if completeOrder:
+                #delete from orders list
+                self.orderdb.DeleteOrder(self.orderNumber)
+            
+                #refresh display
+                self.ClearOrderDetails()
+                self.ClearOrderList()
+                self.orderNumber = ""
+        except: return
