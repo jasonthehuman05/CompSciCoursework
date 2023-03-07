@@ -137,15 +137,15 @@ class CustomerManager:
             messagebox.showerror("Invalid Input", "Incorrect email format")
             valid = False
         
-        if len(addrl1) == 0:
+        if len(addrl1) == 0 and addrl1.isalpha():
             messagebox.showerror("Invalid Input", "Missing address line 1")
             valid = False
         
-        if len(city) == 0:
+        if len(city) == 0 and city.isalpha():
             messagebox.showerror("Invalid Input", "Missing city")
             valid = False
         
-        if len(postcode) == 0:
+        if len(postcode) == 0 and postcode.isalnum():
             messagebox.showerror("Invalid Input", "Missing postcode")
             valid = False
 
