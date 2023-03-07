@@ -9,13 +9,17 @@ class MainCustomerScreen:
 	def __init__(self, rwin:CustomerLoginWindow.CustomerLoginWindow, db:StockDatabase.StockDatabase, customerdb:CustomerDatabase.CustomerDB, basketdb:BasketDatabase.BasketDatabase, uid:str):
 		#Make vars accessible
 		self.objHeight = 128
-		self.rwin = rwin
+		self.rwin = rwin #customer login window, root to this window
+		
+		#Databases
 		self.customerdb = customerdb
 		self.basketdb = basketdb
+		self.db = db
+		
+		#Get customer details
 		self.userid = uid
 		self.customer = customerdb.GetCustomer(self.userid)
 		self.userName = self.customer["Name"]
-		self.db = db
 
 		#Controls for item details
 		self.itemDetailHolders = []
@@ -24,9 +28,11 @@ class MainCustomerScreen:
 		self.prodNumLabels = []
 		self.prodNameLabels = []
 
+		#Current Display Details
 		self.activeItemIndexes = []
 		self.pageCount = 0
 		self.currentPage = 1
+		
 		#Make Window
 		self.root = tkinter.Toplevel()
 		self.root.attributes('-fullscreen', True) #Makes the window appear in fullscreen mode.
