@@ -44,14 +44,14 @@ class StaffLoginScreen:
         self.loginButton.place(x=0,y=150,height=50,width=400)
 
     def TryLogin(self):
-        #id = self.staffdb.LoginStaff(self.usernameEntry.get(), self.passwordEntry.get())
-        #if id == "000000":
-        #    messagebox.showwarning("Incorrect Login", "The provided login details could not be found!")
-        #else:
-        #    self.Login()
+        id = self.staffdb.LoginStaff(self.usernameEntry.get(), self.passwordEntry.get())
+        if id == "000000":
+            messagebox.showwarning("Incorrect Login", "The provided login details could not be found!")
+        else:
+            self.Login()
 
         #BYPASS: UNCOMMENT ABOVE AND REMOVE BELOW TO UNBYPASS
-        self.Login()
+        #self.Login()
     
     def Reopen(self):
         self.root.deiconify()

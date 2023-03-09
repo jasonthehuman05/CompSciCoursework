@@ -42,7 +42,9 @@ class MainMenu:
         self.root.iconify()
 
     def ShowWindow(self):
-        self.root.deiconify()
+        try:
+            self.root.deiconify()
+        except: pass
 
     def OpenCustomerView(self):
         self.HideWindow()
